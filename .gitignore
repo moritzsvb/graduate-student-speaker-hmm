@@ -1,0 +1,52 @@
+# Build files
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.out
+*.toc
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.xdv
+
+# Latexmk
+latexmkrc
+
+# Bibliography
+*.run.xml
+
+# TikZ / PGF
+*.nav
+*.snm
+
+# Beamer
+*.vrb
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor folders
+.vscode/
+.idea/
+
+# Generated PDFs (optional)
+# *.pdf
