@@ -1,0 +1,217 @@
+%%% HUGE credits go out to Moritz H., the algebraist that saved me from commiting an outrageous typo. %%%%%%%%%%
+
+
+% Draft stuff
+% \usepackage{tikz}
+\usepackage{tikz-cd}
+% \usepackage{quiver} 
+
+% Define the watermark command
+% \setbeamertemplate{background}{%
+%   \begin{tikzpicture}[remember picture,overlay]
+%     \node [rotate=45,scale=10,text opacity=0.1] at (current page.center) {DRAFT};
+%   \end{tikzpicture}
+% }
+\usetikzlibrary{babel}
+
+
+
+\usepackage[ngerman]{babel}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+% Set the theme
+\usepackage{lmodern} % For improved fonts
+\usepackage{amsmath} % For better math typesetting
+\usepackage{graphicx} % To include graphics
+\usepackage{tikz} % For creating graphics
+
+% Custom theme setup
+\useoutertheme{infolines}
+\setbeamertemplate{navigation symbols}[default]
+\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{frametitle}[default][left]
+
+\usepackage{xcolor}
+\definecolor{lightgrey}{gray}{0.95}
+\definecolor{darkgrey}{gray}{0.3}
+\definecolor{myblue}{RGB}{0,102,204}
+\definecolor{mygrey}{RGB}{252, 252, 252}
+\definecolor{mygreen}{RGB}{0.0, 0.4, 0.0}
+
+\setbeamercolor{frametitle}{bg=lightgrey,fg=black}
+\setbeamercolor{page number in head/foot}{fg=myblue}
+\setbeamercolor{title}{bg=lightgrey,fg=myblue}
+\setbeamercolor{block title}{bg=lightgrey,fg=myblue}
+\setbeamercolor{block body}{bg=white,fg=black}
+\setbeamercolor{block body example}{bg=lightgrey,fg=black}
+\setbeamercolor{block title example}{bg=darkgrey,fg=white}
+
+% Redefine the itemize environment to include color
+
+% Redefine the itemize environment to include color using enumitem
+\setlist[itemize,1]{label=\textcolor{myblue}{\textbullet}}
+\setlist[itemize,2]{label=\textcolor{myblue}{\textendash}}
+\setlist[itemize,3]{label=\textcolor{myblue}{\textasteriskcentered}}
+\setlist[itemize,4]{label=\textcolor{myblue}{\textperiodcentered}}
+
+% Remove rounded corners from blocks
+\setbeamertemplate{blocks}[default]
+
+%For the fonts
+\usepackage{lmodern} % For improved fonts
+\usepackage{amsmath, amssymb, amsthm} % For better math typesetting
+% \usepackage{mathabx} % For additional math symbols. Hopefully, it doesnt cause issues 8.7.25 Hell it does. 
+
+
+
+\makeatletter
+\newenvironment<>{proofs}[1][\proofname]{%
+    \par
+    \def\insertproofname{#1\@addpunct{.}}%
+    \usebeamertemplate{proof begin}#2}
+  {\usebeamertemplate{proof end}}
+\makeatother
+
+
+% Remove blue color from hyperlinks and other elements
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    urlcolor=black,
+    citecolor=black,
+}
+
+\setbeamertemplate{title page}{
+	\begin{tikzpicture}[remember picture,overlay]
+		
+		\fill[mygrey, opacity=0.95, rounded corners]
+		(current page.center) ++(-7,-1.4) rectangle ++(14,2.8);
+		
+		\node[text=black,align=center,anchor=center] at (current page.center) {
+			\fontsize{13}{15}\selectfont
+			Parametric Maximum Likelihood Estimation for \\[0.3em]
+			\fontsize{15}{15}\selectfont \textcolor{myblue}{Locally Stationary Hidden Markov Models}\\[0.7em]
+			
+			\fontsize{10}{10}\selectfont
+			\textcolor{darkgrey}{Moritz Meyer, Freiburg im Breisgau}
+		};
+		
+	\end{tikzpicture}
+}
+
+% Jetzt zu den Abkürzungen
+% alle Mathe-Abkürzungen
+\renewcommand{\epsilon}{\varepsilon} % wichtige Sache
+\newcommand{\loc}[3]{L_{#1}^{#2}(#3)}
+\newcommand{\s}[0]{\mathfrak{s}}
+\newcommand{\m}[0]{\mathfrak{m}}
+\newcommand{\br}[1]{\left(#1\right)}
+\newcommand{\lbr}[1]{\left(#1\right}
+\newcommand{\C}[0]{\mathbb{C}}
+\newcommand{\R}[0]{\mathbb{R}}
+\newcommand{\Q}[0]{\mathbb{Q}}
+\newcommand{\M}[0]{\mathbb{M}}
+\newcommand{\Z}[0]{\mathbb{Z}}
+\newcommand{\N}[0]{\mathbb{N}}
+\newcommand{\X}[0]{\mathbb{X}}
+\newcommand{\F}[0]{\mathcal{F}}
+\newcommand{\Fi}[0]{\mathbb{F}}
+\newcommand{\G}[0]{\mathbb{G}}
+\newcommand{\W}[0]{\mathbb{W}}
+\newcommand{\B}[0]{\mathcal{B}}
+\renewcommand{\H}[0]{\mathcal{H}}
+\newcommand{\dP}[0]{\mathrm{d}P}
+\newcommand{\dPdif}[1]{\mathrm{d}#1}
+\renewcommand{\S}{\textcolor{orange}{\textbf{(S)}}\,}
+\newcommand{\homQG}[2]{Q_{d_{#1}}(N_{#2}^{(#1)}, f_{#2}^{(#1)}, \mathbb{G})}
+\newcommand{\homQGo}[1]{Q_{d_{#1}}(N_{#1}, f_{#1}, \mathbb{G})}
+\newcommand{\homQXo}[1]{Q_{d_{#1}}(N_{#1}, f_{#1}, \mathbb{X})}
+\newcommand{\homQX}[2]{Q_{d_{#1}}(N_{#2}^{(#1)}, f_{#2}^{(#1)}, \mathbb{X})}
+\newcommand{\Ch}[1]{\mathcal{H}_{#1}}
+\newcommand{\Pol}[1]{\mathcal{P}_{#1}}
+\newcommand{\Hil}[0]{\mathfrak{h}}
+\usepackage{bbm} %for the indicator
+\newcommand{\indicator}[1]{\mathbbm{1}_{#1}}
+\newcommand{\indicatorset}[1]{\mathbbm{1}_{\{#1\}}}
+\newcommand{\law}[0]{\overset{\mathcal{L}}{=}}
+\newcommand{\normald}[2]{\mathcal{N}\left(#1, #2\right)}
+\newcommand{\E}[1][]{%
+    \operatorname{E}%
+    \ifx\\#1\\\else% Check if optional argument is provided
+        \left[#1\right]%
+    \fi%
+}
+\renewcommand{\P}[1][]{%
+    \operatorname{P}%
+    \ifx\\#1\\\else% Check if optional argument is provided
+        \left(#1\right)%
+    \fi%
+}
+\newcommand{\<}{\langle}
+\renewcommand{\>}{\rangle}
+\newcommand{\Cov}[0]{\operatorname{Cov}}
+\newcommand{\iid}[0]{i.\,i.\,d.\,}
+\renewcommand{\P}[0]{\operatorname{P}}
+\newcommand{\Czi}[0]{\mathcal{C}([0, \infty))}
+\newcommand{\brp}[1]{\langle{}#1\rangle{}}
+
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\usepackage{aligned-overset}
+\newcommand\restr[2]{\ensuremath{\left.#1\right|_{#2}}} % für restr-Abbildung: \restr{f}{A}
+
+
+
+% Define a new block environment with a specific counter
+\newenvironment{theoremblock}[0]
+  {%
+   \begin{block}{Theorem }}
+  {\end{block}}
+\newenvironment{theoremblockname}[1]
+  {%
+   \begin{block}{Theorem (#1)}}
+  {\end{block}}
+  \newenvironment{satzblock}[0]
+  {%
+   \begin{block}{Satz }}
+  {\end{block}}
+\newenvironment{satzblockname}[1]
+  {%
+   \begin{block}{Proposition (#1)}}
+  {\end{block}}
+    \newenvironment{propositionblock}[0]
+  {%
+  	\begin{block}{Proposition }}
+  	{\end{block}}
+  \newenvironment{propositionblockname}[1]
+  {%
+  	\begin{block}{Proposition (#1)}}
+  	{\end{block}}
+
+  \newenvironment{lemmablock}[0]
+  {%
+   \begin{block}{Lemma }}
+  {\end{block}}
+\newenvironment{lemmablockname}[1]
+  {%
+   \begin{block}{Lemma (#1)}}
+  {\end{block}}
+
+\newenvironment{corollaryblock}[0]
+  {%
+   \begin{block}{Korollar }}
+  {\end{block}}
+\newenvironment{corollaryblockname}[1]
+  {%
+   \begin{block}{Korollar (#1)}}
+  {\end{block}}
+
+\newenvironment{definitionblock}[0]
+  {%
+   \begin{block}{Definition }}
+  {\end{block}}
+\newenvironment{definitionblockname}[1]
+  {%
+   \begin{block}{Definition (#1)}}
+  {\end{block}}
+

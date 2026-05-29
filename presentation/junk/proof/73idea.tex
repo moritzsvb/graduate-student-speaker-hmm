@@ -1,0 +1,77 @@
+\section{Restliche Ideen}
+\begin{frame}{Und jetzt?}
+    \begin{itemize}
+        \item Sind aber an $\left|\E[h(\mathbf{Q}(\X))]-\E[h(Z)]\right|$ interessiert. 
+        \item $h = \indicator{(-\infty, x_1] \times \cdots \times (-\infty, x_m]}$ natürlich \textbf{nicht} differenzierbar. 
+        \pause
+        \item Wir machen es also differenzierbar!
+        \item Mit Hilfe eines \textbf{gaußschen} Glättungsoperators!
+        \[
+        h_t(x) = \int_{\R^m} h(\sqrt{t}y + \sqrt{1-t}x) \mathcal{N}(0, \operatorname{Id})(dy), \quad t \in (0,1), 
+        \]
+        \pause
+        \item \textbf{Fakt:} Sei $\H(\R^m)$ Menge der Indikatoren konvexer Mengen auf $\R^m$. Ist $Z$ \textit{standardnormal}, so gilt für jedes Wahrscheinlichkeitsmaß $Q$ auf $\R^m$ gilt für jedes $W \sim Q$ bereits \begin{align*}
+        &\sup_{h \in \H(\R^m)} \left|\E[h(W)] - \E[h(Z)]\right| \\ & \qquad \qquad \qquad \leq \frac{4}{3} \sup_{h \in \H(\R^m)} \left(\left|\E[h_t(W)] - \E[h_t(Z)]\right| + 2 \sqrt{m}\sqrt{t}\right)
+        \end{align*}
+    \end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Und jetzt?}
+    \small 
+\textcolor{orange}{
+\begin{align*}
+        &\sup_{h \in \mathcal{I}(\R^m)} \left|\E[h(\mathbf{Q}(\X))] - \E[h(Z)]\right| \\ & \qquad \qquad \qquad \leq \frac{4}{3} \sup_{h \in \mathcal{I}(\R^m)} \left(\left|\E[h_t(\mathbf{Q}(\X))] - \E[h_t(Z)]\right| + 2 \sqrt{m}\sqrt{t}\right)
+        \end{align*}}
+    \begin{itemize}
+        \item $h_t$ erfüllt die Bedingungen an $\varphi, \varphi', \varphi'', \varphi'''$ für jedes $t$. 
+        \item Rechne nach, dass $\norm{\varphi''}_\infty, \norm{\varphi'''}_\infty \leq t^{-\frac{3}{2}}$. 
+        \item Seien $B_1$ und $B_2$ die Bounds aus dem letzten Beweis. Dann erhalte
+        \begin{align*}
+        &\sup_{h \in \mathcal{I}(\R^m)} \left|\E[h(\mathbf{Q}(\X))] - \E[h(Z)]\right| \\ & \qquad \qquad \qquad \leq \frac{8}{3}\sqrt{m}\sqrt{t} + \frac{4}{3}\left(B_1 + B_2\right)t^{-\frac{3}{2}}
+        \end{align*}
+        \item Ableiten (zweimal) ergibt Minimum für $t = \sqrt{3(B_1 + B_2)/(2\sqrt{m})}$. 
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Und jetzt?}
+    \small 
+    \begin{itemize}
+        \item Erhalten
+        \begin{align*}
+        &\sup_{h \in \mathcal{I}(\R^m)} \left|\E[h(\mathbf{Q}(\X))] - \E[h(Z)]\right| \\ & 
+        \leq \frac{8}{3}\sqrt{m}\sqrt{\sqrt{3(B_1 + B_2)/(2\sqrt{m})}} + \frac{4}{3}\left(B_1 + B_2\right)\left(\sqrt{3(B_1 + B_2)/(2\sqrt{m})}\right)^{-\frac{3}{2}} \\ & \sim (B_1+B_2)^{\frac{1}{4}} \to 0.
+        \end{align*}
+        \item Gilt auch für andere Kovarianzmatrizen.
+        \item Damit gilt insbesondere $d_\text{Kol}(\mathbf{Q}(\X), Z) \to 0$. 
+    \end{itemize}
+\end{frame}
+
+%%%%Drumherum
+
+\section{Ausklang}
+\begin{frame}{Was war geschehen?}
+    \begin{itemize}
+        \item Autoren haben mit $\mathrm{Inf}_i(f)$ gearbeitet. Tauchen auf, wenn man sukzessive $(G_1, \ldots, G_N)$ zu $(X_1, \ldots, X_N)$ transformiert. \pause \footnotesize
+        \begin{align*}\E[(V_j^{(i)})^2] &= \sum_{\substack{1 \leq i_1, \ldots, i_{d_j} \leq N_j \\ \exists k: i_k = i}} f_j(i_1, \ldots, i_{d_j})^2 \E[(Z_{i_1}^{(i)})^2] \cdots \textcolor{orange}{\widehat{1}_{(i)}} \cdots \E[(Z_{i_d}^{(i)})^2] \\ &= \sum_{\substack{1 \leq i_1, \ldots, i_{d_j} \leq N_j \\ \exists k: i_k = i}} f_j(i_1, \ldots, i_{d_j})^2 = d_j! \mathrm{Inf}_i(f_j) \end{align*} 
+        \normalsize
+        \item Einflussindizes kontrollieren Abstand von verrauschter und gaußscher Summe.
+        \pause
+        \item \textit{Treibstoff}: Hyperkontraktivität.
+        \pause
+        \item Die sind beschränkt durch Kontraktionen, welche man vor allem durch eine Produktformel für mehrfache \textbf{Integrale} erhält. Unsere Summen sind aber mehrfache Integrale. 
+        \item Verbindung von verschwindenden Kontraktionen und Konvergenz in Verteilung gegen Normalverteilung bekannt / plausibel.
+        
+    \end{itemize}
+\end{frame}
+
+% \begin{frame}{Was geht noch? Was geht nicht?}
+%     \begin{itemize}
+%     \item Man kann auch etwas in der 1-Wasserstein-Metrik zeigen (andere Klasse $\H$ von Lipschitz-Testfunktionen)
+%     \pause
+%     \item Man kann den Abstand zu $\chi^2$-Verteilungen mit ähnlichen Argumenten und Invarianten beschränken. 
+%     \pause
+%     \item Man kann die Resultate \textbf{nicht} für den Fall $d=1$ nutzen. Grund: $\sum_{i=1}^n \frac{1}{\sqrt{n}} X_i \Longrightarrow \mathcal{N}(0,1)$, aber \[\norm{h \otimes_1 h}_2 = \sum_{i=1}^n (\sqrt{n}^{-1})^2 = 1 \not \longrightarrow 0.\]
+%     \end{itemize}
+% \end{frame}

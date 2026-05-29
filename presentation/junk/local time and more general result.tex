@@ -1,0 +1,180 @@
+\section{Lokalzeit, verallgemeinertes Resultat und eine Anwendung}
+\begin{frame}{Die Lokalzeit einer Diffusion}
+% Place the image at the top-right corner
+\begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=north east, xshift=-10mm, yshift=-5mm] at (current page.north east) {
+        \includegraphics[width=15mm]{so-so-128.png}
+    };
+\end{tikzpicture}
+    \begin{definitionblock}
+        Für unsere Diffusionen $X$ existiert jeweils ein \textcolor{red}{stetiger} Prozess $(t,x) \mapsto \loc{t}{x}{X}$, der die folgende \textbf{Okkupationszeitformel} erfüllt: Für jedes $f \in L^1(\mu)$ gilt \textcolor{red}{fast sicher für jedes $t\geq 0$}
+        \[
+\int_0^t f(X_u) du = \int_I f(x) \loc{t}{x}{X} \m(dx).
+        \] 
+        \pause
+        Man darf sich grob $\loc{t}{x}{X} = \int_0^t \delta(X_s - x) dt$ vorstellen.
+        Die Konstruktion und Eindeutigkeit wird im zweiten Vortrag genauer besprochen.
+    \end{definitionblock}
+    \pause
+    \begin{itemize}
+        \item Wir nutzen ad hoc $\G_tf = \sqrt{t}\int_I \br{t^{-1}\loc{t}{x}{X} - \m(I)^{-1}} f(x) \m(dx)$
+        \item Beachte: $f(x)\m(dx)$ ist ein signiertes Maß. 
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Von $\G$ zu $\H$}
+    \begin{definitionblockname}{Totalvariationsabstand}
+    Es sei $\lambda$ ein beliebiges signiertes Maß. Dann definieren wir \[
+    \norm{\lambda} := |\lambda(A)| + |\lambda(B)|,
+    \] wobei $A \cap B = \emptyset$ die Zerlegung in Positiv- und Negativmasse sei.
+    \textcolor{red}{Stimmt das so?}
+    \end{definitionblockname}
+    \begin{itemize}
+        \item Somit $\norm{f(x) \m(dx)} < \infty$.
+        \item Betrachte allgemeiner $\sqrt{t}\int_I \br{t^{-1}\loc{t}{x}{X} - \m(I)^{-1}}\lambda(dx)$ für beliebige $\norm{\lambda} < \infty$. 
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Der verallgemeinerte empirische Prozess $\H_t$}
+    \begin{definitionblockname}{Verallgemeinerter empirischer Prozess}
+        Es sei $\Lambda$ eine Menge signierter Maße derart, dass $\sup_{\lambda} \norm{\lambda} < \infty$ gilt. Dann definieren wir die zufälligen Abbildungen
+        \begin{align*}
+            \Omega &\overset{\H_t}{\longrightarrow} \ell^\infty(\Lambda) \\
+            \omega &\longmapsto \br{\lambda \mapsto \sqrt{t}\int_I \br{t^{-1}\loc{t}{x}{X}(\omega) - \m(I)^{-1}}\lambda(dx)}.
+        \end{align*}
+    \end{definitionblockname}
+    \begin{itemize}
+        \item Wie zuvor Messbarkeit der einzelnen Komponenten. 
+        \item Wohldefiniertheit mit $\loc{t}{x}{X}$ kompakt getragen in $x$ für festes $t$:
+        \pause
+        $\sup_{\lambda \in \Lambda} \norm{H_t \lambda} \leq \sqrt{t}\sup_{x \in I} \left|t^{-1}\loc{t}{x}{X} - \m(I)^{-1}\right|\sup_{\lambda \in \Lambda} \norm{\lambda} < \infty$
+
+        fast sicher.
+    \end{itemize}
+\end{frame}
+\begin{frame}{Konvergenz der endlichdimensionalen Verteilungen}
+    \begin{lemmablock}
+        Die endlichdimensionalen Verteilungen der $\H_t$ konvergieren schwach gegen die eines zentrierten Gaußschen Prozesses $\H$ mit Kovarianzfunktion \[
+\E[\H\lambda\H\nu] = \frac{4}{\m(I)} \int_I \br{\lambda(\inf I, x] - F(x)\lambda(I)} \br{\nu(\inf I, x] - F(x)\nu(I)} d \s(x).
+        \] Dabei bezeichnet $F$ die Verteilungsfunktion von $\mu$. 
+    \end{lemmablock}
+    
+    \begin{definitionblockname}{Donskerklasse}
+        Wir nennen ein solches $\Lambda$ eine Donskerklasse, falls die $H_t$ in $\ell^\infty(\Lambda)$ schwach gegen einen straffen Limes konvergieren, der eine Zufallsvariable ist.
+    \end{definitionblockname}
+\begin{itemize}
+    \item $\H_t$s a priori nicht unbedingt messbar.
+\end{itemize}
+\end{frame}
+\begin{frame}{Verallgemeinertes Hauptresultat}
+    \begin{definitionblock}
+        Wie zuvor induziert $\H$ die natürliche Pseudometrik $d_\H(\lambda, \nu) = \E[(\H\lambda - \H\nu)^2]^\frac{1}{2}$ auf $\Lambda$.
+    \end{definitionblock}
+ \pause
+ \begin{theoremblockname}{Verallgemeinerter Donsker für Diffusionen}
+     Eine beschränkte Menge $\Lambda$ ist donskersch genau dann, falls der zentrierte Gaußsche Prozess $\H$ mit enstsprechender Kovarianzfunktion $\Gamma < \infty$ eine beschränkte und $d_\H$-uniform stetige Version besitzt. In diesem Fall gilt für alle $x \in I$\[
+\H_t \overset{P_x}{\Longrightarrow} \H \; \text{wie zuvor \underline{sogar in} } C_b(\Lambda, d_\H) \text{ für } t \to \infty.
+     \]
+ \end{theoremblockname}
+\end{frame}
+
+\begin{frame}{Erste Folgerungen und Einordnungen}
+    \begin{itemize}
+        \item Regularität von Gaußschen Prozessen bereits untersucht. 
+        \item Oft treten sogenannte majorizing measure conditions (MMC) auf.
+    \end{itemize}
+    \begin{satzblockname}{Folgerungen aus zwei Thm aus Ledoux}
+        Es sei $\X = (X_t)_{t \in T}$ ein gaußscher Prozess. \textbf{Genau dann}, falls es ein Wahrscheinlichkeitsmaß $\nu$ auf $(T, d_\X)$, welches \[
+\lim_{\eta \downarrow 0}\sup_{t \in T} \int_0^\eta \br{\log \frac{1}{\nu(B_\varepsilon(t))}}^\frac{1}{2} d\epsilon = 0
+        \] erfüllt, besitzt $\X$ eine Version, deren Pfade fast alle beschränkt und uniform stetig auf $(T,d_\X)$ sind. 
+    \end{satzblockname}
+    \textcolor{red}{Im Buch steht da noch etwas dazu, wie das in der Praxis zum Tragen kommt. Relevant? Außerdem: Genauer aufschlüsseln?}
+\end{frame}
+\begin{frame}{Erste Folgerungen und Einordnungen}
+Von jetzt an nehmen wir immer $\Gamma < \infty$ an.
+\begin{corollaryblock}
+    Eine in totaler Variation beschränkte Klasse $\Lambda$ ist genau dann donskersch, falls ein borelsches Wahrscheinlichkeitsmaß $\nu$ auf $(\Lambda, d_\H)$ derart existiert, dass \[
+\lim_{\eta \downarrow 0}\sup_{t \in T} \int_0^\eta \br{\log \frac{1}{\nu(B_\varepsilon(t))}}^\frac{1}{2} d\epsilon = 0
+    \] gilt.
+\end{corollaryblock}
+    % \begin{satzblockname}{12.9 aus Ledoux in abgewandelter Form}
+    %      Es sei $\X = (X_t)_{t \in T}$ ein gaußscher Prozess mit fast sicher beschränkten und stetigen 
+    % \end{satzblockname}
+
+\end{frame}
+\begin{frame}{Erste Folgerungen und Einordnungen}
+\begin{theoremblockname}{\textit{Dudley's theorem}}
+    Es sei $\X = (X_t)_{t \in T}$ ein gaußscher Prozess. Dann gilt \textcolor{red}{Messbarkeit von Suprema?}\[
+\E[\sup_{t \in T}X_t] \leq 24 \int_0^\infty \br{\log N(T, d_\X, \varepsilon)}^\frac{1}{2} d\epsilon.
+    \] Konvergiert das Integral, so besitzt $\X$ eine Version, deren Pfade fast alle beschränkt und uniform stetig auf $(T, d_\X)$ sind. 
+\end{theoremblockname}
+    \begin{corollaryblock}
+        Sei $\Lambda$ in Totalvariation beschränkt und es gelte \[
+\int_0^\infty \br{\log N(T, d_\X, \varepsilon)}^\frac{1}{2} d\epsilon < \infty.
+        \] Dann ist $\Lambda$ donskersch.
+    \end{corollaryblock}
+\end{frame}
+\begin{frame}{Erste Anwendung: CLT für Lokalzeit}
+    \begin{itemize}
+        \item Nun sehen wir kleine Anwendung.
+    \end{itemize}
+    \begin{theoremblock}
+        Nimm $\int_I F^2(1-F)^2 d\s < \infty$ an. Dann gilt für alle $x \in I$ und allen kompakten $J \subset I$ bereits \[
+\sqrt{t}\br{t^{-1}\loc{t}{x}{X} - \m(I)} \overset{P_x}{\Longrightarrow} \G \text{ in } C(J),
+        \] wobei $\H$ ein zentrierter Gaußscher Prozess mit Kovarianzfunktion \[
+        \E[\H(x)\H(y)] = \frac{4}{\m(I)} \int_I \br{\indicator{[x, \sup I)} - F}\br{\indicator{[y, \sup I} - F} d \s
+        \] ist.
+    \end{theoremblock}
+\end{frame}
+\begin{frame}{Erste Anwendung: CLT für Lokalzeit}
+    \begin{proofs}
+        \begin{itemize}
+            \item Idee: $\Lambda = \{\delta_x\}_{x \in J}$; natürlich $\norm{\delta_x} = 1$ für jedes $x$.
+            \item Beachte nun: \[\sqrt{t}\br{t^{-1}\loc{t}{x}{X} - \m(I)^{-1}} = \sqrt{t}\int_I \br{t^{-1}\loc{t}{s}{X} - \m(I)^{-1}} \delta_x(ds).\]
+            \item Beachte: \begin{align*}
+            \Gamma(\delta_x, \delta_y) &= 4\m(I)^{-1}\int_I \br{\delta_x(\inf I, s] - F(s)\delta_x(I)}\br{\delta_y(\inf I, s] - F(s)\delta_y(I)} \\
+            &= 4\m(I)^{-1}\int_I \br{\indicator{[x, \sup I)} - F(s) \cdot 1}\br{\indicator{[y, sup I)} - F(s)\cdot 1} d\s.
+        \end{align*}
+       \end{itemize}
+    \end{proofs}
+\end{frame}
+
+\begin{frame}{Erste Anwendung: CLT für Lokalzeit}
+    \begin{proofs}[\proofname \,(fortg.)]
+    \begin{itemize}
+        \item Warum ist \[
+        \E[\H(x)\H(y)] = \frac{4}{\m(I)} \int_I \br{\indicator{[x, \sup I)} - F}\br{\indicator{[y, \sup I)} - F} d \s.
+        \] wohldefiniert: 
+        \begin{itemize}
+            \item Nahe $\inf I$ ist $\br{\indicator{[x, \sup I)} - F}\br{\indicator{[y, \sup I)} - F}$ wie $F^2$ und nahe $\sup I$ wie $(1-F)^2$. 
+            \item $d\s$ ist lokal endlich und es folgt Behauptung aus $\int_I F^2(1-F)^2 d\s < \infty$
+        \end{itemize}
+        \item In der Tat konvergiert also der entsprechende $\Lambda$-indizierte Prozess $\H_t$ schwach gegen $\H$, falls wir die Entropiebedingung \[
+\int_0^\infty \br{\log N(T, d_\X, \varepsilon)}^\frac{1}{2} d\epsilon < \infty \text{ nachweisen können.}
+        \] 
+    \end{itemize}
+        
+    \end{proofs}
+\end{frame}
+
+\begin{frame}{Erste Anwendung: CLT für Lokalzeit}
+\begin{proofs}[\proofname \, (fortg.)]
+    \begin{itemize}
+        \item Man rechnet für $x < y$ nach: \[\E[(\H \delta_x - \H \delta_y)^2] = 4\m(I)^{-1} \int_I \indicator{[x,y)}(s) d\s(s) = 4\m(I)^{-1} |\s (x) - \s(y)|.\]
+        \item Also Metrik durch $\sqrt{|\s(x)-\s(y)|}$ gegeben. Somit $(\Lambda, d_\H) \cong (\s(J), \sqrt{|\cdot|})$ isometrisch. Insbesondere Überdeckungszahlen gleich.
+        \item Da $J$ kompakt, $\s(J)$ kompakt bezüglich $|\cdot|$ und somit $\s(J) = [c,d]$. Insbesondere $N(\s(J), \epsilon, |\cdot|) = \lceil\frac{d-c}{\epsilon}\rceil$. 
+    \end{itemize} 
+\end{proofs}
+\end{frame}
+\begin{frame}{Erste Anwendung: CLT für Lokalzeit}
+\begin{proof}[\proofname\,(fortg.)]
+   \begin{itemize}
+   \item Beachte für $0 < \varepsilon < 1$ $N(\s(J), \epsilon, \sqrt{|\cdot|}) \geq N(\s(J), \epsilon, |\cdot|)$.
+        \item Beachte nun \begin{align*}
+            \int_0^\infty (\log N([c,d], &\varepsilon, |\cdot|))^\frac{1}{2} d \varepsilon \sim \int_0^1 \br{\log \left\lceil\frac{d-c}{\epsilon}\right\rceil}^{\frac{1}{2}} d\epsilon  \\ &\sim  \int_0^1 \br{\log \frac{1}{\epsilon}}^{\frac{1}{2}} d\epsilon = \int_0^\infty \br{\log y}^\frac{1}{2} y^{-2} dy < \infty.
+        \end{align*}
+    \item Haben also nach unserem Satz Konvergenz in $\ell^\infty(J)$.
+    \item Lokalzeit ist stetig $\Longrightarrow$ in $C(J)$.
+\end{itemize} 
+\end{proof}
+\end{frame}

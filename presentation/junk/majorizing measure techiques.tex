@@ -1,0 +1,246 @@
+\section{Technik der majorisierenden Maße}
+\begin{frame}{Technik der majorisierenden Maße}
+\begin{block}{Erinnerung an Theorem \textcolor{red}{COUNTER}}
+     Es sei $\X = (X_t)_{t \in T}$ ein gaußscher Prozess. \textbf{Genau dann}, falls es ein Wahrscheinlichkeitsmaß $\nu$ auf $(T, d_\X)$ gibt, welches \[
+\lim_{\eta \downarrow 0}\sup_{t \in T} \int_0^\eta \br{\log \frac{1}{\nu(B_\varepsilon(t))}}^\frac{1}{2} d\epsilon = 0
+        \] erfüllt, besitzt $\X$ eine Version, deren Pfade fast alle beschränkt und uniform stetig auf $(T,d_\X)$ sind.
+\end{block}
+    \begin{itemize}
+        \item Ziel: Gucken, was mit diesem Integral möglich ist.
+        \item Untersuchen das \textit{einfache Setting}: lokale Martingale.
+        \item Wollen zunächst dort asymptotische Straffheit erhalten.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Setting}
+ \textcolor{red}{Siehe Kommentar}
+ % Wir müssen uns noch einmal über das Setting Gedanken machen. Ich bin der Meinung, dass im Prinzip der Produktraum vom Anfang ausreichen dürfte, da alle Zufallsvariablen immer eine Diffusion beinhalten. Man könnte einmal überlegen, ob wir für irgendwelche Limites etwas anderes brauchen. Glaube aber nicht.
+\begin{itemize}
+    \item Wir befinden uns in einem filtrierten Wahrscheinlichkeitsraum $(\Omega, \F, \Fi, \P)$ 
+\end{itemize}
+    \begin{definitionblockname}{Lokales Martingal}
+    Ein adaptierter Prozess $X$ heißt lokales Martingal, falls eine fast sicher aufsteigende Folge von $\Fi$-Stoppzeiten $\tau_{k}: \Omega \rightarrow [0, \infty)$ existiert, sodass gilt:
+    \begin{itemize}
+        \item Die Folge $\tau_{k}$ divergiert f.s.: $P(\lim_{k \rightarrow \infty} \tau_{k} = \infty)=1$
+        \item Der gestoppte Prozess $\{X_{\tau_n\land t}: t\geq 0\}$ ist ein Martingal für alle $n$
+    \end{itemize}
+\end{definitionblockname}
+\pause
+\begin{itemize}
+    \item Betrachte nun Familie $\M = \{M^\theta\}_{\theta \in \Theta}$ stetiger lokaler Martingale \[
+    M^\theta = (M_t^\theta)_{t \geq 0}
+    \] indiziert auf \[\text{\textbf{abzählbarem} pseudometrischen Raum} \, (\Theta, d).\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Der quadratische $d$-Stetigkeits-Modulus}
+    \begin{definitionblockname}{Quadratische Variation}
+        Ist $N$ ein stetiges lokales %und ohne Einschränkung quadratintegrierbares 
+        Martingal, so bezeichnet $\<N\>$ den eindeutigen stetigen, monoton wachsenden und adaptierten Prozess derart, dass \[
+N^2 - \<N\>
+        \] ein lokales Martingal ist. 
+    \end{definitionblockname}
+    \begin{definitionblockname}{Der quadratische $d$-Stetigkeits-Modulus}
+        Der quadratische $d$-Stetigkeits-Modulus einer solchen Klasse $\M$ ist der stochastische Prozess $\norm{\M}_d = (\norm{\M}_{d,t})_{t \geq 0}$ definiert als 
+        \[
+\norm{\M}_{d,t}  := \sup_{\theta, \psi: d(\theta, \psi) > 0} \frac{\sqrt{\<M^\theta - \M^\psi\>_t}}{d(\theta, \psi)}
+        \]
+    \end{definitionblockname}
+    \begin{itemize}
+        \item Supremum messbar, da $\Theta$ \textbf{abzählbar}. Insbesondere produktmessbar.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Die Bernstein-Ungleichung / Exponentialungleichung}
+    \begin{satzblockname}{Bernstein-Ungleichung für stetige lokale Martingale}
+        Es bezeichne $M$ ein stetiges Martingal mit terminalem Wert $M_\infty$, welches in $0$ startet. Dann gilt die folgende Ungleichung
+        \[
+\P(|M_\infty|^* \geq x, \<M\>_\infty \leq \xi) \leq 2e^{-\frac{x^2}{2\xi}}.
+        \]
+        %% Vielleicht, falls Zeit, den Beweis davon durchgehen. Anleitung im Buch von Johannis.
+    \end{satzblockname}
+    \pause
+Kann benutzt werden, um zu zeigen, dass etwas \textbf{sub-gaußsch} ist:
+% \begin{definitionblockname}{Subgaußsche Zufallsvariablen und Prozesse}
+% Die Verteilung einer Zufallsvariable $Z$ wird subgaußsch genannt, falls es ein $C > 0$ derart gibt, dass für alle $t \geq 0$\[
+% P(|Z| \geq t) \leq 2e^{-\frac{t^2}{C^2}}
+% \]
+%       Die Verteilung eines Prozesses $t \mapsto X(t)$ wird subgaußsch genannt, falls es ein $C > 0$ derart gibt, dass \[
+% \P(|X(t)-X(s)| \geq t) \leq 2e^{-\frac{t^2}{C^2d^2(s,t)}}
+%     \] für alle $t \geq 0$ gilt. 
+% \end{definitionblockname}
+%% Machen es auf eigene Folie %%%%
+\end{frame}
+
+\begin{frame}{Die Bernstein-Ungleichung / Exponentialungleichung}
+    \begin{definitionblockname}{Subgaußsche Zufallsvariablen und Prozesse}
+Die Verteilung einer reellen Zufallsvariable $Z$ beziehungsweise eines reellen Prozesses $(X_t)_{t\in T}$ indiziert in einem metrischen Raum $(T,d)$ wird subgaußsch genannt, falls es ein $C > 0$ derart gibt, dass für alle $t \geq 0$\[
+P(|Z| \geq t) \leq 2e^{-\frac{t^2}{C^2}} \,\text{beziehungsweise} \, \P(|X(t)-X(s)| \geq t) \leq 2e^{-\frac{t^2}{C^2d^2(s,t)}}
+\] für alle $t \geq 0$ gilt. 
+\end{definitionblockname}
+\begin{satzblock}
+    Wir definieren für $\phi(x) = e^{x^2}-1$ die Norm $\norm{X}_\phi := \inf\{c > 0: \E[\phi(\frac{|X|}{c})] \leq 1\}$. 
+    Dann gilt die folgende Äquivalenz für reelle Zufallsvariablen
+\[
+         X \,\text{ist subgaußsch} \Longleftrightarrow 
+        \norm{X}_\phi < \infty.
+ \]
+\end{satzblock}
+\end{frame}
+
+\begin{frame}{Abschätzung mit majorisierendem Maß}
+    \begin{lemmablockname}{Majorisierendes-Maß-Abschätzung}
+        In unserem Setting gilt für alle $\delta, x, \eta > 0; K \geq 1$, jedes Borel-Maß $\nu$ auf $(\Theta, d)$ und jede beschränkte Stoppzeit $\tau$ bereits \begin{align*}
+            \P&\br{\sup_{t \leq \tau} \sup_{d(\theta, \psi) < \delta} |M_t^\theta - M_t^\psi| \geq x, \norm{\M}_{d,t} \leq K} \\ &\lesssim\frac{K}{x} \br{\sup_\theta \int_0^\eta \sqrt{\log\br{\nu\br{B_d(\theta, \varepsilon)}^{-1} +1 }} d\varepsilon + \delta \sqrt{\log(N(\eta, \Theta, d)^2 +1)}}
+        \end{align*}
+    \end{lemmablockname}
+    \begin{itemize}
+        \item Supremum messbar, da $\Theta$ \textbf{abzählbar}. Stoppzeit einsetzen wegen Produktmessbarkeit okay.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Abschätzung mit majorisierendem Maß}
+    \begin{proofs}
+        \begin{itemize}
+            \item Ohne Einschränkung Endlichkeit der rechten Seite.
+            \item Führe nun die Stoppzeit $\tau_K := \inf\{t \geq 0: \norm{\M}_{d,t} > K\}$ ein und setze \[
+    X_t^\delta := \sup_{d(\theta, \psi) < \delta} |M_{\tau_K \wedge t}^\theta - M_{\tau_K \wedge t}^\psi|.
+            \]
+            \item $\tau$ beliebige beschränkte Stoppzeit
+            \item  Beachte \[\P\br{\sup_{t \leq \tau} \sup_{d(\theta, \psi) < \delta} |M_t^\theta - M_t^\psi| \geq x, \norm{\M}_{d,t} \leq K} \leq \P(\sup_{t \leq \tau} X_t^\delta \geq x).\]
+        \end{itemize}
+    \end{proofs}
+\end{frame}
+
+\begin{frame}{Abschätzung mit majorisierendem Maß}
+    \begin{proofs}[\proofname \,(fortg.)]
+        \begin{itemize}
+            \item Erinnere $\norm{\M}_{d,t}  = \sup_{\theta, \psi: d(\theta, \psi) > 0} \frac{\sqrt{\<M^\theta - \M^\psi\>_t}}{d(\theta, \psi)}$.
+            \item Sei nun $\sigma$ weitere beliebige \textbf{endliche} Stoppzeit. Dann für alle $a \geq 0$\begin{align*}
+                \P(|M_{\tau_K\wedge\sigma}^\theta& - M_{\tau_K \wedge \sigma}^\psi| > a) \\
+                =& \P(|M_{\tau_K\wedge\sigma}^\theta - M_{\tau_K \wedge \sigma}^\psi| > a, \<M^\theta - M^\psi\>_{\tau_K \wedge \theta} \leq K^2d^2(\theta, \psi)) \\
+                \leq&2\exp\br{-\frac{1}{2}\cdot \frac{a^2}{K^2d^2(\theta, \psi)}}.
+            \end{align*} Benutze, dass $M_{\tau_K \wedge \sigma}^\theta - M_{\tau_K \wedge \sigma}^\psi$ terminaler Wert.
+            \item $\theta \mapsto M_{\tau_K \wedge \sigma}^\theta$ subgaußsch. Damit \[\norm{d(\theta, \psi)^{-1} M_{\tau_K \wedge \sigma}^\theta - M_{\tau_K \wedge \sigma}^\psi}_\phi < K \cdot \xi \;\text{für alle}\,\psi, \theta \in \Theta; \xi \text{ geeignet.}\] 
+        \end{itemize}
+    \end{proofs}
+\end{frame}
+
+\begin{frame}{Abschätzung mit majorisierendem Maß}
+\begin{proofs}[\proofname\,(fortg.)]
+    \begin{itemize}
+        \item \textbf{Jetzt} skizzieren wir: \textcolor{red}{lesssim oder leq? Glaube lessim, gibt noch Normkonst} \small \[
+    \E[X_\sigma^\delta] \lesssim  K\left(\sup_{\theta} \int_0^\eta \log\br{\nu(B_d(\theta, \epsilon))^{-1} + 1} d\epsilon\right. + \left. \delta \sqrt{\log(N(\eta, \Theta, d)^2 + 1)}\right)
+        \]
+        \normalsize
+        \item Hintergrund: $\phi(x)$ ist \textbf{Young-Funktion}: $\phi(0)=0, \lim_{x \to \infty}\phi(x) = \infty$, monoton und konvex. Inverse ist $\phi^{-1}(x) = \sqrt{\log(x+1)}$. 
+         \item \textcolor{red}{Hier lese ich einiges in den Wikiartikel rein}Notation: $Y_\theta := (K\xi)^{-1}M_{\tau_K \wedge \sigma}^\theta$ und \textcolor{red}{$ \sup_{\theta, \psi}d(\theta, \psi)^{-1}\norm{M_{\tau_K \wedge \sigma} - M_{\tau_K \wedge \sigma}^\psi}_\phi \leq K\xi <\infty$}\\ Allgemeine Abschätzung: Für alle $A \in \mathcal{A}$  
+        \small
+        \begin{align*}
+            \int_A |Y_\theta-Y_\psi| d\P =& d(\theta, \psi) \P(A)\int_A \phi^{-1}\circ\phi(d(\theta, \psi)^{-1}|Y_\theta-Y_\psi|) \,\frac{d\P}{\P(A)} \\
+            \leq& d(\theta, \psi) P(A)\phi^{-1}(\underbrace{\E[\phi(|Y_\theta-Y_\psi|) ]}_{\leq 1} \P(A)^{-1})
+        \end{align*}
+        \normalsize
+    \end{itemize}
+\end{proofs}
+\end{frame}
+\begin{frame}{Abschätzung mit majorisierendem Maß}
+\begin{proofs}[\proofname\,(fortg.)]
+\normalsize
+    \begin{itemize}
+        % \item \textcolor{red}{Hier lese ich einiges in den Wikiartikel rein}Notation: $Y_\theta := (K\xi)^{-1}M_{\tau_K \wedge \sigma}^\theta$ und $ \sup_{\theta, \psi}d(\theta, \psi)^{-1}\norm{M_{\tau_K \wedge \sigma} - M_{\tau_K \wedge \sigma}^\psi}_\phi \leq K\xi <\infty$\\ %Allgemeine Abschätzung: Für alle $A \in \mathcal{A}$  
+        \item Nun also im Fall $|\Theta|< \infty$ mit mit geeignet definierten Funktionen $r_i: \Theta \to \text{Rep.system für Radius-$2^{-i}$-Überdeckung}=:R_l$ definiere\small \[
+        &U:= \{(x,y)\in \,R_l\times R_l: \,\text{ex. }\,u,v \text{ mit } d(u,v)<\delta,\, r_l(u)=x, \,r_l(v) = y\}  \]
+     \normalsize und rechne für $d(\theta, \psi)< \delta$ \small \[ |Y_\theta-Y_\psi| \leq \sup_{(x,y) \in U} |Y_{u_{x,y}}- Y_{v_{x,y}}| + 4 \sup_{\gamma \in \Theta}|Y_\gamma - Y_{r_l(\gamma)}|. \]
+     \item \normalsize Teile $\Omega = \sum_{(x,y) \in U} A_{x,y} := \sum \{\text{Max. nimmt Wert durch } (x,y) \text{ an}\}$ auf. \small
+     \[
+\int \max_{(x,y) \in U} |Y_{u_{x,y}}- Y_{v_{x,y}}| \,d\P = \sum_{(x,y) \in U} \int_{A_{x,y}} |Y_{u_{x,y}}- Y_{v_{x,y}}| \,d\P\]
+
+        % \sup_{\theta, \psi \in \Theta} |Y_\theta - Y_\psi| \leq 2 \cdot \sum_{i=K_0}^{K_1} \sup_{\gamma \in \Theta} |Y_{r_i(\gamma)} - Y_{r_{i-i}(\gamma)}| 
+ \normalsize 
+        % \item Wir zeigen nun mit Konkavität $\phi^{-1}$s für $k_m: R_m \to R_{m-1}$: \small\vspace{-0.3cm} \begin{align*}
+        % \E&\max_{\theta \in \Theta} |Y_\theta - Y_{r_l(\theta)}| \leq \sum_{m=l+1}^L \E \max_{\theta \in \Theta}|Y_{r_{m}(\theta)} - Y_{r_{m-1}(\theta)}| \\&= \sum_{m,\theta} \int_{A_\theta} |Y_{r_{m}(\theta)} - Y_{r_{m-1}(\theta)}| d\P \leq \sum_{m, \theta} \underbrace{d(r_{m}(\theta),r_{m-1}(\theta))}_{\leq 2^{-m+1}} \P(A_\theta) \phi^{-1}(\P(A_\theta)^{-1})
+    %         % \int& \sum_{i=K_0}^{K_1} \max_{l=1,\ldots,N(\varepsilon, \Theta,d)} |Y_{r_i(\gamma_l)} - Y_{r_{i-i}(\gamma_l)}| = \sum_{i=K_0}^{K_1} \sum_{l=1}^{N(\varepsilon, \Theta,d)}\int_{Z_l} |Y_{r_i(\gamma_l)} - Y_{r_{i_i}(\gamma_l)}| d\P \\
+    %         % &= \sum_{i=K_0}^{K_1}\sum_{l=1}^{N(\varepsilon, \Theta,d)} 2^{-i}P(Z_l)\phi^{-1}(\P(Z_l)^{-1}) \leq \sum_{i=K_0}^{\infty}2^{-i}\phi^{-1}(N(\varepsilon, \Theta,d))
+        % \end{align*}
+     \normalsize
+    \end{itemize}
+\end{proofs}
+\end{frame}
+\begin{frame}{Abschätzung mit majorisierendem Maß}
+    \begin{proofs}[\proofname\,(fortg.)]
+    \small
+    \vspace{-0.5cm}
+\begin{align*}
+            \int_A &|Y_\theta-Y_\psi| d\P \leq \P(A)d(\theta, \psi)\phi^{-1}(\P(A)^{-1})
+        \end{align*}
+    \begin{itemize}
+\item \normalsize Also \small \begin{align*}
+    \int \max_{(x,y) \in U}& |Y_{u_{x,y}}- Y_{v_{x,y}}| \,d\P = \sum_{(x,y) \in U} \int_{A_{x,y}} |Y_{u_{x,y}}- Y_{v_{x,y}}| \,d\P \\&\leq \sum_{(x,y) \in U} d(u_{x,y}, v_{x,y}) P(A_{x,y}) \phi^{-1}(\P(A_{x,y})^{-1}) \leq \delta \phi^{-1}(|U|^2).
+\end{align*}
+    \item \normalsize Beachte $|U| = N(2^{-l}, \Theta, d)$.
+    \item \textbf{Blackbox: } \small \[4 \int \sup_{\gamma \in \Theta}|Y_\gamma - Y_{r_l(\gamma)}| \,d\P\leq 8 \sup_{\gamma \in \Theta} \int \phi^{-1}(\nu(B_d(\gamma, \varepsilon))^{-1}) d\epsilon\]
+        % \item Beachte $|R_l| = N(2^{-l}, \Theta, d)$. 
+        % Also \small \begin{align*}
+        %     % \E\max_{\theta \in \Theta} |Y_\theta - Y_{r_l(\theta)}| &\leq \sum_{m, \theta} \underbrace{d(r_{m}(\theta),r_{m-1}(\theta))}_{\leq 2^{-m}} \P(A_\theta) \phi^{-1}(\P(A_\theta)^{-1}) \\&\leq 2 \sum_{m > l} 2^{-m}\phi^{-1}(N(2^{-m}, \Theta, d)).
+        % \end{align*}
+        % \item \normalsize Also zusammen mit $|U|=N(2^{-l}, \Theta, d)^2$ \small\begin{align*}
+        %     \E \sup_{d(\theta, \psi) &< 2^{-l}} |Y_\theta-Y_\psi| \leq \E \sup_{(x,y) \in U} |Y_{u_{x,y}}- Y_{v_{x,y}}| + 8 \sum_{m > l} 2^{-m}\phi^{-1}(N(2^{-m}, \Theta, d)) \\ \leq 2^{-l} \phi^{-1}(N(2^{-l}, \Theta, d)) + 8 \int_0^\eta \phi^{-1}()
+        % \end{align*}
+    \end{itemize}
+    \end{proofs}
+\end{frame}
+
+\begin{frame}{Abschätzung mit majorisierendem Maß}
+    \begin{proofs}[\proofname\,(fortg.)]
+        \begin{itemize}
+            \item Also zusammengefasst  \small \begin{align*}
+                \E \sup_{d(\theta, \psi) < \delta}|Y_\theta-Y_\psi| \leq  8 \sup_{\theta} \int_0^\eta &\sqrt{\log\br{\nu(B_d(\theta, \epsilon))^{-1} + 1}} d\epsilon \\ &+ \delta \sqrt{\log(N(\eta, \Theta, d)^2 + 1)}
+            \end{align*}
+            \item \normalsize und damit \small \begin{align*}
+                \E X_\sigma^\delta &= \E \sup_{d(\theta, \psi) < \delta}|M_{\tau_K\wedge\sigma}^\theta - M_{\tau_K\wedge\sigma}^\psi| \\&\lesssim  K \left(\sup_{\theta} \int_0^\eta \sqrt{\log\br{\nu(B_d(\theta, \epsilon))^{-1} + 1}} d\epsilon + \delta \sqrt{\log(N(\eta, \Theta, d)^2 + 1)}\right).
+            \end{align*}
+            \item \normalsize Weiter \small$\E (M_{\tau_K\wedge\sigma}^\theta - M_{\tau_K\wedge\sigma}^\psi)^2 \leq \E \<M^\theta-M^\psi\>_{\tau_K \wedge \psi} \leq K^2d^2(\theta,\psi)$. 
+        \end{itemize}
+    \end{proofs}
+\end{frame}
+\begin{frame}{Abschätzung mit majorisierendem Maß}
+    \begin{proof}[\proofname \,(fortg.)]
+    \begin{itemize}
+           \item \normalsize Also $\{M_{\tau_K\wedge\sigma}^\theta - M_{\tau_K\wedge\sigma}^\psi: \sigma \text{ endlich} \}$ $L^2$-beschränkt und damit ist (\textbf{Fakt}) $(M_{\tau_K\wedge t}^\theta - M_{\tau_K\wedge t}^\psi)_t$ \textbf{gleichgradig integrierbares Martingal}. 
+           \item $\sup_{d(\theta, \psi) < \delta} |\cdot|$ konvex, also \small \[
+X^\delta := (\sup_{d(\theta, \psi) < \delta} |M_{\tau_K \wedge t}^\theta - {\tau_K \wedge t}^\psi|)_t\] \normalsize ein \textbf{Submartingal}.
+\item \textbf{Doobsche Ungleichung:}  \small \begin{align*}
+    &\P\br{\sup_{t \leq \tau} \sup_{d(\theta, \psi) < \delta}  |M_t^\theta - M_t^\psi| \geq x, \norm{\M}_{d,t} \leq K} \leq \P(\sup_{t \leq \tau} X_t^\delta \geq x) \leq \frac{\E X_\tau^\delta}{x}  \\ &\lesssim  \frac{K}{x} \left(\sup_{\theta} \int_0^\eta \sqrt{\log\br{\nu(B_d(\theta, \epsilon))^{-1} + 1}} d\epsilon + \delta \sqrt{\log(N(\eta, \Theta, d)^2 + 1)}\right). \end{align*}
+    \end{itemize}  \end{proof}
+\end{frame}
+
+\begin{frame}{Die Majorisierendes-Maß-Bedingung}
+\small
+\begin{align*}
+            \P&\br{\sup_{t \leq \tau} \sup_{d(\theta, \psi) < \delta} |M_t^\theta - M_t^\psi| \geq x, \norm{\M}_{d,t} \leq K} \\ &\lesssim\frac{K}{x} \br{\sup_\theta \int_0^\eta \sqrt{\log\br{\nu\br{B_d(\theta, \varepsilon)}^{-1} +1 }} d\varepsilon + \delta \sqrt{\log(N(\eta, \Theta, d)^2 +1)}}
+        \end{align*}
+\normalsize
+% \begin{itemize}
+%     \item Erinnere: An asymptotischer Straffheit interessiert
+% \end{itemize}
+    \begin{definitionblockname}{Die Majorisierendes-Maß-Bedingung}
+        Existiert auf $\Theta$ eine Pseudo-Metrik $d$ und ein Wahrscheinlichkeitsmaß $\nu$ derart, dass \[
+\lim_{\eta \downarrow 0} \sup_{\theta \in \Theta} \int_0^\eta \sqrt{\log \frac{1}{\nu(B_d(\theta, \epsilon))}} d\epsilon =0,
+        \] so erklären wir die majorisierendes-Maß-Bedingung (MM) für erfüllt. 
+        Gilt gleichzeitig $\norm{\M^n}_{d, \tau_n} = \mathcal{O}_P(1)$, d.h. für alle $\varepsilon> 0$ existiert ein $K > 0$ mit $P(\norm{\M^n}_{d, \tau_n} > K) \leq \epsilon \text{ für alle } n$, so nennen wir das MM+-Bedingung.  
+    \end{definitionblockname}
+\end{frame}
+
+\begin{frame}{Die Majorisierendes-Maß-Bedingung}
+\begin{definitionblockname}{Asymptotische Gleichstetigkeit in Wahrscheinlichkeit}
+    Wir nennen eine Folge $\ell^\infty(\Theta)$-wertiger Zufallselemente asymptotisch $d$-gleichstetig in Wahrscheinlichkeit, falls für alle $\epsilon, \eta > 0$ ein $\delta > 0$ derart existiert, dass \[
+\limsup_{n \to \infty} \P(\sup_{d(\theta, \psi) \leq \delta} |X_n(\theta) - X_n(\psi)| > \epsilon) \leq \eta
+    \]
+\end{definitionblockname}
+    \begin{theoremblockname}{Asymptotische Gleichstetigkeit der Martingal-Abbildungen}
+    Es sei nun für jedes $n \in \N$ eine Kollektion $\M^n = \{M^{n, \theta} : \theta \in \Theta\}$ stetiger lokaler Martingale und eine Stoppzeit $\tau_n$ gegeben. 
+    
+        Angenommen, die MM+-Bedingung ist für ein Maß $\nu$ auf der metrisierten Indexmenge erfüllt. Dann ist die Folge zufälliger Abbildungen $\theta \mapsto M_{\tau_n}^{n,\theta}$ asymptotisch $d$-gleichsstetig in Wahrscheinlichkeit.
+    \end{theoremblockname}
+\end{frame}

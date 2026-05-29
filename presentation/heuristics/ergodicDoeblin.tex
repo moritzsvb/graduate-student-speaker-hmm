@@ -1,0 +1,247 @@
+%% From LLN to ergodic theorem to infinite memory (classical) to finite memory
+%% Say something on the integrals and their hard bounds. 
+%% Introduce the Doeblin condition "naturally"
+%% Talk about the classical limitation.
+%% And talk about van Handels proof which solves this limitation. 
+%% And the other notion of LS. And what the idea is now.
+%% Then argue why this other notion will most likely stay in the realm of classical time series analysis.  
+\section{How can we adapt a consistency proof?}
+\begin{frame}{The classical case}
+First let us go back to \textbf{assuming stationarity}.
+\begin{itemize}
+	\item In the classical iid case we decompose \[n^{-1} \log \rho_\theta(X_0^{n-1}) = n^{-1}\sum_{k=0}^{n-1} \log \rho_\theta(X_k) \overset{n \to \infty}{\longrightarrow} \E[\log \rho_\theta(X_0)] =: \ell(\theta) \] by the LLN. Then use separation/identifiability properties of $\ell(\theta)$ (unique maximum at $\theta^\ast$) and -- for example -- uniformity of the convergence.
+	\pause
+	\item In Hidden Markov case it is harder. \begin{align*}
+	n^{-1} \log \rho_\theta(Y_0^{n-1}) &= n^{-1} \sum_{k=0}^{n-1} \log \left(\rho_\theta(Y_0^{k})/ \rho_\theta(Y_0^{k-1})\right) \\ &= n^{-1} \sum_{k=0}^{n-1} \log \rho_{\theta}(Y_k|Y_0^{k-1})
+	\end{align*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The likelihood function's (slightly) nasty explicit form}
+	Explit form:
+	\[\log \rho_\theta(Y_k | Y_{0}^{l-1}) = \log \int_\mathcal{X} \gamma_{\theta}(x_k,Y_{k}) Q_{\theta}(x_{k-1}, dx_k) P_{\theta}(X_{k-1} \in dx_{k-1} | Y_{0}^{k-1}) \]
+	$\gamma_\theta$ transition density, i.e. \small\[
+	\int_{\mathcal{X}} \int_\mathcal{Y} \indicator{C}(x',y') \gamma_\theta(x',y') \phi(dy') Q_{\theta}(x,dx') = \int_{\mathcal{X}} \int_\mathcal{Y} \indicator{C}(x',y') G_\theta(x',dy') Q_{\theta}(x,dx') \]\normalsize \pause
+	\begin{itemize}
+	\item Say $\gamma_\theta(x,y) = \frac{1}{\sqrt{2\pi \sigma^2}} \exp(-\frac{(x-y)^2}{2\sigma^2})$ and $\mathcal{X}$ is a finite state space $\mathcal{X} = \{\mu_1, \ldots, \mu_d\}$.  
+	\item ... or say $\mathcal{X}$ is a compact manifold of dimension $k$, $Q$ has diffusion type transition density $q^{(t_0)}(x,x') \sim (4\pi t_0)^{-k/2}e^{-d(x,x')^2/(4t_0)}$
+	\item ... or try to figure out densities in noisy channel example.
+	\end{itemize}
+	\pause $\leadsto$ \textbf{We don't do this!}
+\end{frame}
+
+\begin{frame}{What one usually does in the Hidden Markov case}
+	\small 
+	\[
+	n^{-1} \log \rho_\theta(Y_0^{n-1}) = n^{-1} \sum_{k=0}^{n-1} \underbrace{\log \rho_\theta(Y_k | Y_0^{k-1})}_{g_k(Y_0^{k})}.
+	\]
+	\normalsize
+	\begin{itemize}
+	\item \textit{I.i.d.}-LLN unavailable but in many cases of intererest Markov chains are \textit{ergodic}. 
+	\pause
+	\item Remember: $n^{-1}\sum_{k=0}^{n-1} g(\tau^k) \to \E[g]$ almost surely, where $\tau$ is the shift operator of a measure-preserving dynamical system. 
+	\item Example: $\tau^k \leadsto  (\ldots, Y_{k-1}, Y_{k})$ 
+	\item or go back a \textbf{fixed finite amount} of $m$ steps. $\tau^k \leadsto (Y_{k-m+1}, \ldots, Y_{k})$
+	\pause
+	\begin{align*}
+	n^{-1} \sum_{k=0}^{n-1} \log \rho_\theta(Y_k | Y_{-\infty}^{k-1}) &\longrightarrow \ell(\theta) \\ 
+	n^{-1} \sum_{k=0}^{n-1} \log \rho_\theta(Y_k | Y_{k-m+1}^{k-1}) &\longrightarrow \ell(\theta) + \varepsilon 
+	\end{align*}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{But if homogeneity fails?}
+	\small
+		\begin{align*}
+		n^{-1} \sum_{k=0}^{n-1} \log \rho_\theta(Y_k | Y_{k-m+1}^{k-1}) &\longrightarrow \ell(\theta) + \varepsilon \\ n^{-1} \sum_{k=0}^{n-1} \log \rho_\theta(Y_k | Y_{-\infty}^{k-1}) &\longrightarrow \ell(\theta)
+	\end{align*}
+	\normalsize
+	\begin{itemize}
+		\item If homogeneity (stationarity) fails, ergodic theorem makes no sense. 
+		\item Especially in our triangular array setting. 
+		\pause
+		\item Need a suitable LLN for triangular arrays. 
+		\item The above introduced \textit{finite memory approximation} is in the spirit of local stationarity. 
+		\pause
+		\item \textit{infinite memory approximation} is clearly off the table. 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Treating with the likelihood function}
+	$\qquad (bN)^{-1} \sum_{k=t_N^-}^{t_N^+} \log \rho_\theta(Y_{k,N}|Y_{t_N^-,N}^{k-1,N})$ \pause \textbf{finite memory approximation} \\[0.4cm]  $\quad  \leadsto (bN)^{-1} \sum_{k=t_N^-}^{t_N^+} \log \rho_\theta(Y_{k,N}|Y_{k-l,N}^{k-1,N})$ \pause \begin{align*} =&\; (bN)^{-1} \sum_{k=t_N^-}^{t_N^+} \left(\log \rho_\theta(Y_{k,N}|Y_{k-l,N}^{k-1,N})-  \E[\log \rho_\theta(Y_{k,N}|Y_{k-l,N}^{k-1,N})]\right) \\ &\; + (bN)^{-1} \sum_{k=t_N^-}^{t_N^+} \left(\E[\log \rho_\theta(Y_{k,N}|Y_{k-l,N}^{k-1,N})]-  \E[\log \rho_\theta(Y_{k}(t)|Y_{k-l}^{k-1}(t))]\right) \\ &\; + (bN)^{-1} \sum_{k=t_N^-}^{t_N^+} \E[\log \rho_\theta(Y_{k}(t)|Y_{k-l}^{k-1}(t))].
+	\end{align*}
+\end{frame}
+
+\begin{frame}{A LLN for triangular arrays}
+	\small \[(bN)^{-1} \sum_{k=t_N^-}^{t_N^+} \left(\log \rho_\theta(Y_{k,N}|Y_{k-l,N}^{k-1,N})-  \E[\log \rho_\theta(Y_{k,N}|Y_{k-l,N}^{k-1,N})]\right)\]
+	\normalsize
+	\begin{propositionblock}
+	Let $\{\{Z_{k,N}\}_{0 \leq k \leq N}\}_{N \geq 0}$ be a triangular array of random variables which is adapted to the family of filtrations $\{\mathbb{F}_N = (\mathcal{F}_{k,N})_{0 \leq k \leq N}\}_{N \geq 0}$. Assume there is a $C$ and a $1 > \rho > 0$ such that \[
+	|\E[Z_{k,N}|\mathcal{F}_{m,N}]| \leq C \cdot \rho^{k-m},
+	\] 
+	then for $bN \to \infty$ \[
+	(bN)^{-1} \sum_{k=t_N^-}^{t_N^+} Z_{k,N} \overset{\operatorname{P}}{\longrightarrow} 0.
+	\]
+	\end{propositionblock}
+\end{frame}
+\begin{frame}
+	\small \[(bN)^{-1} \sum_{k=t_N^-}^{t_N^+} \left(\log \rho_\theta(Y_{k,N}|Y_{k-l,N}^{k-1,N})-  \E[\log \rho_\theta(Y_{k,N}|Y_{k-l,N}^{k-1,N})]\right)\]
+	\[
+	\E[Z_{k,N}|\mathcal{F}_{m,N}]| \leq C \cdot \rho^{k-m}
+	\]\pause
+	\normalsize
+	\begin{itemize}
+		\item Deterministic bound on $\log \rho_\theta(Y_{k,N} | Y_{k-l,N}^{k-1,N})$ strong but possible. 
+		\item Geometrical decay (forgetting) non-trivial. 
+	\end{itemize}
+	\pause
+	\begin{definitionblockname}{Doeblin condition}
+		Let $K$ be a Markov kernel from $(\mathcal{Z}_1, \mathcal{A}_{\mathcal{Z}_1})$ to $(\mathcal{Z}_2, \mathcal{A}_{\mathcal{Z}_2})$. If there is a probability measure $\mu$ on $(\mathcal{Z}_2, \mathcal{A}_{\mathcal{Z}_2})$ and an $\varepsilon$ such that \[
+		K(x,A) \geq \varepsilon \mu(A) \text{ for all } A \in \mathcal{A}_{\mathcal{Z}_2},
+		\] we say that $Q$ satisfies a Doeblin condition. 
+	\end{definitionblockname}
+\end{frame}
+
+\begin{frame}{The quite powerful Doeblin condition}
+	\small \[
+	K(x,A) \geq \varepsilon \mu(A) \text{ for all } A \in \mathcal{A}_{\mathcal{Z}_2},
+	\]
+	\[
+	|\E[Z_{k,N}|\mathcal{F}_{m,N}]| \leq C \cdot \rho^{k-m}
+	\]
+	\pause
+	\normalsize
+	\begin{propositionblockname}{Doeblin condition leads to a contraction}
+		If $Q_1, \ldots, Q_n$ are Markov kernels on $(\mathcal{X}, \mathcal{A}_\mathcal{X})$ and satisfy the Doeblin condition with common $\varepsilon$, we get for every $\nu \in \mathcal{M}_0(\mathcal{X}, \mathcal{A}_\mathcal{X})$ the  bound \[
+		\norm{Q_n \cdots Q_1 \nu}_{\text{TV}} \leq (1-\varepsilon)^n \norm{\nu}_{\text{TV}}.
+		\]
+	\end{propositionblockname}
+	\begin{itemize}
+		\item Think of $\nu = \delta_x - \delta_y$ for $x,y \in \mathcal{X}$.
+		\item Doeblin $\leadsto$ exponential forgetting of initial condition $\leadsto$ convergence against expected value
+		\pause
+		\item $(bN)^{-1} \sum_{k=t_N^-}^{t_N^+} \left(\log \rho_\theta(Y_{k,N}|Y_{k-l,N}^{k-1,N})-  \E[\log \rho_\theta(Y_{k,N}|Y_{k-l,N}^{k-1,N})]\right)$ converges
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{The (Doeblin-powered) final appearance of local stationarity}
+	\vspace{-0.5cm}
+	\textcolor{red}{
+	\tiny 
+	\[(bN)^{-1} \sum_{k=t_N^-}^{t_N^+} \left(\E[\log \rho_\theta(Y_{k,N}|Y_{k-l,N}^{k-1,N})]-  \E[\log \rho_\theta(Y_{k}(t)|Y_{k-l}^{k-1}(t))]\right) \qquad  \left|\int f d\nu\right| \leq \norm{f}_\infty \norm{\nu}_{\text{TV}}
+	\]}
+	\small
+	\begin{theoremblockname}{$\norm{\cdot}_{\text{TV}}$-local stationarity of Markov chains, \cite{truquet2019locally}}
+	Let $\{K_u\}_{u \in [0,1]}$ be a family of Markov kernels on $(\mathcal{Z}, \mathcal{B}(\mathcal{Z}))$ and let $\{\{Z_{k,N}\}_{0 \leq k \leq N}\}_{N \geq 0}$ be a triangular array of Markov chains with transition kernels $\P(Z_{k,N} \in dx | Z_{k-1,N}) = K_{\frac{k}{N}}(Z_{k-1,N}, dx)$ that satisfies the following two conditions: \begin{itemize}
+		\item[(A1)] All transition kernels $K_u$ satisfy a Doeblin condition with common constant $\varepsilon > 0$. 
+		\item[(A2)] $\sup_{z \in \mathcal{Z}} \norm{K_u(z,\cdot) - K_v(z,\cdot)}_{\text{TV}} \leq L|u-v|$
+	\end{itemize}
+	Then, for every $l$ we have \vspace{-0.3cm}\[
+	 \norm{\pi_{k,N}^{k+l,N} - \pi_{l+1}(t)}_{TV} \leq C_{l+1} \left(\left|t- \frac{k}{N}\right| + \frac{1}{N}\right). 
+	\]
+	\end{theoremblockname}
+\end{frame}
+
+\begin{frame}{On possible assumptions}
+	\begin{itemize}
+\item We use $|\log \rho_\theta(Y_{k,N} | Y_{0}^k)| \leq C$ type bounds for total variation $\leadsto \kappa \leq  \gamma_{\theta} \leq \kappa^{-1}$ for $\kappa \in (0,1)$. 
+\pause
+\item For theorem from last slide: Lipschitz continuity of $Q_\theta$ and $\gamma_\theta$ in $\theta$
+\item And, of course, the Doeblin condition $Q_\theta(x,A) \geq \varepsilon \mu_\theta(A)$ for all $\theta$ -- for the same $\varepsilon > 0$. 
+\end{itemize}
+\pause
+\begin{theoremblock}
+	Assume the transition kernels $T_{k,N}$ of the array of Hidden Markov models are given by $T_{\theta^\infty(k/N)}$ for $\theta^\infty: [0,1] \to \Theta$ Lipschitz. Assume further that the above assumptions hold. Then, the maximum likelihood estimator is (weakly) consistent. 
+\end{theoremblock}
+\pause
+Identifiability is important -- but it is a property of the stationary distributions. 
+\end{frame}
+
+\begin{frame}{The Doeblin condition and possible examples}
+	\begin{itemize}
+		
+		\item $\mathcal{X} = \{x_1, \ldots, x_n\}, \mathcal{Y} = \{y_1, \ldots, y_m\}$, $ \inf_\theta \inf_{i, j \in \mathcal{X}} q_\theta(i,j) > 0$, $\kappa \leq \gamma_\theta \leq \kappa^{-1}$. 
+		\item On many compact state spaces $\mathcal{X}, \mathcal{Y}$, conditions seem plausible $\leadsto$ compare to our introductory example. \pause
+		\item But even in simple finite state space models, Doeblin minorization is often not fulfilled: $\mathcal{X} = \{1,2,3\}$, \[q_{\theta}(i,j) = \begin{cases} \theta &\text{ if } j = i+1 \mod 3 \\ 1 - \theta &\text{ if } j = i-1  \mod 3 \end{cases}\]		
+		\pause
+		\small
+		\pause 
+		\item Doeblin: Constant non-zero probability that chain starts all over again. \pause One can show: Doeblin condition means $
+		Q(x,\cdot) = \varepsilon \nu + (1-\varepsilon) R(x,\cdot)$ for all $x$. \pause
+		\item  On the level of random variables, \[
+		f(x,X_{k-1}) = \begin{cases} V_\nu &\text{ if } U \leq \varepsilon \\ g_K(X_{k-1},W) &\text{ if } U \geq \varepsilon \end{cases}
+		\] for $U,W \sim \mathcal{U}([0,1])$ and $V_\nu \sim \nu$ independent and $g_K$ suitable. 
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{But what about the AR(1) case?}
+	\begin{itemize}
+		\item Gaussian observation densities $\gamma_\theta$ also possible in slightly different setting $\leadsto$ mixture models, $\mathcal{X}$ could encode changing variances and means. 
+		\item But at the end, the whole Hidden Markov seems to demand a Doeblin condition. \pause
+		\item \[
+		X_{t,N} = \alpha(t/N) X_{t,N} + \sigma(t/N) \varepsilon_t \quad Y_{t,N} = X_{t,N} + \nu(t/N) \eta_t
+		\] is also an interesting (locally stationary) Markov model. \textbf{Kernels do not satisfy a Doeblin condition. }
+		\pause
+		\item The seminal paper \cite{douc_moulines_olsson_vanhandel2011consistency} covered such AR(1) models (and many other models from classical TSA). 
+		\item Quite intrinsic usage of ergodic theorem, seems to intentionally circumvent invoking (stronger) forgetting properties. 
+	\end{itemize}
+\end{frame}
+
+\section{Time series models and the notion of $L^p$-local stationarity}
+\begin{frame}{All is not lost!}
+	\begin{definitionblockname}{$L^p$-local stationarity in the spirit of \cite{Dahlhaus2012locally}}
+	A triangular array of Hidden Markov chains $\{\{(X_{k,N}, Y_{k,N})\}_{0 \leq k \leq N}\}_{N \geq 0}$ is called $L^p$-locally stationary, if for every $u \in [0,1]$ there is a stationary Hidden Markov chain $\{(\widetilde{X_k}(u), \widetilde{Y_k}(u))\}_{k \in \Z}$ such that for every sequence $k$ such that $\frac{k}{N} \to u$ we have $\norm{\varepsilon_{k,N}(u):= Y_{k,N}-Y_k(u)}_p \to 0$.  
+	\end{definitionblockname}
+	\pause
+	\small
+	\vspace{-0.3cm}
+	\begin{itemize}
+		\item Model: $X_{t} = \alpha X_{t-1} + \varepsilon_t, Y_{t} = X_t + \eta_t$. 
+		\item $\eta_t$ has bounded support $K$, $\varepsilon \sim \mathcal{N}(0,1)$
+		\pause 
+	\end{itemize}
+	\vspace{-0.3cm}
+	\begin{align*}
+	& \log \rho_{\alpha}^\nu(Y_{k,N},Y_{k+1,N}) = \log \rho_{\alpha}^\nu(\widetilde{Y_{k}}(t),\widetilde{Y_{k+1}}(t)) \\  & \qquad \quuad +  \underbrace{\left\{\log \rho_{\alpha}^\nu(Y_{k,N},Y_{k+1,N}) - \log \rho_{\alpha}^\nu(\widetilde{Y_{k}}(t),\widetilde{Y_{k}}(t))\right\}}_{=:d}
+	\end{align*}
+	\vspace{-0.3cm}
+	\pause
+	
+	Bound the second term by an interpolation technique for each component.
+	\vspace{-0.2cm}
+	\begin{align*}
+	|d| &\leq |\varepsilon_{k,N}(t)|\int_0^1 |\partial_{y_{k}} \log \rho_\alpha^\nu(\widetilde{Y_{k}}(t) + r \varepsilon_{k,N}(t),\widetilde{Y_{k+1}}(t))| dr  \\ \vspace{-0.3cm} & + |\varepsilon_{k+1,N}(t)|\int_0^1 |\partial_{y_{k+1}} \log \rho_\alpha^\nu(Y_{k,N},\widetilde{Y_{k+1}}(t) + r\varepsilon_{k+1,N}(t))| dr.
+	\end{align*}
+\end{frame}
+
+\begin{frame}
+	\[
+	|d| \leq |\varepsilon_{k,N}(t)|\int_0^1 |\partial_{y_{k}} \log \rho_\alpha^\nu(\widetilde{Y_{k}}(t) + r \varepsilon_{k,N}(t),\widetilde{Y_{k+1}}(t))| dr  + \text{Rest}
+	\]
+	is a nice bound. Vanishes in $L^1$ by Hoelder and Fubini (in case of right integrability conditons), \textbf{if we can bound the derivative}. 
+	\pause
+	In our case, get something like 
+	\begin{align*}
+	&|\partial_{y_1} \log \rho_{\alpha}^\nu(y_1, y_{2})| \\ = & \frac{\partial_{y_1} \int_{\mathcal{X}^2} \gamma(|y_{2}-x_{2}|) \exp(-(x_{2}-\alpha x_{1})^2/2) \gamma(|y_1-x_1|) \lambda(dx_{2})  q_\nu(x_1) \lambda(dx_1)}{\int_{\mathcal{X}^2}  \gamma(|y_{2}-x_{2}|) \exp(-(x_{2}-\alpha x_{1})^2/2) \gamma(|y_1-x_1|) \lambda(dx_{2})  q_\nu(x_1) \lambda(dx_1)} \\ & \lesssim C_{\theta}(y_1,y_2, \textbf{K}) \cdot \textbf{1}.
+	\end{align*}
+\pause
+\[
+C_\theta(y_1,y_2,K) \approx \sup_{x_1,x_2 \in y_i + K }\frac{\partial_i q_\theta(x_1,x_2)}{q_\theta(x_1,x_2)} \leadsto \sup_{x_1,x_2 \in y_i + K } |x_i-y_i|
+\]
+	Reason: We can localize all $x$ by the compact support. 
+	\pause
+	
+\end{frame}
+
+\begin{frame}
+	\begin{itemize}
+		\item Have to assume quite some \textit{analytic} assumptions to be able to perform these deriavtions.
+		\item If everything is met, by \textbf{proximity of the likelihood functions}, we can use the result from the stationary case. 
+		\pause
+		\item There is always the (non-trivial) question of existence of $L^p$-locally stationary arrays. $\leadsto$ theory for locally stationary times series.
+	\end{itemize}
+	\pause
+	\vspace{1cm}
+	
+	\textbf{Thank you for your attention!}
+\end{frame}

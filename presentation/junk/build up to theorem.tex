@@ -1,0 +1,286 @@
+\section{Hinführung zum Hauptresultat}
+\begin{frame}{Unser Setting}
+\begin{itemize}
+    \item Von jetzt an sei $\{P_x\}_{x \in I}$ eine Diffusion auf beliebigem (aber natürlich festem) Intervall $I$.
+    \item Es bezeichnen $\s$ und $\m$ Speed und Scale.
+    \pause
+    \item Wir nehmen außerdem $\m(I) < \infty$ an (durchaus restriktiv).
+    \begin{itemize}
+        \item Brownsche Bewegung fällt heraus
+        \item An Rändern gestoppte Diffusionen fallen heraus
+        \item ...
+    \end{itemize}
+    \pause
+    \item Im Folgenden schreibe $\mu := \m(I)^{-1}\m$. Das ist ein Wahrscheinlichkeitsmaß.
+    \item Handelt sich um invariante Verteilung der Diffusion.
+\end{itemize}
+\end{frame}
+
+% \begin{frame}{Das stetige \textit{empirische Integral  }revisited}
+% \begin{itemize}
+%     \item Komme \textbf{zurück zum} Integral $ t^{-1}\int_0^t f(X_s) ds$.
+%     \item Handelt sich um Zufallsvariable:
+% \end{itemize}
+%     \begin{proof}
+%     \begin{itemize}
+%     \pause
+%         \item Zeige zunächst, dass für beschränkte produktmessbare $F(\omega, s)$ bereits $\omega \mapsto \int_0^t F(\omega, s) ds$ messbar ist.
+%         \begin{itemize}
+%             \item Da nämlich $f$ messbar und $X$ stetig und daher produktmessbar ist, ist $F(\omega, s)$ gegeben durch $(\omega, s) \mapsto X_s(\omega) \mapsto f(X_s(\omega))$ messbar.
+%         \end{itemize}
+%         \pause
+%         \item  Zeige die Aussage nun für Abbildungen $G(s, \omega) = \indicator{A}(s)\indicator{B}(\omega)$. Dort klar. Nutze nun monotone class arguments und erhalte die Aussage für beschränkte $F$ und damit für beschränkte $f$. 
+%         \item \textcolor{red}{Für allgemeine $f$, für die das Integral existiert, folgt es mit monotoner Konvergenz des Lebesgue-Integrals und Abgeschlossenheit von Messbarkeit unter punktweisen Grenzwerten.}
+%     \end{itemize}
+%     \end{proof}
+% \end{frame}
+
+\begin{frame}{Ergodensatz für Diffusionen}
+\begin{itemize}
+    \item Komme \textbf{zurück zum} Integral $ t^{-1}\int_0^t f(X_s) ds$.
+    \item Handelt sich um Zufallsvariable (generelleres Resultat über produktmessbare Prozesse).
+\end{itemize}
+  
+    \begin{theoremblockname}{Ergodentheorem für Diffusionen}
+    Es sei eine Diffusion $\{P_x\}_{x \in I}$ mit endlichem Geschwindigkeitsmaß gegeben. Dann gilt für beliebiges $f \in L^1(\mu)$ und beliebiges $x \in I$ \[
+    t^{-1}\int_0^t f(X_s) ds \overset{\text{f.s.}}{\to} \int_I f\,d\mu.
+    \] bezüglich $P_x$.
+    \end{theoremblockname}
+    \pause
+\begin{itemize}
+    \item Hintergrund, dass $X$ bezüglich \textcolor{red}{$\mu$ (stationärer) ergodischer Prozess} und $P_x \circ X_t^{-1} \overset{\norm{\cdot}_\text{TV}}{\longrightarrow} \mu$.
+\end{itemize}
+\end{frame}
+\begin{frame}{Ein zentraler Grenzwertsatz für Diffusionsintegrale}
+Wir erinnern uns
+\begin{itemize}
+    \item \textbf{SGGZ}: $n^{-1}\sum_{i=1}^n X_i \to \E[X_1]$
+    \item  \textbf{ZGWS}: $\sqrt{n}(n^{-1}\sum_{i=1}^n X_i - \E[X_1]) \Longrightarrow \mathcal{N}(0, \sigma^2)$.
+\end{itemize}
+\pause
+    Betrachte also analog die Folge von Diffusionsintegralen \[\G_t f := \sqrt{t}(t^{-1}\int_0^t f(X_s) ds - \int f \, d\mu). \]
+    \begin{itemize}
+        \item Gilt hier \textit{(uniforme)} schwache Konvergenz unter den $P_x$ für $t \to \infty$?
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Der $\F$-indizierte empirische Prozess}
+    \begin{itemize}
+        \item Möchten Konvergenz auf unendliche Funktionenklassen ausweiten.
+    \end{itemize}
+    \begin{definitionblockname}{Der $\F$-indizierte empirische Prozess}
+    Sind die Elemente einer Funktionenklasse $\F \subset L^1(\mu)$ in der $L^1$-Norm beschränkt, so definieren wir für alle $t >0$ die zufällige Abbildung \begin{align*}
+        \Omega &\overset{\G_t}{\longrightarrow} \ell^\infty(\F) \\
+        \omega &\longmapsto \br{f \mapsto \sqrt{t}\br{t^{-1}\int_0^t f(X_s(\omega)) ds - \int_I f\,d\mu}}.
+    \end{align*}
+Jede dieser Abbildungen bezeichnen wir als \textbf{empirischen durch} $t$ \textbf{ indizierten Prozess.}
+    \end{definitionblockname}
+    \pause
+    \begin{itemize}
+       \item Wohldefiniertheit 
+       nicht trivial und wird später gezeigt
+        \item Handelt sich keineswegs direkt um eine bezüglich $\norm{\cdot}_\infty$ Borel-messbare Abbildung. 
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Donskerklassen in unserem Setting}
+    \begin{definitionblockname}{Donskerklassen}
+        Wir nennen eine solche Klasse $\F$ donskersch, falls die Zufallselemente $\G_t$ in $\ell^\infty(\F)$ schwach gegen eine straffe $\ell^\infty(\F)$-wertige und Borel-messbare Zufallsvariable konvergieren.
+    \end{definitionblockname}
+    \pause
+    \begin{itemize}
+        \item Erinnere: Schwache Konvergenz von Zufallselementen $X_\alpha$in $\ell^\infty(\mathcal{F})$ gegen straffen und Borel-messbaren Grenzwert impliziert \textit{fdd}-Konvergenz.
+        \item Erinnere: Unter zusätzlichen Annahmen Äquivalenz zu stochastischer Gleichsstetigkeit im Wahrscheinlichkeit bezüglich gewisser Metrik $\rho$ \[
+\lim_{\delta\downarrow0} \limsup_{t \to \infty} \P^*(\sup_{f, g: \rho(f,g)< \delta}|\G_tf - \G_tg| > \epsilon) = 0.
+        \]
+    \end{itemize}
+   % Ach nee, mach erst einmal nur Implikation vielleicht.
+%%% Folgende Leiche stimmt nicht so ganz und der Satz benötigt auch zu viele Voraussetzungen um ihn direkt anzubringen.
+    % \begin{theoremblock}
+    %     Die folgenden Aussagen sind für eine Folge von $\ell^\infty(T)$-Zufallselementen äquivalent. 
+    %     \begin{itemize}
+    %         \item Die Folge konvergiert schwach gegen einen straffen und Borel-messbaren Grenzwert in $\G$ mit Werten in $\ell^\infty(\F)$.
+    %         \item Es gibt eine bezüglich $d_\G$ separable Teilmenge $T$
+    %     \end{itemize}
+    % \end{theoremblock}
+\end{frame}
+\begin{frame}{Konvergenz der endlichen Verteilungen}
+    \begin{theoremblockname}{ZGWS für Diffusionsintegrale}
+        Es sei $f \in L^1(\mu)$ beliebig. Dann gilt in unserem Setting 
+        \[
+\sqrt{t}(t^{-1}\int_0^tf(X_u)\,du - \int f \,d\mu) \overset{t \to \infty}{\Longrightarrow} \normald{0}{\Gamma(f,f)},
+        \] wobei \begin{align*}
+\Gamma(f,g) = 4 \m(I) \int_I &\br{\int_{\inf I}^x f(y) \mu(dy) - F(x) \int_I f(y) \mu(dy)} \\
+& \cdot \br{\int_{\inf I}^x g(y) \mu(dy) - F(x) \int_I g(y) \mu(dy)} d\s(x),
+        \end{align*} falls $\Gamma(f,f)$ existiert.
+    \end{theoremblockname}
+\end{frame}
+\begin{frame}{Konvergenz der endlichdimensionalen Verteilungen}
+     \begin{corollaryblock}
+        Für $f_1, \ldots, f_N \in L^1(\mu)$, für die alle $\Gamma(f_i,f_i)$ existieren, gilt die schwache Konvergenz
+        \[
+\br{\sqrt{t}(t^{-1}\int_0^tf_i(X_u)\,du - \int f_i \,d\mu)}_{i=1}^N \overset{t \to \infty}{\Longrightarrow} \normald{0}{(\Gamma(f_i,f_j))_{1\leq i,j\leq N}}.
+        \]
+    \end{corollaryblock}
+    \begin{itemize}
+        \item Insbesondere konvergieren somit die endlichdimensionalen Verteilungen der $\G_t$ schwach gegen die eines zentrierten $\F$-indizierten Gaußschen Prozesses mit Kovarianzfunktion $\Gamma(f,g)$. 
+    \end{itemize}
+\end{frame}
+\begin{frame}{Konvergenz der endlichdimensionalen Verteilungen}
+    \begin{proof}
+Folgt aus dem CW-Device. Induktiv genügt es, dessen Charakterisierung für $N = 2$ nachzurechnen. Sei $\Gamma$ die dortige Kovarianzmatrix für Funktionen $f,g$. Für $\lambda \in \R^2$ gilt $\<\lambda, Z\> \sim \normald{0}{\lambda^T \Gamma \lambda}$ für $Z \sim \normald{0}{\Gamma}$. Rechne nun \begin{align*}
+    \Gamma(\lambda_1f + \lambda_2g) &= 4 \m(I) \int_I\br{\int_{\inf I}^x \lambda_1f(y) + \lambda_2g(y) \mu(dy) \\ &- F(x) \int_I \lambda_1 f(y) + \lambda_2 g(y) \mu(dy)}^2 d\s(x) \\
+    &= 4 \m(I) \int_I\br{\lambda_1\br{\int_{\inf I}^x f(y) \mu(dy) - F(x) \int_I f(y) \mu(dy)} \\ &+ \lambda_2\br{\int_{\inf I}^x g(y) \mu(dy) - F(x) \int_I g(y) \mu(dy)} }^2 d\s(x) \\
+    &= \lambda_1^2 \Gamma(f,f) + 2\lambda_1\lambda_2 \Gamma(f,g) + \lambda_2^2 \Gamma(g,g) = \lambda^T\Gamma \lambda
+\end{align*}
+\textcolor{red}{fix this}
+\end{proof}
+\end{frame}
+\begin{frame}{Eigenschaften des möglichen Grenzwertes $\G$}
+    \begin{itemize}
+        \item $\mathcal{F}$ kann nur donskersch sein, falls es Version des Prozesses $\G$ gibt, der straffe und Borel-messbare zufällige Abbildung nach $\ell^\infty(\F)$ ist.
+        \pause
+        \item Idee: Prozess induziert eine Metrik auf dem Indexraum $\F$. 
+    \end{itemize}
+    \begin{definitionblockname}{$\X$-induzierte Metrik}
+        Jeder Prozess $\X$ indiziert durch eine Menge $\mathcal{T}$, dessen Varianzen endlich sind, induziert eine Metrik $d_\X$ auf $\mathcal{T}$ gegeben durch \[
+d_\X(t_1,t_2) := \E[(\X t_1 - \X t_2)^2]^{\frac{1}{2}}
+        \]
+    \end{definitionblockname}
+    \pause
+    \begin{theoremblock}
+        Es existiere eine straffe Zufallsvariable $\X: \Omega \to \ell^\infty(\mathcal{T})$, die einen zentrierten Gaußschen Prozess mit Kovarianzfunktion $\Gamma$ beschreibt. Dann existiert eine \textcolor{red}{Version} mit $d_\X$-uniform stetigen und uniform beschränkten Pfaden.
+    \end{theoremblock}
+\end{frame}
+
+\begin{frame}{Eigenschaften des möglichen Grenzwertes $\G$}
+    \begin{proofs}[\proofname.]
+        \begin{itemize}
+            \item Definiere $\nu := P \circ \X^{-1}$.
+            \item Nach Straffheit finden wir aufsteigende Folge von Kompakta \[K_n \uparrow, K_n \subset \ell^\infty(\mathcal{T}), n \in \N\] derart, dass $\nu(\bigcup_{i=1}^\infty K_n) = 1$. Definiere $K := \bigcup_{i=1}^\infty K_n$. 
+            \pause
+            \item Führe auf $\F$ Pseudometrik \[
+\rho(f,g) := \sum_{n=1}^\infty 2^{-n} (\rho_n(f,g) \wedge 1)
+            \] ein, wobei \[
+\rho_n(f,g) := \sup \{|Hf - Hg| : H \in K_n\}.
+            \]
+        \end{itemize}
+    \end{proofs}
+\end{frame}
+\begin{frame}{Eigenschaften des möglichen Grenzwertes $\G$}
+    \begin{proofs}[\proofname \,(fortg.)]
+    \begin{itemize}
+        \item Wir zeigen die folgende Zwischenbehauptung: \textbf{$\mathcal{T}$ ist bezüglich $\rho$ totalbeschränkt.}
+        \pause
+        \begin{itemize}
+            \item Es genügt zu zeigen, dass $\mathcal{T}$ bezüglich $\rho_n$ totalbeschränkt ist.
+            \item Sei $\varepsilon > 0$ beliebig. Wollen $f_1, \ldots, f_n$ finden mit $\F = B_\epsilon(f_1) \cup \cdots \cup B_\epsilon(f_n)$.
+            \pause
+            \item $K_n$ ist totalbeschränkt, finde also $H_1, \ldots, H_k$ mit $K_n \subset B_\delta(H_1) \cup \cdots \cup B_\delta(H_k)$ für $\delta = \frac{\epsilon}{4}$.
+            \pause
+            \item Beachte also nun \begin{align*}
+               \rho_n(f,g) &= \sup \{|Hf-Hg|: H \in K_n\} \\
+               &\leq 2 \cdot \frac{\varepsilon}{4} + \max_{i=1, \ldots, k} |H_if - H_ig|.
+            \end{align*}
+        \end{itemize} 
+    \end{itemize}
+    \end{proofs}
+\end{frame}
+
+\begin{frame}{Eigenschaften des möglichen Grenzwertes $\G$}
+    \begin{proofs}[\proofname \, \,(fortg.)]
+        \begin{itemize}
+            \begin{itemize}
+                \item Gilt: $H_i \in \ell^\infty(\mathcal{T})$, also exisiert $K > 0$ mit $|H_i| \leq K$ für alle $i$.
+                \item Betrachte also Menge \[
+A := \{(H_1f, \ldots, H_kf) : f \in \mathcal{T}\} \subset [-K,K]^k.
+                \]
+                \item $A$ ist totalbeschränkt bezüglich $\norm{\cdot}_{\infty,k}$, finde also $f_1, \ldots, f_n \in \F$ mit \[
+A \subset B_{\frac{\epsilon}{2}}((H_1 f_1, \ldots, H_k f_1)) \cup \cdots \cup B_{\frac{\epsilon}{2}}((H_1 f_n, \ldots, H_k f_n)).
+                \]    \pause
+                \item Sei nun $g \in \F$ beliebig. Dann OBdA $\norm{(H_1 f_1, \ldots, H_k f_1)-(H_1 g, \ldots, H_k g)}_{\infty, k} < \frac{\epsilon}{2}$.
+                \item Also $\max_{i=1, \ldots, k} |H_i f_1 - H_i g| < \frac{\varepsilon}{2}$.
+                \item Also $\rho_n(f_1, g) < \frac{\varepsilon}{2} + \max_{i=1, \ldots, k} |H_i f_1 - H_i g| < \varepsilon$,\textbf{ wie gewünscht.}
+            \end{itemize}
+        \end{itemize}
+    \end{proofs}
+\end{frame}
+\begin{frame}{Eigenschaften des möglichen Grenzwertes $\G$}
+    \begin{itemize}
+        \item Erinnere: $\rho(f,g) = \sum_{k=1}^\infty 2^{-k}(\rho_n(f,g) \wedge 1)$.
+        \item Per Konstruktion ist jedes $H \in K$ uniform $\rho$-stetig und besitzt \textcolor{red}{somit} beschränkte Pfade.
+        \item Insbesondere hat somit $\G$ bereits fast sicher $\rho$-uniform-stetige und beschränkte (wegen $\F$ totalbeschränkt) Pfade.
+        \pause
+        \item \textcolor{red}{vgl van der Vaart 1.5.7}
+        \item Nun gehe auf notfalls $\F / \rho$ über, sodass es sich \textbf{um metrischen Raum} handelt. 
+        Fassen auf dem Level von $\G$ bloß Elemente zusammen, welche in allen Pfaden gleiche Werte haben. 
+        \small Warum keine Einschränkung?
+        \pause
+        Ohne Einschränkung $\tilde{\mathbb{X}}: \Omega \to K / \rho = \pi \circ \X $ für $\pi: K \twoheadrightarrow K / \rho$ stetig und somit Borel-messbar. 
+        \normalsize
+        \pause
+        
+
+
+% Warum funktioniert der Kack nicht?
+
+        \end{itemize}   
+\end{frame}
+\begin{frame}{Eigenschaften des möglichen Grenzwertes $\G$}
+    \begin{proofs}[\proofname {} (fortg.)]
+        \begin{itemize}
+        \item Nun beachte: \[\rho(f_n, f_m) \overset{n,m\to \infty}{\longrightarrow 0} \Longrightarrow d_\G(f_n,f_m) \overset{n,m\to \infty}{\longrightarrow 0}. \]
+            \item Grund: Punktweise Konvergenz fast überall folgt aus $\nu(K) = 1$ und Gestalt von $\rho$. 
+            \pause 
+            \item \textbf{Fakt:} Für eine Folge normalverteilter Zufallsvariablen folgt aus Konvergenz in Wahrscheinlichkeit bereits $L^p$-Konvergenz für $1 \leq p < \infty$. Insbesondere für $p=2$. 
+            \item Also in diesem Fall $\E[(\X f_n - \X f_m)^2] \overset{n, m \to \infty}{\longrightarrow} 0$, da $\G f_n - \G f_m$ gaußsch. 
+            \pause
+            % \item Erhalte also stetige Identität $(\overline{\F}, \overline{\rho}) \overset{\operatorname{id}}{\longrightarrow} (\overline{\F}, d_\G)$. 
+            % \item Erhalte nun ebenso stetige Abbildung $(\overline{\F}, \overline{\rho}) \overset{\pi}{\twoheadrightarrow} (\overline{\F}/d_\G, d_\G)$ 
+            \item Setze $\X$ auf $\overline{\mathcal{T}}$ nach uniformer $\rho$-Stetigkeit fort zu $\overline{\X}$.
+      \item Setze $A:= \{(f,g) \in \overline{\mathcal{T}}^2: d_\X(f,g)=0\} = \{(f,g) : \overline{\X}f = \overline{\X}g \text{ f. s.}\}$
+        \end{itemize}
+    \end{proofs}
+\end{frame}
+
+\begin{frame}{Eigenschaften des möglichen Grenzwertes $\G$}
+  \begin{proof}[\proofname (fortg.)]
+  \begin{itemize}
+      \item $(\overline{\mathcal{T}}^2, \overline{\rho}^2)$ separabel, da kompakt. Finde also abzählbares dichtes $A_0$ in $A$ und somit gilt in der Tat fast sicher für $d_\X(f,g) = 0$ bereits $\overline{\X}f = \overline{\X}g$. 
+      \item Definiere $\X$ als Prozess mit stetigen Pfaden auf $(\overline{\mathcal{T}}/d_\X, \overline{\rho})$. 
+      \item \textcolor{red}{Fast sicher: genauer ausführen, dass anderes $\rho$} $d_\G(f,g) = 0 \Longrightarrow \overline{\rho}(f,g) = 0$, also $(\overline{\F}/d_\G, \overline{\rho})$ wohldefiniert.
+      \pause
+      \item $(\overline{\mathcal{F}}/d_\G, \overline{\rho}) \overset{\operatorname{id}}{\longrightarrow} (\overline{\mathcal{F}}/d_\G, d_\G)$ bijektiv und stetig, da $\overline{\rho}$ bereits $d_\G$ dominiert.
+      \item Stetige Abbildungen $f: X \to Y$ von kompakten Hausdorff-Räumen $X$ sind abgeschlossen. Also $\operatorname{id}$ ein Homöomorphismus zwischen \textbf{somit kompakten} Räumen. 
+      \pause
+      \item Also $f \mapsto \overline{\G}\operatorname{id}^{-1}f \in C_u(\overline{\F}/d_\G, d_\G)$, da Abbildungen auf Kompakta gleichmäßig stetig, wie gewünscht. 
+  \end{itemize}\end{proof}
+\end{frame}
+
+\begin{frame}{Das Hauptresultat}
+    \begin{itemize}
+        \item Haben mit einiger Mühe gesehen \begin{align*} \F \text{ donskersch }\Longrightarrow & \,\G \text{ besitzt eine Version mit uniform } \\ &d_\G\text{-stetigen und beschränkten Pfaden.}\end{align*}
+        \item Gilt die Rückrichtung?
+            \pause
+    \end{itemize}
+    \begin{theoremblockname}{Donsker für Diffusionen}
+        Sei $\F$ eine beschränkte Menge in $L^1(\mu)$. Dann ist $\F$ genau dann donkersch, falls die zugehörige zufällige gaußsche Abbildung $\G$ mit entsprechender Kovarianzfunktion $\Gamma  < \infty$ eine beschränkte und $d_\G$-uniform stetige Version besitzt. In diesem Fall gilt für jedes $x \in I$ \[
+\G_t \overset{P_x}{\Longrightarrow} \G \; \text{ \underline{sogar in} } C_b(\F, d_\G). 
+        \]
+    \end{theoremblockname}
+\end{frame}
+
+\begin{frame}{Zwischenstopp}
+    \begin{itemize}
+        \item Haben also Hauptresultat gesehen. 
+        \item Keine direkten Entropieabschätzungen oder Ähnliches, sondern nur bekannte Grenzverteilung begutachten.
+        \item Weitere Beweisstrategie: 
+        \begin{itemize}
+            \item[(1)] Mit Lokalzeit allgemeinere Form des Theorems aufstellen, die auf Lokalzeit zurückgreift
+            \item[(2)] In einem anderen Setting Bedingungen für asymptotische Gleichstetigkeit einer Martingalfolge formulieren.
+            \item[(3)] Einige nützliche Eigenschaften der Lokalzeit feststellen. 
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+%%%%% Und weiter zur local time.
+

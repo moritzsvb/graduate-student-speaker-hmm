@@ -1,0 +1,161 @@
+\section{Das Hauptresultat}
+\begin{frame}{Definitionen}
+    \small
+    % \begin{definitionblockname}{Homogene Summen}
+    %     Sei $\mathbb{X} = (X_n)_{n \in \N}$ eine Folge von unabhängigen zentrierten Zufallsvariablen mit Varianz 1 (mit gewissen Momentannahmen). 
+    %     Für $d \in \N$ und $f^{(N)}: \{1, \ldots, N\}^d \to \R$ symmetrisch mit $f^{(N)}(i_1, \ldots, i_d) = 0$ falls $i_j = i_k$ für $j \neq k$ definieren wir die homogene Summe
+    %     \[
+    %     Q_d(f^{(N)}, N, \mathbb{X}) = \sum_{1 \leq i_1, \ldots, i_d \leq N} f^{(N)}(i_1, \ldots, i_d) X_{i_1} \cdots X_{i_d}.
+    %     \]
+    % \end{definitionblockname}
+    \vspace{-0.4cm}
+    \begin{definitionblockname}{$\mathcal{H}$-Abstand und Kolmogorov-Abstand}
+        Sei $\mathcal{H}$ eine Klasse von Funktionen $h: \R^m \to \R$, so definiere
+            $d_{\mathcal{H}}(F, Z) = \sup_{h \in \mathcal{H}} \left|\E[h(F)]- \E[h(Z)]\right|.$
+
+        Der Kolmogorov-Abstand zwischen zwei multivariaten Verteilungen bzw. \textbf{Verteilungsfunktionen} $F$ und $G$ ist gegeben durch $
+        d_{\text{Kol}}(F,G) = \sup_{x \in \R^m} |F(x_1, \ldots, x_m) - G(x_1, \ldots, x_m)|,$
+        also 
+        \[
+            d_{\text{Kol}}(F,G) = d_{\mathcal{H}}(F,G), \mathcal{H} = \{\indicator{(-\infty, x_1]\times \cdots \times (-\infty, x_m]}\}_{x_1, \ldots, x_m \in \R}.
+        \]
+    \end{definitionblockname}
+\end{frame}
+\begin{frame}{Das Hauptresultat}
+    \small
+    \begin{theoremblockname}{Universalität des Wiener Chaos}
+        Sei $\mathbb{G} = (G_n)_{n \in \N}$ eine Folge von unabhängigen standardnormalverteilten Zufallsvariablen. 
+        Fixiere $m \geq 1$ und \textcolor{orange}{$d_1, \ldots, d_m \geq 2$}. Sei ferner für jedes $j = 1, \ldots, m \; \{(N_n^{(j)}, f_n^{j})\}_{n \geq 1}$ so, dass $N_n^{(j)} \overset{n \to \infty}{\longrightarrow} \infty$ sei und $f_n^{(j)}: [N_n^{(j)}]^{d_j} \to \R$ auf Diagonalen ($i_k = i_j , j \neq k$) verschwinde. 
+        \pause
+
+        Seien nun für jedes $j = 1, \ldots, m$ die Erwartungswerte $\E[Q_{d_j}(N_n^{(j)}, f_n^{(j)}, \mathbb{G})^2]$ beschränkt. 
+        Sei $\Sigma$ eine positiv semidefinite symmetrische $m\times m$-Matrix mit nicht-verschwindenden Diagonaleinträgen. Nenne dieses Setting \S.
+
+        \pause
+        Dann sind für $n \to \infty$ äquivalent: 
+        \begin{itemize}
+            \item[(1)] $\left(Q_{d_j}(N_n^{(j)}, f_n^{(j)}, \mathbb{G})\right)_{j=1}^m \Longrightarrow \mathcal{N}(0, \Sigma)$
+            \item[(2)]  Für jede Folge $\mathbb{X} = \{X_i\}_{i \in \N}$ unabhängiger zentrierter Zufallsvariablen mit Varianz 1 so, dass $\sup_{i} \E[|X_i|^3] < \infty$, konvergiert \[
+                \left(Q_{d_j}(N_n^{(j)}, f_n^{(j)}, \mathbb{X})\right)_{j=1}^m \overset{d_{\text{Kol}}}{\longrightarrow} \mathcal{N}(0, \Sigma).
+            \]
+        \end{itemize}
+    \end{theoremblockname}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%
+\section{Grundlegende Ideen des Beweises}
+\begin{frame}{Kontraktionen und Einflussindizees}
+    \small
+    \begin{definitionblockname}{Kontraktionen und Einflussindizes}
+        Seien $d_1, d_2 \geq 2$ und $N\in \N \cup \{\infty\}$ fixiert und es sei $f: [N]^{d_1} \to \R, g: [N]^{d_2} \to \R$ symmetrische Funktionen, die auf Diagonalen verschwinden. 
+        Definiere für jedes $r = 0, \ldots, d_1 \wedge d_2$ die Kontraktion $f *_r g: [N]^{d_1 + d_2 - 2r} \to \R$ durch \begin{align*}
+        f *_r& g(i_1, \ldots,  i_{d_1 + d_2 - 2r}) = \\ &\sum_{1 \leq a_1, \ldots, a_r \leq N} f(a_{1}, \ldots, a_r, i_1, \ldots, i_{d_1 -r}) g(a_1, \ldots, a_r, i_{d_1 - r +1}, \ldots, i_{d_1 + d_2 - 2r}).
+        \end{align*}
+        Definiere ferner $\norm{f}_d^2 := \sum_{1 \leq i_1, \ldots, i_d \leq N} f^2(i_1, \ldots, i_d)$.
+        \pause
+        Der $i$te Einflussindex von $f$ ist gegeben durch \[
+        \text{Inf}_i(f) = \sum_{\{i_2, \ldots, i_d\} \subset [N]^{d-1}} f^2(i, i_2, \ldots, i_d) = (d-1)!^{-1} \sum_{1 \leq i_2, \ldots, i_d \leq N} f^2(i, i_2 \ldots, i_d).
+        \]
+    \end{definitionblockname}
+\end{frame}
+
+\begin{frame}{Wiener Chaos in unserer Situation}
+    \small
+    Auch in unserem Fall Chaos-Formalismus opportun. 
+    \begin{definitionblockname}{Wiener-Chaos-Notation}
+    Sei $(\Hil, \<\cdot, \cdot\>_{\Hil})$ ein separabler Hilbertraum und $\{e_i\}_{i \in \N}$ eine Orthonormalbasis von $\Hil$. Es bezeichnen $\Hil^{\otimes k}$ und $\Hil^{\odot k}$ das $k$-fache (resp. $k$-fache symmetrische) Tensorprodukt von $\Hil$. 
+    Es bezeichne $\zeta$ einen isonormalen gaußschen Prozess auf $\Hil$. 
+    \pause
+    Mit $I_k(h)$ bezeichne für $h \in \Hil^{\otimes k}$ $k$-faches Wiener-Integral bezüglich $\zeta$ und definiere \[\Ch{k} = \{I_k(h)\}_{h \in \Hil^{\otimes k}}, \Pol{k} = \overline{\<\{\text{Polynome von Grad } \leq k \text{ in } \zeta h\}\>}\]
+    \end{definitionblockname}
+    \pause
+    \begin{itemize}
+        \item Verbindung zu unserem Setting: Für $e_1, \ldots, e_k$ orthonormal gilt \[I_k(e_1 \otimes \ldots \otimes e_k) = I_1(e_1) \cdots I_1(e_k). 
+        \]
+        \pause
+        \[
+        h = \sum_{1 \leq i_1, \ldots, i_d \leq N} f(i_1, \ldots, i_d) e_{i_1} \otimes \cdots \otimes e_{i_d} \in \Hil^{\odot d}
+        \] rechtfertigt somit $Q_d(N,f,\mathbb{G}) = I_d(h)$.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Idee des Beweises}
+    \begin{itemize}
+    \item Rückrichtung im Prinzip klar: Setze $\mathbb{X} = \mathbb{G}$. 
+    \item Beachte, dass Konvergenz bezüglich $d_{\text{Kol}}$ sogar stärker ist als Konvergenz in Verteilung. 
+    \end{itemize}
+    \pause 
+    \begin{itemize}
+        \item Nun zur Rückrichtung. Folgendes im Wesentlichen bekannt.
+    \end{itemize}
+    \begin{theoremblockname}{ZGWS für chaotische Summen}
+        Nimm an, dass die Voraussetzungen \S erfüllt sind. Nimm ferner an, dass für alle $i,j = 1, \ldots, m$ die Konvergenz \textcolor{orange}{$\E[\homQG{i}{n}\homQG{j}{n}] \to \Sigma(i,j)$} gilt, wobei $\Sigma$ eine positiv semidefinite symmetrische Matrix ist. Dann sind für $n \to \infty$ äquivalent: 
+        \begin{itemize}
+            \item[(1)] Es gilt $(\homQG{j}{n})_{j=1}^m \Longrightarrow \mathcal{N}(0, \Sigma).$
+            \item[(2)] Für jedes $j =1 ,\ldots, m$ und jedes $r = 0, \ldots, d_j - 1$ gilt \[\norm{f_n^{(j)} *_r f_n^{(j)}}_{2d_j - 2r} \longrightarrow 0.\]
+        \end{itemize} 
+    \end{theoremblockname}
+\end{frame}
+
+\begin{frame}{Idee des Beweises}
+    Wollen \textcolor{orange}{$\E[\homQG{i}{n}\homQG{j}{n}] \to \Sigma(i,j)$} zeigen.
+    \begin{itemize}
+        \item Mit dem Continuous Mapping Theorem wissen wir $\homQG{i}{n}\homQG{j}{n} \Longrightarrow Z_iZ_j$ für zwei standarnormalverteilte Zufallsvariablen $Z_i, Z_j$ mit Kovarianz $\Sigma(i,j)$. 
+        \item Für die Konververgenz der Erwartungswerte ist nun uniforme Integrierbarkeit hinreichend. 
+        \pause
+        \item Schätze ab \begin{align*}
+        &\E[|\homQG{i}{n}\homQG{j}{n}|^{1 + \varepsilon}] \leq \\ & \qquad \qquad \qquad \E[|\homQG{i}{n}|^{2 + 2\varepsilon}]^{\frac{1}{2}} \E[|\homQG{j}{n}|^{2 + 2\varepsilon}]^{\frac{1}{2}}.
+        \end{align*}
+        
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Idee des Beweises}
+    Wollen \textcolor{orange}{$\E[\homQG{i}{n}\homQG{j}{n}] \to \Sigma(i,j)$} zeigen.
+    Gut wäre $\E[|\homQG{i}{n}|^{2 + 2\varepsilon}]^{\frac{1}{2}} \leq C.$ 
+    \pause
+    \begin{itemize}
+        \item Wir brauchen \textbf{Konzept der Hyperkontraktivität}. 
+    \end{itemize}
+    \begin{satzblockname}{Hyperkontraktivität und das Wiener Chaos, \cite{ghs} Thm. 5.10}
+        Sei $d \in \N_{\geq 1}$ und $F \in \Pol{d}$. Fixiere $2 \leq p \leq q < \infty$, so gilt \[
+        \norm{F}_q \leq (q-1)^{\frac{d}{2}}\norm{F}_p.
+        \]
+    \end{satzblockname}
+\begin{itemize}
+    \pause
+    \small
+    \item Hyper\textbf{kontraktivität}: Folg. Abb. hat Norm 1:
+    \begin{align*}L^2(\sigma(\zeta), P) &\longrightarrow L^q(\sigma(\zeta), P) \\ \sum_{k = 0}^\infty H_k\in \bigotimes_{k=0}^\infty \Ch{k} &\longmapsto \sum_{k = 0}^\infty (q-1)^{-\frac{k}{2}}H_k \end{align*}  
+    % \item Rechne für Bernoulli-Zufallsvariablen nach und erhalte Gauß-Zufallsvariablen als Verteilungsgrenzwert. 
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Idee des Beweises}
+    Wollen \textcolor{orange}{$\E[\homQG{i}{n}\homQG{j}{n}] \to \Sigma(i,j)$} zeigen.
+    Gut wäre $\E[|\homQG{i}{n}|^{2 + 2\varepsilon}]^{\frac{1}{2}} \leq C.$ 
+    \pause
+    \begin{itemize}
+    \item Mit der Voraussetzung $\E[\homQG{i}{n}^2] \leq C$ und Hyperkontraktivität folgt dies nun.
+    \pause
+    \end{itemize}
+    \tiny
+\begin{center}
+    \textcolor{orange}{
+    \textit{
+        Dann sind für $n \to \infty$ äquivalent: 
+        \begin{itemize}
+            \item[(1)] Es gilt $(\homQG{j}{n})_{j=1}^m \Longrightarrow \mathcal{N}(0, \Sigma).$
+            \item[(2)] Für jedes $j =1 ,\ldots, m$ und jedes $r = 0, \ldots, d_j - 1$ gilt \[\norm{f_n^{(j)} *_r f_n^{(j)}}_{2d_j - 2r} \longrightarrow 0.\]
+        \end{itemize} 
+    }
+    }
+    \end{center}
+    \normalsize
+    \begin{itemize}
+        \item Nun (konzeptuell) zentrale Abschätzung: \small \begin{align*}
+        &\norm{f_n^{(j)} *_{d_j -1 } f_n^{(j)}}_{2}^2  \geq  
+         \sum_{1 \leq i, \textcolor{orange}{\widehat{k}} \leq N} \left[\sum_{1 \leq i_2, \ldots, i_d \leq N} (f_n^{(j)})^2(i, i_2, \ldots, i_d)\right]^2 \\ & \qquad \geq \max_{i = 1, \ldots, N} \left[\sum_{1 \leq i_2, \ldots, i_d \leq N} (f_n^{(j)})^2(i, i_2, \ldots, i_d)\right]^2 = \max_{i = 1, \ldots, N}  \left[(d-1)! \textcolor{orange}{\text{Inf}_i(f_n^{(j)})} \right]^2
+        \end{align*}
+    \end{itemize}
+\end{frame}

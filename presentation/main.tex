@@ -1,0 +1,34 @@
+\documentclass{beamer}
+\usepackage{preamble}
+  % Bibliography setup
+  \usepackage{csquotes} % Recommended for biblatex with babel/polyglossia
+  \usepackage[backend=biber,style=alphabetic]{biblatex}
+  \addbibresource{bibliography.bib} % Replace 'references.bib' with the path to your .bib file
+
+  % Command to print bibliography
+  \newcommand{\printbibliographysection}{
+    \begin{frame}[allowframebreaks]{References}
+      \printbibliography
+    \end{frame}
+  }
+\AtBeginSection[]{
+	\begin{frame}
+		\vfill
+		\centering
+		\begin{beamercolorbox}[sep=8pt,center,rounded=false]{title}
+			\usebeamerfont{title}\insertsectionhead\par%
+		\end{beamercolorbox}
+		\vfill
+	\end{frame}
+}
+
+\begin{document}
+
+\begin{frame}
+    \titlepage
+\end{frame}
+
+\include{introduction/structure.tex}
+\include{heuristics/structure.tex}
+\printbibliographysection
+\end{document}

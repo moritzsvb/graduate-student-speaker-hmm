@@ -1,0 +1,17 @@
+\section{Beweis}
+\begin{frame}{Weiteres Ziel}
+    \begin{itemize}
+    \item Bereits zuvor angekündigt: Einfluss-Indizes spielen eine zentrale Rolle. \pause
+    \item Einordnung: \cite{mossel2005noisestabilityfunctionslow} hat für gewisse $\H$ folgende Abschätzung in 1D hergeleitet: 
+    \[
+    d_\H(Q_d(N,f,\mathbb{G}), Q_d(N,f,\mathbb{X})) \leq C_{d} \sqrt{\max_{1 \leq i \leq N} \mathrm{Inf}_i(f)} 
+    \]
+    \pause
+    \item Andererseits ist auch die 4te-Momente-Methode bekannt. Autoren (\cite{homsums}) leiten nun (in 1D) sogar her: 
+\[
+d_\H(Q_d(N,f,\mathbb{G}), Z) \leq C_d \cdot \sqrt{\E[Q_d(N,f,\mathbb{G})^4] - 3}.
+\]
+\pause 
+\item  Also auch für unseren Beweis sinnvoll: \begin{align*}d_\H(Q_d(N,f,\mathbb{X}), Z) \leq &d_\H(Q_d(N,f,\mathbb{G}), Q_d(N,f,\mathbb{X})) \\ & \qquad \qquad \qquad + d_\H(Q_d(N,f,\mathbb{G}), Z)  \end{align*}
+    \end{itemize}
+\end{frame}

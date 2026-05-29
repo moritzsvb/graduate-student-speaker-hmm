@@ -1,0 +1,362 @@
+\section{Abstand von chaotischer Summe und der Normalverteilung}
+\begin{frame}{Bound für $d_\H(Q_d(N,f,\mathbb{G}), Z)$}
+    \small
+    \begin{satzblockname}{Abstand von verrauschter Summe und der Normalverteilung}
+        Wir befinden uns im Setting des vorherigen Satzes und nehmen zusätzlich an, dass $Z \sim \mathcal{N}(0, \Sigma)$, wobei $\Sigma$ wie zuvor \textcolor{orange}{-- und gleichzeitig noch die Kovarianzmatrix von $\mathbb{Q}(\X)$ --} sei. 
+        Dann gilt für alle $\varphi: \R^m \to \R$ mit $\norm{\varphi'''}_\infty, \norm{\varphi''}_\infty < \infty$ und $\varphi, \varphi', \in L^2(P^{\mathbf{Q}(\Tilde{\mathbb{X}})})$ für alle $\Tilde{\mathbb{X}}$, dass  (für $D = D(\beta, \max_j d_j, m)$ von vorher)
+        \vspace{-0.4cm}
+        \begin{align*}
+            &\left|\E[\varphi(\mathbf{Q}(\X))] - \E[\varphi(Z)]\right| \leq \norm{\varphi'''}_\infty \cdot D \sqrt{\max_{j=1, \ldots, m}\max_{1 \leq i \leq N} \textcolor{orange}{\mathrm{Inf}_i(f_j)}} \\ &\qquad \qquad + \norm{\varphi''}_\infty \cdot \left(\sum_{i=1}^m \triangle_{ii} + 2 \cdot \sum_{1\leq i < j \leq m} \triangle_{ij}\right)\text{, wobei } \\
+       & \triangle_{i,j} := \frac{d_j}{\sqrt{2}} \sum_{r = 1}^{d_j -1} (r-1)! \binom{d_i-1}{r-1} \binom{d_j-1}{r-1} \\ & \qquad \qquad \times  \sqrt{(d_i + d_j - 2r)!} \left(\textcolor{orange}{\norm{f_i *_{d_i -r } f_i}_{2r} + \norm{f_j *_{d_j - r}f_j}_{2r}}\right) \\ & \qquad \qquad \qquad \qquad \qquad + \indicatorset{d_i < d_j} \sqrt{d_j! \binom{d_j}{d_i} \textcolor{orange}{\norm{f_j *_{d_j - d_i} f_j}_{2d_i}}} \end{align*}
+    \end{satzblockname}
+\end{frame}
+
+\begin{frame}{Bound für $d_\H(Q_d(N,f,\mathbb{G}), Z)$ -- \textbf{Beweis}}
+    \begin{itemize}
+        \item Erinnern uns an unsere Ausgangslage vom Anfang: \[\textcolor{orange}{\max_{1 \leq j \leq m} \max_{1 \leq i \leq N_j}\mathrm{Inf}_i(f_j)}, \textcolor{orange}{\norm{f_j *_{d_j - d_i} f_j}_{2d_i}}, \textcolor{orange}{\norm{f_i *_{d_i -r } f_i}_{2r} + \norm{f_j *_{d_j - r}f_j}_{2r}}\] verschwinden für $n \to \infty$!
+    \end{itemize}
+    \pause
+    %% falls man es mal braucht
+    % \E[\norm{\varphi'''}_\infty \cdot D \sqrt{\max_{j=1, \ldots, m}\max_{1 \leq i \leq N} \mathrm{Inf}_i(f_j)}]
+    \begin{proofs}
+        \begin{itemize}
+            \item Oft angekündigt: \begin{align*}&|\E[\varphi(\mathbf{Q}(\X))]- \E[\varphi(Z)]| \\ & \qquad \qquad \leq \underbrace{\left|\E[\varphi(\mathbf{Q}(\X))] - \E[\varphi(\mathbf{Q}(\G))]\right|}_{=: \delta_1} + \underbrace{\left|\E[\varphi(\mathbf{Q}(\G))] - \E[\varphi(Z)]\right|}_{=: \delta_2}  \end{align*} 
+            \item Haben $\delta_1$ bereits zufriedenstellend gebounded.
+            \pause
+            \item Für $\delta_2$ nimm \textbf{ohne Einschränkung} an, dass $\G$ und $Z$ unabhängig sind.
+        \end{itemize}
+    \end{proofs}
+\end{frame}
+
+\begin{frame}{Bound für $d_\H(Q_d(N,f,\mathbb{G}), Z)$ -- \textbf{Beweis}}
+    \begin{proofs}[Beweis (fortg.)]
+        \begin{itemize}
+            \item Arbeiten wieder mit Tensorformalismus: \[
+            \left(Q^{(j)}(\G)\right)_{j = 1}^m \overset{\mathcal{L}}{=} \left(I_{d_j}(h_j)\right)_{j=1}^m
+            \]
+            für $h_j = \sum_{1 \leq i_1, \ldots, i_{d_j} \leq N_j} f_j(i_1, \ldots, i_{d_j})  e_{i_1} \otimes \cdots \otimes e_{i_{d_j}} \in \Hil^{\odot d_j}$.
+            \pause
+            \item Jetzt \textbf{Interpolationstechnik}: 
+            \[
+\Psi(t) := \E[\varphi(\sqrt{1-t}(I_{d_1}(h_1), \ldots, I_{d_m}(h_m)) + \sqrt{t} Z)], t \in [0,1]. 
+            \]
+            \pause
+            \item Mit (Regularitäts-)Annahmen an $\varphi$ erhalte:
+            \[
+            \left|\E[\varphi(\mathbf{Q}(\G))] - \E[\varphi(Z)]\right| = |\Psi(0) - \Psi(1)| \leq \sup_{t \in (0,1)} |\Psi'(t)|.
+            \]
+        \end{itemize}
+    \end{proofs}
+\end{frame}
+
+\begin{frame}{Bound für $d_\H(Q_d(N,f,\mathbb{G}), Z)$ -- \textbf{Beweis}}
+    \small
+    \textcolor{orange}{
+    \begin{align*}
+    \Psi(t) &:= \E[\varphi(\sqrt{1-t}(I_{d_1}(h_1), \ldots, I_{d_m}(h_m)) + \sqrt{t} Z)] \\ 
+            \left|\E[\varphi(\mathbf{Q}(\G))] - \E[\varphi(Z)]\right| &= |\Psi(0) - \Psi(1)| \leq \sup_{t \in (0,1)} |\Psi'(t)|.
+    \end{align*}}
+            \normalsize
+    \begin{proofs}[Beweis (fortg.)]
+        \begin{itemize}
+            \item Berechne Ableitung: 
+            \begin{align*}
+            \Psi'(t) = \sum_{i=1}^m &\operatorname{E}\left\{\frac{\partial \varphi}{\partial x_i}\left(\sqrt{1-t}(I_{d_1}(h_1), \ldots, I_{d_m}(h_m)) + \sqrt{t} Z\right) \right. \\ & \qquad \qquad \qquad \qquad \times \left.\left(\textcolor{green}{\frac{1}{2\sqrt{t}}Z_i} - \textcolor{blue}{\frac{1}{2\sqrt{1-t}} I_{d_i}(h_i)}\right)\right\}.
+            \end{align*}
+            \item Müssen also zwei Teile ausrechnen: \textcolor{green}{GRÜN} und \textcolor{blue}{BLAU}.
+        \end{itemize}
+    \end{proofs}
+\end{frame}
+
+\begin{frame}{Bound für $d_\H(Q_d(N,f,\mathbb{G}), Z)$ -- \textbf{Beweis}}
+    \small
+    \begin{proofs}[Beweis (fortg.)]
+        \begin{itemize}
+            \item Beginne mit \textcolor{green}{GRÜN}:
+            \begin{align*}
+                & \E[\frac{\partial \varphi}{\partial x_i} \left(\sqrt{1-t} (I_{d_1}(h_1), \ldots, I_{d_m}(h_m)) + \sqrt{t}Z\right) \cdot \frac{1}{2\sqrt{t}} Z_i] \\ & \quad = \int_{\R^m} \int_{\R^m} \frac{\partial \varphi}{\partial x_i} \left(\sqrt{1-t} (i_1, \ldots, i_n) + \sqrt{t}\bar z\right) \cdot \frac{1}{2\sqrt{t}} z_i P^Z(d \bar z) P^{\mathbf{I}}(d i_1, \ldots, d i_n)
+            \end{align*}
+            \item Betrachte nur inneres Integral, definiere \[g_{t, I}(\cdot) := \frac{\partial \varphi}{\partial x_i} (\sqrt{1-t}(i_1, \ldots, i_m) + \sqrt{t} \;\cdot)\]
+            \vspace{-0.7cm}
+            \pause
+            \item Partielle Integration nach $z_i$ (arbeite mit Dichte der Normalverteilung) liefert \[\int_{\R^m} g_{t,I}(\bar z) z_i P^Z(d \bar z) = \sum_{j=1}^m \Sigma(i,j) \int_{\R^m} \frac{\partial g_{t,I}}{\partial x_j}(\bar z) P^Z(d\bar z)\] 
+        \end{itemize}
+    \end{proofs}
+\end{frame}
+
+\begin{frame}{Bound für $d_\H(Q_d(N,f,\mathbb{G}), Z)$ -- \textbf{Beweis}}
+    \small
+    \begin{proofs}[Beweis (fortg.)]
+        \begin{itemize}
+            \item Setze zusammen:
+            \textcolor{olive}{
+            \begin{align*}
+                & \frac{1}{2\sqrt{t}}\E[\frac{\partial\varphi}{\partial x_i } \left(\sqrt{1-t} (I_{d_1}(h_1), \ldots, I_{d_m}(h_m)) + \sqrt{t}Z\right) \cdot Z_i] \\ & \qquad \qquad = \frac{1}{2}\frac{\sqrt{t}}{\sqrt{t}}\sum_{j=1}^m \Sigma(i,j) \E[\frac{\partial^2 \varphi}{\partial x_i \partial x_j}\left(\sqrt{1-t} (I_{d_1}(h_1), \ldots, I_{d_m}(h_m)) + \sqrt{t}Z\right)]
+            \end{align*}}
+            \item Nun wollen wir \textcolor{blue}{BLAU} ausrechnen: 
+        \end{itemize}
+         \begin{align*}
+             & \E[\frac{\partial \varphi}{\partial x_i} \left(\sqrt{1-t} (I_{d_1}(h_1), \ldots, I_{d_m}(h_m)) + \sqrt{t}Z\right) \cdot \frac{1}{2\sqrt{1-t}} I_{d_i}(h_i)] \\ = & \int_{\R^m} \int_{\R^m} \frac{\partial \varphi}{\partial x_i} \left(\sqrt{1-t} (y_1, \ldots, y_n) + \sqrt{t}\bar z\right) \cdot \frac{1}{2\sqrt{1-t}} y_i P^{\mathbf{I}}(d y_1, \ldots, d y_m)  P^Z(d \bar z)
+            \end{align*}
+    \end{proofs}
+\end{frame}
+
+\begin{frame}{Bound für $d_\H(Q_d(N,f,\mathbb{G}), Z)$ -- \textbf{Beweis}}
+    \small
+    \begin{proofs}[Beweis (fortg.)]
+        \begin{itemize}
+            \item Definiere \[g_{t, \bar z}(\cdot) := \frac{\partial \varphi}{\partial x_i} (\sqrt{1-t}\; \cdot + \sqrt{t} \bar z).\]
+            \item Berechne für \textcolor{blue}{BLAU} also \[
+            \E[g_{t,\bar z}(I_{d_1}(h_1), \ldots, I_{d_m}(h_m)) \cdot I_{d_i}(h_i)].
+            \]
+        \end{itemize}
+        %     \begin{align*}
+        %         & \E[\frac{\partial\varphi}{\partial x_i } \left(\sqrt{1-t} (I_{d_1}(h_1), \ldots, I_{d_m}(h_m)) + \sqrt{t}Z\right) \cdot Z_i] \\ & \qquad \qquad = \sqrt{t}\sum_{j=1}^m \Sigma(i,j) \E[\frac{\partial^2 \varphi}{\partial x_i \partial x_j}\left(\sqrt{1-t} (I_{d_1}(h_1), \ldots, I_{d_m}(h_m)) + \sqrt{t}Z\right)]
+        %     \end{align*}
+        %     \item Nun wollen wir \textcolor{blue}{BLAU} ausrechnen: 
+        % \end{itemize}
+        %  \begin{align*}
+        %      & \E[\frac{\partial \varphi}{\partial x_i} \left(\sqrt{1-t} (I_{d_1}(h_1), \ldots, I_{d_m}(h_m)) + \sqrt{t}Z\right) \cdot \frac{1}{2\sqrt{1-t}} I_{d_i}(h_i)] \\ = & \int_{\R^m} \int_{\R^m} \frac{\partial \varphi}{\partial x_i} \left(\sqrt{1-t} (y_1, \ldots, y_n) + \sqrt{t}\bar z\right) \cdot \frac{1}{2\sqrt{1-t}} y_i P^{\mathbf{I}}(d y_1, \ldots, d y_m)  P^Z(d \bar z)
+        %     \end{align*}
+    \end{proofs}
+    \pause
+    \vspace*{-0.7cm}
+Auch gerne mit partieller Integration. Dafür benötigt: \textbf{Malliavin-Kalkül!}
+\pause
+\begin{itemize}
+    \item $D: \mathcal{D}^{1,2} \subset L^2(\sigma(\zeta)) \to L^2(\sigma(\zeta), \Hil)$ Malliavian-Ableitung
+\end{itemize}
+\begin{lemmablockname}{Partielle Integration mit Malliavin-Ableitung}
+    Sei $g: \R^m \to \R$ differenzierbar mit beschränkter Ableitung, seien $G_1, \ldots, G_m \in \mathcal{D}^{1,2}, F = I_d(h)$ mit $h \in \Hil^{\odot d}$. Dann gilt: 
+    \[
+    \E[g(G_1, \ldots, G_m) F] = d^{-1}\sum_{j=1}^m\E[\frac{\partial g}{\partial x_j}(G_1, \ldots, G_m) \<DG_j, DF\>_\Hil]\]
+\end{lemmablockname}
+\end{frame}
+
+\begin{frame}{Bound für $d_\H(Q_d(N,f,\mathbb{G}), Z)$ -- \textbf{Beweis}}
+    \small
+    \begin{center}
+    \textcolor{orange}{$ \E[g(G_1, \ldots, G_m) F] = d^{-1}\sum_{j=1}^m \E[\frac{\partial g}{\partial x_j}(G_1, \ldots, G_m) \<DG_j, DF\>_\Hil]$}\end{center}
+    \begin{itemize}
+    \item $D^*: \mathcal{D}^* \subset L^2(\sigma(\zeta), \Hil) \to L^2(\sigma(\zeta))$ die Adjungierte (Skorohod-Integral)
+    \pause
+    \item  Ornstein-Uhrlenbeck-Operator gegeben durch \begin{align*}
+    L: \mathcal{L} \subset L^2(\sigma(\zeta)) \longrightarrow L^2(\sigma(\zeta)), \xi \longmapsto - \sum_{n=1}^\infty n \operatorname{Pr}_{\mathcal{H}_n} (\xi)
+    \end{align*}
+    \end{itemize}
+    \pause
+    \vspace{-0.6cm}
+    \begin{proofs}[Beweis vom Lemma zu partieller Integration]
+        \begin{itemize}
+            \item Beachte $L^{-1}(I_d(h)) = - d^{-1} I_d(h)$. Das liefert \begin{align*}
+            \E[g(G_1, \ldots, G_m) F] &= \E[g(G_1, \ldots, G_m)L(L^{-1}I_d(h))] \\ &= -d^{-1}\E[g(G_1, \ldots, G_m) L(I_d(h))].
+            \end{align*}
+            \item Wissen, dass für $\xi \in \mathcal{L}$ bereits $\xi \in \mathcal{D}^{1,2}, D\xi \in \mathcal{D}^{*}$ und $-L\xi = D^{*}D\xi$. 
+        \end{itemize}
+    \end{proofs}
+\end{frame}
+
+\begin{frame}{Bound für $d_\H(Q_d(N,f,\mathbb{G}), Z)$ -- \textbf{Beweis}}
+    \small
+    \begin{center}
+    \textcolor{orange}{$ \E[g(G_1, \ldots, G_m) F] = d^{-1}\sum_{j=1}^m \E[\frac{\partial g}{\partial x_j}(G_1, \ldots, G_m) \<DG_j, DF\>_\Hil]$}\end{center}
+    \begin{proof}[Beweis vom Lemma zu partieller Integration (fortg.)]
+            Somit erhalte \begin{align*}
+            -d^{-1}\E[g(G_1, \ldots, G_m) L(I_d(h))] &= d^{-1}\E[g(G_1, \ldots, G_m) D^{*}DI_d(h)] \\ &= d^{-1} \E[\<D(g(G_1, \ldots, G_m)), DI_d(h)\>_{\Hil}] \\ &= d^{-1} \E[\<\sum_{j=1}^m \frac{\partial g}{\partial x_j}(G_1, \ldots, G_m) D G_j, D I_d(h)\>_{\Hil}] \\&= d^{-1} \sum_{j=1}^m \E[\frac{\partial g}{\partial x_j}(G_1, \ldots, G_m) \<DG_j, D I_d(h)\>_{\Hil}].
+            \end{align*}
+    \end{proof}
+\end{frame}
+
+\begin{frame}{Bound für $d_\H(Q_d(N,f,\mathbb{G}), Z)$ -- \textbf{Beweis}}
+    \small
+    \vspace{-0.8cm}
+    \begin{center}
+    \textcolor{orange}{\begin{align*}\E[g(G_1, \ldots, G_m) F] = d^{-1}\sum_{j=1}^m \E[\frac{\partial g}{\partial x_j}(G_1, \ldots, G_m) \<DG_j, DF\>_\Hil] \\ g_{t, \bar z}(\cdot) := \frac{\partial \varphi}{\partial x_i} (\sqrt{1-t}\; \cdot + \sqrt{t} \bar z); \quad \E[g_{t,\bar z}(I_{d_1}(h_1), \ldots, I_{d_m}(h_m)) \cdot I_{d_i}(h_i)] = \text{?}\end{align*}}\end{center}
+    \begin{proofs}[Beweis zu unserer Bound (fortg.)]
+        \vspace{-0.6cm}
+        \begin{align*}& \E[g_{t,\bar z}(I_{d_1}(h_1), \ldots, I_{d_m}(h_m)) \cdot I_{d_i}(h_i)] \\ & = \sqrt{1-t}\cdot \sum_{j=1}^m \E[\frac{\partial^2 \varphi}{\partial x_i \partial x_j} (\sqrt{1-t}(I_{d_1}(h_1), \ldots, I_{d_m}(h_m)) + \sqrt{t} \bar z) \<D I_{d_i}(h_i), D I_{d_j}(h_j)\>_{\Hil}]\end{align*} 
+        \pause 
+        \vspace{-0.4cm}
+        Also \textcolor{blue}{\begin{align*}
+& -\E[\frac{\partial \varphi}{\partial x_i}\left(\sqrt{1-t}(I_{d_1}(h_1), \ldots, I_{d_m}(h_m)) + \sqrt{t} Z\right) \frac{1}{2\sqrt{1-t}} I_{d_i}(h_i)] \\  =-& \frac{1}{2} \cdot 1 \cdot \sum_{j=1}^m \E[\frac{\partial^2 \varphi}{\partial x_i \partial x_j}(\sqrt{1-t}(I_{d_1}(h_1), \ldots, I_{d_m}(h_m)) + \sqrt{t} Z) \<D I_{d_i}(h_i), D I_{d_j}(h_j)\>_{\Hil}]\end{align*}
+}
+    \end{proofs}
+\end{frame}
+
+%%%Jetzt alles zusammen: 
+
+\begin{frame}{Bound für $d_\H(Q_d(N,f,\mathbb{G}), Z)$ -- \textbf{Beweis}}
+    \small
+    \vspace{-0.3cm}
+    \begin{center}
+    \textcolor{orange}{\begin{align*}
+            &\Psi'(t) = \\ &\sum_{i=1}^m \E[\frac{\partial \varphi}{\partial x_i}\left(\sqrt{1-t}(I_{d_1}(h_1), \ldots, I_{d_m}(h_m)) + \sqrt{t} Z\right) \times \left(\frac{1}{2\sqrt{t}}Z_i - \frac{1}{2\sqrt{1-t}} I_{d_i}(h_i)\right)].
+            \\ 
+            &\left|\E[\varphi(\mathbf{Q}(\G))] - \E[\varphi(Z)]\right| = |\Psi(0) - \Psi(1)| \leq \sup_{t \in (0,1)} |\Psi'(t)|\end{align*}}\end{center}
+    \begin{proofs}[Beweis zu unserer Bound (fortg.)]
+        \begin{itemize}
+           \item Nun setze alles zusammen: \begin{align*}
+           \Psi'(t) &= \frac{1}{2} \sum_{i,j=1}^m\operatorname{E}\left\{\frac{\partial^2 \varphi}{\partial x_i \partial x_j}(\sqrt{1-t}(I_{d_1}(h_1), \ldots, I_{d_m}(h_m)) + \sqrt{t} Z) \right. \\ & \qquad \qquad \qquad \times  \left(\Sigma(i,j) - d_j^{-1} \<D(I_{d_i}(h_i)), D(I_{d_j}(h_j))\>_\Hil\right) \Big\}
+           \end{align*}
+           \vspace{-0.6cm}
+           \pause
+           \item Erhalte $
+           \delta_2 \leq \frac{1}{2} \norm{\varphi''}_\infty \sum_{i,j=1}^m \E[\left|\Sigma(i,j) - d_i^{-1} \<D(I_{d_i}(h_i)), D(I_{d_j}(h_j))\>_\Hil\right|]$
+         \end{itemize}     
+    \end{proofs}
+\end{frame}
+
+\begin{frame}{Bound für $d_\H(Q_d(N,f,\mathbb{G}), Z)$ -- \textbf{Beweis}}
+    \small
+    \begin{proofs}[Beweis zu unserer Bound (fortg.)]
+        \begin{itemize}
+           \item Erhalte \begin{align*}
+           \delta_2 \leq 2\cdot \delta_2 &\leq \norm{\varphi''}_\infty \sum_{i,j=1}^m \E[\left|\Sigma(i,j) - d_i^{-1} \<D(I_{d_i}(h_i)), D(I_{d_j}(h_j))\>_\Hil\right|] \\
+            & \leq \norm{\varphi''}_\infty \sum_{i,j=1}^m \sqrt{\E[\left(\Sigma(i,j) - d_i^{-1} \<D(I_{d_i}(h_i)), D(I_{d_j}(h_j))\>_\Hil\right)^2]} \\ &= \norm{\varphi''}_\infty \sum_{i,j=1}^m \sqrt{\operatorname{Var}(\<D(I_{d_i}(h_i)), D(I_{d_j}(h_j))\>_\Hil)}
+        \end{align*}
+        \pause
+        \item \textbf{Denn} mit $g(x) = x$ und $\E[g(G)F] = d^{-1}\E[g'(G)\<DG,DF\>_\Hil]$ erhalte   \begin{align*}\E[d_j^{-1} \<D(I_{d_i}(h_i)), D(I_{d_j}(h_j))\>_\Hil] &= \E[I_{d_i}(h_i)I_{d_j}(h_j)] = \E[Q^{(i)}(\X)Q^{(j)}(\X)] \\& = \Sigma(i,j)\end{align*}
+         \end{itemize}     
+    \end{proofs}
+\end{frame}
+
+%%% Einschub Kontraktionen %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Kurzer Einschub zu Kontraktionen}
+        \begin{definitionblockname}{Kontraktionen in symmetrischen Tensorprodukten}
+            Sei $\Hil$ ein separabler Hilbertraum und $\{e_i\}_{i \in \N}$ eine Orthonormalbasis von $\Hil$. Dann definiere für $h = \sum_{i_1, \ldots, i_d} a(i_1, \ldots, i_d) e_{i_1} \otimes \cdots \otimes e_{i_d} \in \Hil^{\odot d_1}$ und und $g = \sum_{i_1, \ldots, i_d} b(i_1, \ldots, i_d) e_{i_1} \otimes \cdots \otimes e_{i_d} \in \Hil^{\odot d_2}$ für $p \in \{0, \ldots, d_1 \wedge d_2\}$ die $p$te Kontraktion $h \otimes_p g \in \Hil^{d_1 + d_2 - 2p}$  als \[
+            h \otimes_p g := \sum_{\substack{i_1, \ldots, i_{d_1 - p} \\ j_1, \ldots, j_{d_2 - p}}} a *_p b(i_1, \ldots, j_{d_2 - p}) e_{i_1} \otimes \cdots \otimes e_{i_{d_1 - p}} \otimes e_{j_1} \otimes \cdots \otimes e_{j_{d_2 - p}}.
+            \]
+        \end{definitionblockname}
+        \pause
+        \begin{itemize}
+            \scriptsize
+            \vspace{-0.7cm}
+            \item Beachte: Man kann schreiben \begin{align*}
+             &h \otimes_p g = \<h,g\>_{\Hil^{\odot p}}  \\ &= \sum_{\substack{i_1, \ldots, i_{d_1 - p} \\ j_1, \ldots, j_{d_2 - p}}} \big\<\sum_{i_{d_1-p+1, \ldots, i_{d_1}}} a(i_{1}, \ldots, i_{d_1}) e_{i_{d_1-p+1}} \otimes \cdots \otimes e_{i_{d_1}} ,  \\ &  \sum_{i_{j_{d_2-p+1}, \ldots, j_{d_2}}} b(j_{1}, \ldots, j_{d_2}) e_{j_{d_2-p+1}} \otimes \cdots \otimes e_{i_{d_2}}\big\>_{\Hil^{\odot p}} e_{i_1} \otimes \cdots \otimes e_{i_{d_1 - p}} \otimes e_{j_1} \otimes \cdots \otimes e_{j_{d_2 - p}}.
+            \end{align*}
+        \end{itemize}
+\end{frame}
+
+\begin{frame}{Kurzer Einschub zu Kontraktionen}
+        \begin{itemize}
+            \scriptsize
+            \item \textcolor{orange}{ Man kann schreiben \begin{align*}
+             &h \otimes_p g = \<h,g\>_{\Hil^{\odot p}}  \\ &= \sum_{\substack{i_1, \ldots, i_{d_1 - p} \\ j_1, \ldots, j_{d_2 - p}}} \big\<\sum_{i_{d_1-p+1, \ldots, i_{d_1}}} a(i_{1}, \ldots, i_{d_1}) e_{i_{d_1-p+1}} \otimes \cdots \otimes e_{i_{d_1}} ,  \\ &  \sum_{i_{j_{d_2-p+1}, \ldots, j_{d_2}}} b(j_{1}, \ldots, j_{d_2}) e_{j_{d_2-p+1}} \otimes \cdots \otimes e_{i_{d_2}}\big\>_{\Hil^{\odot p}} e_{i_1} \otimes \cdots \otimes e_{i_{d_1 - p}} \otimes e_{j_1} \otimes \cdots \otimes e_{j_{d_2 - p}}.
+            \end{align*}}
+            \pause
+            \normalsize
+            \item Unabhängigkeit von der Wahl der Orthonormalbasis.
+            \item Insbesondere für $\{e_i\} \subset \ell^2(\N)$ gegeben durch $e_i(n) = \delta_{i,n}$ (Kronecker-Delta) haben wir gerade \[f *_r g = f \otimes_r g \in \ell^2(\N)^{\otimes d_1 + d_2 - 2r}.\]
+        \end{itemize}
+\end{frame}
+
+\begin{frame}{Bound für $d_\H(Q_d(N,f,\mathbb{G}), Z)$ -- \textbf{Beweis}}
+    \small
+    \begin{center}
+    \textcolor{orange}{$\delta_2 \leq \norm{\varphi''}_\infty \sum_{i,j=1}^m d_i^{-1}\sqrt{\operatorname{Var}(\<D_{d_i}(h_i), D_{d_j}(h_j)\>_\Hil)}$}
+    \end{center}
+    \begin{proofs}[Beweis zu unserer Bound (fortg.)]
+\begin{itemize}
+    \item Wir müssen also $\operatorname{Var}(\<D_{d_i}(h_i), D_{d_j}(h_j)\>_\Hil)$ bounden. 
+    \pause
+    \item Jetzt nutzen wir $\Hil \cong \ell^2(\N)$ als Hilberträume (wir hätten den Raum direkt so wählen können.)
+    \pause
+    \item Beachte: Für $h \in \Hil^{\odot d}$ gilt $n \mapsto D(I_d(h))(n) = n \mapsto d I_{d-1}(h(\cdot, n))$.  
+    \pause
+    \item Also erhalten wir für mit Produktformel für mehrfache Integrale ($d_i \leq d_j$) \begin{align*}
+    &\<D_{d_i}(h_i), D_{d_j}(h_j)\>_\Hil = d_id_j \sum_{n \in \N} I_{d_i-1}(h_i(\cdot, n)) I_{d_j-1}(h_j(\cdot, n))  \\ &\qquad = d_id_j \sum_{n \in \N} \sum_{r=0}^{d_i-1} r! \binom{d_i-1}{r}\binom{d_j-1}{r} I_{d_i + d_j -2 -2r}(h_i(\cdot, n) \widetilde{\otimes_r} h_j(\cdot, n)) 
+    \end{align*}
+\end{itemize}
+    \end{proofs}
+\end{frame}
+
+\begin{frame}{Bound für $d_\H(Q_d(N,f,\mathbb{G}), Z)$ -- \textbf{Beweis}}
+\small
+    \begin{center}
+    \textcolor{orange}{$\<D_{d_i}(h_i), D_{d_j}(h_j)\>_\Hil = d_id_j \int_0^1 \sum_{r=0}^{d_i-1} r! \binom{d_i-1}{r}\binom{d_j-1}{r} I_{d_i + d_j -2 -2r}(h_i(\cdot, a) \widetilde{\otimes_r} h_j(\cdot, a)) da$}
+    \end{center}
+\begin{proofs}[Beweis zu unserer Bound (fortg.)]
+    \vspace{-0.6cm}
+    \begin{align*}
+        & d_id_j \sum_{n \in \N} \sum_{r=0}^{d_i-1} r! \binom{d_i-1}{r}\binom{d_j-1}{r} I_{d_i + d_j -2 -2r}(h_i(\cdot, n) \widetilde{\otimes_r} h_j(\cdot, n)) \\ &= d_id_j \sum_{r=0}^{d_i-1} r! \binom{d_i-1}{r}\binom{d_j-1}{r} I_{d_i + d_j -2 -2r}\left(\sum_{n \in \N} h_i(\cdot, n) \widetilde{\otimes_r} h_j(\cdot, n) \right) \\ &= d_id_j \sum_{r=0}^{d_i-1} r! \binom{d_i-1}{r}\binom{d_j-1}{r} I_{d_i + d_j -2 -2r}\left(h_i \widetilde{\otimes_{r+1}} h_j\right) \\ &= d_id_j \sum_{r=1}^{d_i} r! \binom{d_i-1}{r-1}\binom{d_j-1}{r-1} I_{d_i + d_j -2r}\left(h_i \widetilde{\otimes_{r}} h_j\right)
+    \end{align*}
+    \pause
+ Dabei benutze Darstellung durch Skalaprodukt $h\otimes_p g = \<h,g\>_{\Hil^{\odot p}}$.
+\end{proofs}
+\end{frame}
+
+\begin{frame}{Bound für $d_\H(Q_d(N,f,\mathbb{G}), Z)$ -- \textbf{Beweis}}
+\small
+\begin{center}
+\textcolor{orange}{$\<D_{d_i}(h_i), D_{d_j}(h_j)\>_\Hil = d_id_j \sum_{r=1}^{d_i} r! \binom{d_i-1}{r}\binom{d_j-1}{r} I_{d_i + d_j -2r}\left(h_i \widetilde{\otimes_{r}} h_j\right)$}
+\end{center}
+\begin{proofs}[Beweis zu unserer Bound (fortg.)]
+\begin{itemize}
+    \item Falls $d_i < d_j$ so gilt stets $\E[I_{d_i + d_j -2 -2r}(h_i \widetilde{\otimes_{r+1}} h_j)] = 0$. In diesem Fall \begin{align*}
+        &\operatorname{Var}(\<D_{d_i}(h_i), D_{d_j}(h_j)\>_\Hil) \\ & \qquad = d_i^2 d_j^2 \sum_{r=1}^{d_i} r!^2 \binom{d_i-1}{r}^2\binom{d_j-1}{r}^2 \E[I_{d_i + d_j -2 -2r}(h_i \widetilde{\otimes_{r}} h_j)^2] \\ & \qquad = d_i^2 d_j^2 \sum_{r=1}^{d_i} r!^2 \binom{d_i-1}{r}^2\binom{d_j-1}{r}^2 \norm{h_i \widetilde{\otimes_{r}} h_j}_{d_i+d_j-2r}^2
+    \end{align*}
+    \pause
+    \vspace{-0.3cm}
+    \item Falls $d_i = d_j$, so ziehe für Varianz Konstanten ab:
+    \begin{align*}
+     \operatorname{Var}(\<D_{d_i}(h_i), D_{d_j}(h_j)\>_\Hil) = d_i^4 \sum_{r=1}^{\textcolor{orange}{d_i-1}} r!^2 \binom{d_i-1}{r}^4 \norm{h_i \widetilde{\otimes_{r}} h_j}_{2d_i-2r}^2
+    \end{align*}
+\end{itemize}
+\end{proofs}
+\end{frame}
+
+\begin{frame}{Bound für $d_\H(Q_d(N,f,\mathbb{G}), Z)$ -- \textbf{Beweis}}
+    \small
+    \begin{center}
+        \textcolor{orange}{\begin{align*}
+           \delta_2 \leq  \norm{\varphi''}_\infty \sum_{i,j=1}^m \sqrt{\operatorname{Var}(\<D_{d_i}(h_i), D_{d_j}(h_j)\>_\Hil)} \\ 
+\operatorname{Var}(\<D_{d_i}(h_i), D_{d_j}(h_j)\>_\Hil) \leq C(d_i,d_j) \sum_{r} \norm{h_i \widetilde{\otimes_{r}} h_j}_{d_i + d_j-2r}^2
+        \end{align*}}
+    \end{center}
+\begin{proofs}[Beweis zu unserer Bound (fortg.)]
+    \begin{tikzpicture}[remember picture, overlay]
+    \node[anchor=north east, xshift=-10mm, yshift=-75mm] at (current page.north east) {
+        \includegraphics[width=15mm]{proof/so-so-128.png}
+    }; \end{tikzpicture}
+\begin{itemize}
+    \vspace{-0.5cm}
+    \item Erinnere an die Darstellung $h \otimes_p g = \<h,g\>_{\Hil^{\odot p}}$. 
+    \pause
+    \item So erhält man (mit etwas Notationsmissbrauch und Ungenauigkeit) \begin{align*}
+    \norm{h_i \widetilde{\otimes_{r}} h_j}_{d_i + d_j-2r}^2 &\leq  \norm{h_i \otimes_{r} h_j}_{d_i + d_j-2r}^2 = \<\<h_i,h_j\>_{\Hil^{\odot r}}, \<h_i,h_j\>_{\Hil^{\odot r}}\>_{{\Hil^{\odot d_i + d_j - 2r}}} \\ &= \<\<h_i,h_i\>_{\Hil^{\odot d_i-r}}, \<h_j,h_j\>_{\Hil^{\odot d_j-r}}\>_{\Hil^{\odot 2r}} \\ &\leq \norm{\<h_i,h_i\>_{\Hil^{\odot d_i-r}}}_{\Hil^{\otimes 2r}} \norm{\<h_j,h_j\>_{\Hil^{\odot d_j-r}}}_{\Hil^{\otimes 2r}} \\ & \leq 2^{-1}\left(\norm{h_i \otimes_{d_i-r} h_i}_{\Hil^{\otimes 2r}}^2 + \norm{h_j \otimes_{d_j-r} h_j}_{\Hil^{\otimes 2r}}^2 \right)
+    \end{align*}
+\end{itemize}
+\end{proofs}
+\end{frame}
+
+%%%%%%%%%%%%%%% Hier schauen, ob man das nicht direkt mit \ell^2 regelt! %%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Bound für $d_\H(Q_d(N,f,\mathbb{G}), Z)$ -- \textbf{Beweis}}
+    \small
+    \begin{center}
+        \textcolor{orange}{$\delta_2 \leq  \norm{\varphi''}_\infty \sum_{i,j=1}^m \sqrt{C(d_i,d_j) \sum_{r} 2^{-1}\left(\norm{h_i \otimes_{d_i-r} h_i}_{\Hil^{\otimes 2r}}^2 + \norm{h_j \otimes_{d_j-r} h_j}_{\Hil^{\otimes 2r}}^2\right)}$}
+    \end{center}
+    \pause
+    \begin{proof}[Beweis zu unserer Bound (fortg.)]
+        \begin{itemize}
+            \item Erinnere: Operator $*$ ist Kontraktion auf Raum $\ell^2(\N)^{\odot d}$; verträglich mit Skalaprodukt, dementsprechend erhalte $\norm{h_i \otimes_{d_i - r} h_i}_{\Hil^{\odot 2r}} = \norm{f_i *_{d_i-r} f_i}_{2r}.$
+            \item Wir hätten (Hilbertraumisomorphismus!) auch auf anderen $\Hil$ arbeiten können. 
+        \end{itemize}
+        \pause
+        \scriptsize
+        \vspace{-0.4cm}
+        \begin{align*}
+            &\left|\E[\varphi(\mathbf{Q}(\X))] - \E[\varphi(Z)]\right| \leq \norm{\varphi'''}_\infty \cdot D \sqrt{\max_{j=1, \ldots, m}\max_{1 \leq i \leq N} \textcolor{orange}{\mathrm{Inf}_i(f_j)}} \\ &\qquad \qquad + \norm{\varphi''}_\infty \cdot \left(\sum_{i=1}^m \triangle_{ii} + 2 \cdot \sum_{1\leq i < j \leq m} \triangle_{ij}\right)\end{align*}
+            \vspace{-1cm}
+            \begin{align*}
+       & \triangle_{i,j} := \frac{d_j}{\sqrt{2}} \sum_{r = 1}^{d_j -1} (r-1)! \binom{d_i-1}{r-1} \binom{d_j-1}{r-1} \times  \sqrt{(d_i + d_j - 2r)!} \left(\textcolor{orange}{\norm{f_i *_{d_i -r } f_i}_{2r} + \norm{f_j *_{d_j - r}f_j}_{2r}}\right)  \\ & \qquad \qquad + \indicatorset{d_i < d_j} \sqrt{d_j! \binom{d_j}{d_i} \textcolor{orange}{\norm{f_j *_{d_j - d_i} f_j}_{2d_i}}} \end{align*}\end{proof}
+\end{frame}
+
+%% Für später: hinzufügen.
+% \item Mit unserem Hilfslemma zu partieller Integration erhalten wir 
+% %             \begin{align*}
+% % & \E[\frac{\partial \varphi}{\partial x_i}\left(\sqrt{1-t}(I_{d_1}(h_1), \ldots, I_{d_m}(h_m)) + \sqrt{t} Z\right) \frac{1}{2\sqrt{1-t}} I_{d_i}(h_i)] \\  =-& \frac{1}{2} \cdot 1 \cdot \sum_{j=1}^m d_j^{-1}\E[\frac{\partial^2 \varphi}{\partial x_i \partial x_j}(\sqrt{1-t}(I_{d_1}(h_1), \ldots, I_{d_m}(h_m)) + \sqrt{t} Z) \<D I_{d_i}(h_i), D I_{d_j}(h_j)\>_{\Hil}]\end{align*}
+%         \end{itemize}
+%         \[\E[d_j^{-1} \<D(I_{d_i}(h_i)), D(I_{d_j}(h_j))\>_\Hil] = \E[I_{d_i}(h_i)I_{d_j}(h_j)] = \E[Q^{(i)}(\X)Q^{(j)}(\X)] = \Sigma(i,j)\]

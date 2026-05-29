@@ -1,0 +1,224 @@
+\documentclass[11pt, ngerman]{scrartcl}
+\usepackage[utf8]{inputenc}
+
+\usepackage{scrlayer-scrpage}
+\pagestyle{scrheadings}\usepackage{scrlayer-scrpage}
+\pagestyle{scrheadings}
+
+\renewcommand{\headfont}{\normalfont}
+
+\ihead{\small Seminarvortrag}
+ \chead{  \hspace{1,3cm }\small Universalität des homogenen Wiener Chaos}
+ \ohead{\small SoSe 2025}
+ \setheadsepline{.2pt}
+
+
+% \usepackage[notcite,notref]{showkeys}
+\setlength{\parindent}{0cm}
+\usepackage{amsthm}
+\usepackage{amsmath, amssymb, amsfonts}
+\renewcommand{\proofname}{Beweis}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{beispiel}[definition]{Beispiel}
+\newtheorem{bemerkung}[definition]{Bemerkung}
+\newtheorem{Fdefinition}[subsection]{Definition}
+\newtheorem{Aufgabe}{Übung}
+\theoremstyle{plain}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{satz}[definition]{Satz}
+\newtheorem{hauptsatz}[definition]{Hauptsatz}
+\newtheorem{corollar}[definition]{Korollar}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{folgerung}[definition]{Folgerung}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{Axiom}[definition]{Axiom}
+\newtheorem{Abschaetzung}[definition]{Abschätzung}
+
+% Jetzt zu den Abkürzungen
+% alle Mathe-Abkürzungen
+\renewcommand{\epsilon}{\varepsilon} % wichtige Sache
+\newcommand{\loc}[3]{L_{#1}^{#2}(#3)}
+\newcommand{\s}[0]{\mathfrak{s}}
+\newcommand{\m}[0]{\mathfrak{m}}
+\newcommand{\br}[1]{\left(#1\right)}
+\newcommand{\lbr}[1]{\left(#1\right}
+\newcommand{\C}[0]{\mathbb{C}}
+\newcommand{\R}[0]{\mathbb{R}}
+\newcommand{\Q}[0]{\mathbb{Q}}
+\newcommand{\M}[0]{\mathbb{M}}
+\newcommand{\Z}[0]{\mathbb{Z}}
+\newcommand{\N}[0]{\mathbb{N}}
+\newcommand{\X}[0]{\mathbb{X}}
+\newcommand{\F}[0]{\mathcal{F}}
+\newcommand{\Fi}[0]{\mathbb{F}}
+\newcommand{\G}[0]{\mathbb{G}}
+\newcommand{\W}[0]{\mathbb{W}}
+\newcommand{\B}[0]{\mathcal{B}}
+\renewcommand{\H}[0]{\mathcal{H}}
+\newcommand{\dP}[0]{\mathrm{d}P}
+\newcommand{\dPdif}[1]{\mathrm{d}#1}
+\renewcommand{\S}{\textcolor{orange}{\textbf{(S)}}\,}
+\newcommand{\homQG}[2]{Q_{d_{#1}}(N_{#2}^{(#1)}, f_{#2}^{(#1)}, \mathbb{G})}
+\newcommand{\homQGo}[1]{Q_{d_{#1}}(N^{(#1)}, f^{(#1)}, \mathbb{G})}
+\newcommand{\homQXo}[1]{Q_{d_{#1}}(N^{(#1)}, f^{(#1)}, \mathbb{X})}
+\newcommand{\homQX}[2]{Q_{d_{#1}}(N_{#2}^{(#1)}, f_{#2}^{(#1)}, \mathbb{X})}
+\newcommand{\Ch}[1]{\mathcal{H}_{#1}}
+\newcommand{\Pol}[1]{\mathcal{P}_{#1}}
+\newcommand{\Hil}[0]{\mathfrak{h}}
+\usepackage{bbm} %for the indicator
+\newcommand{\indicator}[1]{\mathbbm{1}_{#1}}
+\newcommand{\indicatorset}[1]{\mathbbm{1}_{\{#1\}}}
+\newcommand{\law}[0]{\overset{\mathcal{L}}{=}}
+\newcommand{\normald}[2]{\mathcal{N}\left(#1, #2\right)}
+\newcommand{\E}[1][]{%
+    \operatorname{E}%
+    \ifx\\#1\\\else% Check if optional argument is provided
+        \left[#1\right]%
+    \fi%
+}
+\renewcommand{\P}[1][]{%
+    \operatorname{P}%
+    \ifx\\#1\\\else% Check if optional argument is provided
+        \left(#1\right)%
+    \fi%
+}
+\newcommand{\<}{\langle}
+\renewcommand{\>}{\rangle}
+\newcommand{\Cov}[0]{\operatorname{Cov}}
+\newcommand{\iid}[0]{i.\,i.\,d.\,}
+\renewcommand{\P}[0]{\operatorname{P}}
+\newcommand{\Czi}[0]{\mathcal{C}([0, \infty))}
+\newcommand{\brp}[1]{\langle{}#1\rangle{}}
+
+\newcommand{\norm}[1]{\lVert#1\rVert}
+\usepackage{aligned-overset}
+\newcommand\restr[2]{\ensuremath{\left.#1\right|_{#2}}} % für restr-Abbildung: \restr{f}{A}
+
+
+\begin{document}
+\begin{center}
+
+\vspace{0,25cm}
+
+    \large{\textbf{Universalität des homogenen Wiener Chaos}}\\
+\end{center}
+\vspace{0,25cm}
+\textbf{Struktur des Vortrags}
+\begin{itemize}
+    \item Wir stellen das Setting vor.
+    \item Wir präsentieren das Hauptresultat und was es mit dem Wiener Chaos zu tun hat.
+    \item Wir führen \textbf{Kontraktionen und Einflussindizes} ein -- die \textit{Stars} des Beweises.
+    \item Mithilfe einiger erster Techniken legen wir die Beweisidee dar. 
+    \item Wir können für die Konvergenz mittels Dreiecksungleichung zwei Terme gesondert betrachten. Dies tuen wir dann. 
+    \item Am Ende geben wir skizzenhaft wieder, wie man den Beweis vervollständigt.
+    \end{itemize}
+
+\begin{definition}[Homogene Summen]
+ Sei $\mathbb{X} = (X_n)_{n \in \N}$ eine Folge von unabhängigen zentrierten Zufallsvariablen mit Varianz 1 (mit gewissen Momentannahmen). 
+        Für $d \in \N$ und $f^{(N)}: \{1, \ldots, N\}^d \to \R$ symmetrisch mit $f^{(N)}(i_1, \ldots, i_d) = 0$ falls $i_j = i_k$ für $j \neq k$ definieren wir die homogene Summe
+        \[
+        Q_d(f^{(N)}, N, \mathbb{X}) = \sum_{1 \leq i_1, \ldots, i_d \leq N} f^{(N)}(i_1, \ldots, i_d) X_{i_1} \cdots X_{i_d}.
+        \]
+\end{definition}
+\begin{definition}[$\mathcal{H}$-Abstand und Kolmogorov-Abstand]
+        Sei $\mathcal{H}$ eine Klasse von Funktionen $h: \R^m \to \R$, so definiere
+            $d_{\mathcal{H}}(F, Z) = \sup_{h \in \mathcal{H}} \left|\E[h(F)]- \E[h(Z)]\right|.$
+
+        Der Kolmogorov-Abstand zwischen zwei multivariaten Verteilungen bzw. \textbf{Verteilungsfunktionen} $F$ und $G$ ist gegeben durch $
+        d_{\text{Kol}}(F,G) = \sup_{x \in \R^m} |F(x_1, \ldots, x_m) - G(x_1, \ldots, x_m)|,$
+        also 
+        \[
+            d_{\text{Kol}}(F,G) = d_{\mathcal{H}}(F,G), \mathcal{H} = \{\indicator{(-\infty, x_1]\times \cdots \times (-\infty, x_m]}\}_{x_1, \ldots, x_m \in \R}.
+        \]
+    \end{definition}
+\begin{theorem}[Universalität des Wiener Chaos]
+        Sei $\mathbb{G} = (G_n)_{n \in \N}$ eine Folge von unabhängigen standardnormalverteilten Zufallsvariablen. 
+        Fixiere $m \geq 1$ und $d_1, \ldots, d_m \geq 2$. Sei ferner für jedes $j = 1, \ldots, m \; \{(N_n^{(j)}, f_n^{j})\}_{n \geq 1}$ so, dass $N_n^{(j)} \overset{n \to \infty}{\longrightarrow} \infty$ sei und $f_n^{(j)}: [N_n^{(j)}]^{d_j} \to \R$ auf Diagonalen ($i_k = i_j , j \neq k$) verschwinde. 
+
+        Seien nun für jedes $j = 1, \ldots, m$ die Erwartungswerte $\E[Q_{d_j}(N_n^{(j)}, f_n^{(j)}, \mathbb{G})^2]$ beschränkt. 
+        Sei $\Sigma$ eine positiv semidefinite symmetrische $m\times m$-Matrix mit nicht-verschwindenden Diagonaleinträgen. Nenne dieses Setting \textbf{(S)}.
+
+        Dann sind für $n \to \infty$ äquivalent: 
+        \begin{itemize}
+            \item[(1)] $\left(Q_{d_j}(N_n^{(j)}, f_n^{(j)}, \mathbb{G})\right)_{j=1}^m \Longrightarrow \mathcal{N}(0, \Sigma)$
+            \item[(2)]  Für jede Folge $\mathbb{X} = \{X_i\}_{i \in \N}$ unabhängiger zentrierter Zufallsvariablen mit Varianz 1 so, dass $\sup_{i} \E[|X_i|^3] < \infty$, konvergiert \[
+                \left(Q_{d_j}(N_n^{(j)}, f_n^{(j)}, \mathbb{X})\right)_{j=1}^m \overset{d_{\text{Kol}}}{\longrightarrow} \mathcal{N}(0, \Sigma).
+            \]
+        \end{itemize}
+    \end{theorem}
+\begin{definition}[Kontraktionen und Einflussindizes]
+        Seien $d_1, d_2 \geq 2$ und $N\in \N \cup \{\infty\}$ fixiert und es sei $f: [N]^{d_1} \to \R, g: [N]^{d_2} \to \R$ symmetrische Funktionen, die auf Diagonalen verschwinden. 
+        Definiere für jedes $r = 0, \ldots, d_1 \wedge d_2$ die Kontraktion $f *_r g: [N]^{d_1 + d_2 - 2r} \to \R$ durch \begin{align*}
+        f *_r& g(i_1, \ldots,  i_{d_1 + d_2 - 2r}) = \\ &\sum_{1 \leq a_1, \ldots, a_r \leq N} f(a_{1}, \ldots, a_r, i_1, \ldots, i_{d_1 -r}) g(a_1, \ldots, a_r, i_{d_1 - r +1}, \ldots, i_{d_1 + d_2 - 2r}).
+        \end{align*}
+        Definiere ferner $\norm{f}_d^2 := \sum_{1 \leq i_1, \ldots, i_d \leq N} f^2(i_1, \ldots, i_d)$.
+        Der $i$te Einflussindex von $f$ ist gegeben durch \[
+        \text{Inf}_i(f) = \sum_{\{i_2, \ldots, i_d\} \subset [N]^{d-1}} f^2(i, i_2, \ldots, i_d) = (d-1)!^{-1} \sum_{1 \leq i_2, \ldots, i_d \leq N} f^2(i, i_2 \ldots, i_d).
+        \]
+    \end{definition}
+\begin{definition}[Wiener-Chaos-Notation]
+    Sei $(\Hil, \<\cdot, \cdot\>_{\Hil})$ ein separabler Hilbertraum und $\{e_i\}_{i \in \N}$ eine Orthonormalbasis von $\Hil$. Es bezeichnen $\Hil^{\otimes k}$ und $\Hil^{\odot k}$ das $k$-fache (resp. $k$-fache symmetrische) Tensorprodukt von $\Hil$. 
+    Es bezeichne $\zeta$ einen isonormalen gaußschen Prozess auf $\Hil$. 
+    Mit $I_k(h)$ bezeichne für $h \in \Hil^{\otimes k}$ $k$-faches Wiener-Integral bezüglich $\zeta$ und definiere \[\Ch{k} = \{I_k(h)\}_{h \in \Hil^{\otimes k}}, \Pol{k} = \overline{\<\{\text{Polynome von Grad } \leq k \text{ in } \zeta h\}\>}\]
+    \end{definition}
+    \begin{itemize}
+        \item Verbindung zu unserem Setting: Für $e_1, \ldots, e_k$ orthonormal gilt \[I_k(e_1 \otimes \ldots \otimes e_k) = I_1(e_1) \cdots I_1(e_k). 
+        \]
+        \[
+        h = \sum_{1 \leq i_1, \ldots, i_d \leq N} f(i_1, \ldots, i_d) e_{i_1} \otimes \cdots \otimes e_{i_d} \in \Hil^{\odot d}
+        \] rechtfertigt somit $Q_d(N,f,\mathbb{G}) = I_d(h)$.
+    \end{itemize}
+
+\begin{Abschaetzung}
+    \begin{align*}
+        &\norm{f_n^{(j)} *_{d_j -1 } f_n^{(j)}}_{2}^2  \geq  
+         \sum_{1 \leq i \leq N} \left[\sum_{1 \leq i_2, \ldots, i_d \leq N} (f_n^{(j)})^2(i, i_2, \ldots, i_d)\right]^2 \\ & \qquad \geq \max_{i = 1, \ldots, N} \left[\sum_{1 \leq i_2, \ldots, i_d \leq N} (f_n^{(j)})^2(i, i_2, \ldots, i_d)\right]^2 \geq \max_{i = 1, \ldots, N}  \left[(d-1)! \text{Inf}_i(f_n^{(j)}) \right]^2
+        \end{align*}
+\end{Abschaetzung}
+\begin{satz}[Abstand von Chaos und verrauschter homogener Summe]
+       Seien $\mathbb{X}, \mathbb{G}$ wie immer, fixiere $m \geq 1; d_m \geq \cdots \geq d_1 \geq 2; N_1, \ldots, N_m \geq 1$ und $f_j: [N_j]^{d_j} \to \R$ seien symmetrisch und 0 auf Diagonalen. 
+       Setze $\E[\homQGo{j}^2] = 1$ (und somit $\E[\homQXo{j}^2] =1$) für alle $j = 1, \ldots, m$ voraus.
+        Nimm ferner an, es gibt ein $C > 0$ derart, dass $\sum_{i=1}^{\max_{j}N_j} \max_{1 \leq j \leq m} \mathrm{Inf}_i(f_j) \leq C.$ Dann gilt für all dreifach differenzierbaren $\varphi: \R^m \to \R$ mit $\norm{\varphi'''}_\infty < \infty$ und $\varphi, \varphi', \varphi'' \in L^2(P^{\mathbf{Q}(\Tilde{\mathbb{X}})})$ für alle $\Tilde{\mathbb{X}}$, dass \begin{align*}
+        &\left|\E[\varphi(Q^{(1)}(\mathbb{X}), \ldots, Q^{(m)}(\mathbb{X}))] - \E[\varphi(Q^{(1)}(\mathbb{G}), \ldots, Q^{(m)}(\mathbb{G}))]\right| \\ \leq &  C \cdot \norm{\varphi'''}_\infty \left(\beta + \sqrt{\frac{8}{\pi}}\right)  \times \left[\sum_{j=1}^m (16 \sqrt{2} \beta)^{\frac{d_j-1}{3}} d_j!\right]^3 \sqrt{\max_{j=1, \ldots, m}\max_{1 \leq i \leq N} \mathrm{Inf}_i(f_j)}.
+        \end{align*}
+        Dabei ist $\beta := \sup_{i \in \N} \E[|X_i|^3] <\infty$ und $\norm{\varphi'''}_{\infty} := \max_{|\alpha| = 3} \sup_{x \in \R^m} |\partial^\alpha \varphi(x)|$, $\norm{\varphi'}_2, \norm{\varphi''}_2$ analog
+         ($\alpha \in \N^{m}$) \end{satz}
+
+\begin{definition}[Wesentliche Bestandteile des Beweises]
+  \[
+        \mathbb{Z}^{(i)} = \left(G_1, \ldots, G_i, X_{i+1}, \ldots, X_{\max_j N_j}\right).\]
+  \begin{align*}
+        U_j^{(i)} &:= \sum_{\substack{1 \leq i_1, \ldots, i_{d_j} \leq N_j \\ \forall k: i_k \neq i}} f_j(i_1, \ldots, i_{d_j}) Z_{i_1}^{(i)} \cdots Z_{d_j}^{(i)} \text{ für } j = 1, \ldots, m\\
+        V_j^{(i)} &:= \sum_{\substack{1 \leq i_1, \ldots, i_{d_j} \leq N_j \\ \exists k: i_k = i}} f_j(i_1, \ldots, i_{d_j}) Z_{i_1}^{(i)} \cdots \widehat{Z_{i_{k}}^{(i)}} \cdots Z_{i_d}^{(i)} \text{ für } j = 1, \ldots, m
+    \end{align*}
+\end{definition}
+\begin{itemize}
+  \item Zentraler Punkt: Wegen Zentriertheit, Unabhängigkeit und Normierheit \begin{align*}\E[(V_j^{(i)})^2] &= \sum_{\substack{1 \leq i_1, \ldots, i_{d_j} \leq N_j \\ \exists k: i_k = i}} f_j(i_1, \ldots, i_{d_j})^2 \E[(Z_{i_1}^{(i)})^2] \cdots \widehat{1}_{(i)} \cdots \E[(Z_{i_d}^{(i)})^2] \\ &= \sum_{\substack{1 \leq i_1, \ldots, i_{d_j} \leq N_j \\ \exists k: i_k = i}} f_j(i_1, \ldots, i_{d_j})^2 = d_j! \mathrm{Inf}_i(f_j) \end{align*} 
+\end{itemize}
+
+ \begin{satz}{Abstand von verrauschter Summe und der Normalverteilung}
+        Wir befinden uns im Setting des vorherigen Satzes und nehmen zusätzlich an, dass $Z \sim \mathcal{N}(0, \Sigma)$, wobei $\Sigma$ wie zuvor -- und gleichzeitig noch die Kovarianzmatrix von $\mathbf{Q}(\mathbb{G})$ -- sei.
+        Dann gilt für alle $\varphi: \R^m \to \R$ mit $\norm{\varphi'''}_\infty, \norm{\varphi''}_\infty < \infty$ und $\varphi, \varphi', \in L^2(P^{\mathbf{Q}(\Tilde{\mathbb{X}})})$ für alle $\Tilde{\mathbb{X}}$, dass  (für $D = D(\beta, \max_j d_j, m)$ von vorher)
+        \vspace{-0.4cm}
+        \begin{align*}
+            &\left|\E[\varphi(\mathbf{Q}(\X))] - \E[\varphi(Z)]\right| \leq \norm{\varphi'''}_\infty \cdot D \sqrt{\max_{j=1, \ldots, m}\max_{1 \leq i \leq N} \mathrm{Inf}_i(f_j)} \\ &\qquad \qquad + \norm{\varphi''}_\infty \cdot \left(\sum_{i=1}^m \triangle_{ii} + 2 \cdot \sum_{1\leq i < j \leq m} \triangle_{ij}\right)\text{, wobei } \\
+       & \triangle_{i,j} := \frac{d_j}{\sqrt{2}} \sum_{r = 1}^{d_j -1} (r-1)! \binom{d_i-1}{r-1} \binom{d_j-1}{r-1} \\ & \qquad \qquad \times  \sqrt{(d_i + d_j - 2r)!} \left(\norm{f_i *_{d_i -r } f_i}_{2r} + \norm{f_j *_{d_j - r}f_j}_{2r}\right) \\ & \qquad \qquad \qquad \qquad \qquad + \indicatorset{d_i < d_j} \sqrt{d_j! \binom{d_j}{d_i} \norm{f_j *_{d_j - d_i} f_j}_{2d_i}} \end{align*}
+    \end{satz}
+
+    \begin{definition}[Kontraktionen in symmetrischen Tensorprodukten]
+            Sei $\Hil$ ein separabler Hilbertraum und $\{e_i\}_{i \in \N}$ eine Orthonormalbasis von $\Hil$. Dann definiere für $h = \sum_{i_1, \ldots, i_d} a(i_1, \ldots, i_d) e_{i_1} \otimes \cdots \otimes e_{i_d} \in \Hil^{\odot d_1}$ und und $g = \sum_{i_1, \ldots, i_d} b(i_1, \ldots, i_d) e_{i_1} \otimes \cdots \otimes e_{i_d} \in \Hil^{\odot d_2}$ für $p \in \{1, \ldots, d_1 \wedge d_2\}$ die $p$te Kontraktion $h \otimes_p g \in \Hil^{d_1 + d_2 - 2p}$  als \[
+            h \otimes_p g := \sum_{\substack{i_1, \ldots, i_{d_1 - p} \\ j_1, \ldots, j_{d_2 - p}}} a *_p b(i_1, \ldots, j_{d_2 - p}) e_{i_1} \otimes \cdots \otimes e_{i_{d_1 - p}} \otimes e_{j_1} \otimes \cdots \otimes e_{j_{d_2 - p}}.
+            \]
+            \begin{itemize}
+            % \item Beachte: Man kann schreiben \begin{align*}
+            %  &h \otimes_p g = \<h,g\>_{\Hil^{\odot p}}  \\ &= \sum_{\substack{i_1, \ldots, i_{d_1 - p} \\ j_1, \ldots, j_{d_2 - p}}} \big\<\sum_{i_{d_1-p+1, \ldots, i_{d_1}}} a(i_{1}, \ldots, i_{d_1}) e_{i_{d_1-p+1}} \otimes \cdots \otimes e_{i_{d_1}} ,  \\ &  \sum_{i_{j_{d_2-p+1}, \ldots, j_{d_2}}} b(j_{1}, \ldots, j_{d_2}) e_{j_{d_2-p+1}} \otimes \cdots \otimes e_{i_{d_2}}\big\>_{\Hil^{\odot p}} e_{i_1} \otimes \cdots \otimes e_{i_{d_1 - p}} \otimes e_{j_1} \otimes \cdots \otimes e_{j_{d_2 - p}}.
+            % \end{align*}
+            \item Insbesondere für $\{e_i\} \subset \ell^2(\N)$ gegeben durch $e_i(n) = \delta_{i,n}$ (Kronecker-Delta) haben wir gerade \[f *_r g = f \otimes_r g \in \ell^2(\N)^{\otimes d_1 + d_2 - 2r}.\]
+            \end{itemize}
+        \end{definition}
+        
+  \begin{satz}[Multiplikationsformel für Wienersche Mehrfachintegrale]
+    Seien $f \in \Hil^{\odot p}, g \in \Hil^{\odot q}$. Dann gilt $I_p(f)I_q(g) = \sum_{r=0}^{p \wedge q} r! \binom{p}{r}\binom{q}{r}I_{p+q-2r}(f \otimes_r g)$.
+  \end{satz}
+\end{document}

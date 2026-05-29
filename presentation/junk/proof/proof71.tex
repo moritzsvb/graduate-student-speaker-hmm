@@ -1,0 +1,123 @@
+\section{Abstand von Chaos und verrauschter homogener Summe}
+\begin{frame}{Zu  $d_\H(Q_d(N,f,\mathbb{G}), Q_d(N,f,\mathbb{X}))$}
+    \begin{satzblockname}{Abstand von Chaos und verrauschter homogener Summe}
+       Seien $\mathbb{X}, \mathbb{G}$ wie immer, fixiere $m \geq 1; d_m \geq \cdots \geq d_1 \geq 2; N_1, \ldots, N_m \geq 1$ und $f_j: [N_j]^{d_j} \to \R$ seien symmetrisch und 0 auf Diagonalen. 
+       Setze $\E[\homQGo{j}^2] = 1$ (und somit $\E[\homQXo{j}^2] =1$) für alle $j = 1, \ldots, m$ voraus.
+        Nimm ferner an, es gibt ein $C > 0$ derart, dass $\textcolor{orange}{\sum_{i=1}^{\max_{j}N_j} \max_{1 \leq j \leq m} \mathrm{Inf}_i(f_j) \leq C.}$ \pause Dann gilt für all \textcolor{orange}{dreifach differenzierbaren} $\varphi: \R^m \to \R$ mit $\norm{\varphi'''}_\infty < \infty$ und $\varphi, \varphi', \varphi'' \in L^2(P^{\mathbf{Q}(\Tilde{\mathbb{X}})})$ für alle $\Tilde{\mathbb{X}}$, dass \begin{align*}
+        &\left|\E[\varphi(Q^{(1)}(\mathbb{X}), \ldots, Q^{(m)}(\mathbb{X}))] - \E[\varphi(Q^{(1)}(\mathbb{G}), \ldots, Q^{(m)}(\mathbb{G}))]\right| \\ \leq &  C \cdot \norm{\varphi'''}_\infty \left(\beta + \sqrt{\frac{8}{\pi}}\right)  \times \left[\sum_{j=1}^m (16 \sqrt{2} \beta)^{\frac{d_j-1}{3}} d_j!\right]^3 \sqrt{\max_{j=1, \ldots, m}\max_{1 \leq i \leq N} \textcolor{orange}{\mathrm{Inf}_i(f_j)}}.
+        \end{align*}
+        Dabei ist $\beta := \sup_{i \in \N} \E[|X_i|^3] <\infty$ und $\norm{\varphi'''}_{\infty} := \max_{|\alpha| = 3} \sup_{x \in \R^m} |\partial^\alpha \varphi(x)|$, $\norm{\varphi'}_2, \norm{\varphi''}_2$ analog
+         ($\alpha \in \N^{m}$) \end{satzblockname}
+\end{frame}
+
+\begin{frame}{Bound für  $d_\H(Q_d(N,f,\mathbb{G}), Q_d(N,f,\mathbb{X}))$ -- \textbf{Beweis}}
+    \small
+\begin{proofs}
+    \begin{itemize}
+        \item Ohne Einschränkung $\G$ und $\X$ unabhängig.
+        \item Werden auf die folgende Art und Weise abkürzen: $Q^j(\mathbb{X}) = Q_{d_j}(N_{j}, f_j, \mathbb{X})$, außerdem $\mathbf{Q(\mathbb{X})} := (Q^1(\mathbb{X}), \ldots, Q^m(\mathbb{X}))$ (und für andere Familien $\mathbb{G}, \mathbb{Z}$ analog).
+        \pause
+        \item Genügt, endliche Familien \[\mathbb{X} = \left(X_1, \ldots, X_{\max_{j = 1, \ldots, m}N_j}\right), \mathbb{G} = \left(G_1, \ldots, G_{\max_{j = 1, \ldots, m}N_j}\right)\] zu betrachten. 
+        \item Definiere für $i = 1, \ldots, \max_jN_j$ die Ensembles \[
+        \mathbb{Z}^{(i)} = \left(G_1, \ldots, G_i, X_{i+1}, \ldots, X_{\max_j N_j}\right).\]
+        \pause
+        \vspace{-1cm}
+        \item Jetzt natürlich \[
+        \left|\E[\varphi(\mathbf{Q(\mathbb{X})})] - \E[\varphi(\mathbf{Q(\mathbb{G})})]\right| \leq \sum_{i=1}^{\max_j N_j} \left|\E[\varphi(\mathbf{Q}(\mathbb{Z}^{(i-1)}))] - \E[\varphi(\mathbf{Q}(\mathbb{Z}^{(i)}))]\right|
+        \]
+    \end{itemize}  
+\end{proofs}
+\end{frame}
+
+\begin{frame}{Bound für $d_\H(Q_d(N,f,\mathbb{G}), Q_d(N,f,\mathbb{X}))$ -- \textbf{Beweis}}
+    \begin{center}
+    \textcolor{orange}{$\mathbb{Z}^{(i)} = \left(G_1, \ldots, G_i, X_{i+1}, \ldots, X_{\max_j N_j}\right)$}
+    \end{center}
+\begin{proofs}[Beweis (fortg.)]
+    \begin{itemize}
+    \item Definiere $\mathbb{V}^{(i)}, \mathbb{U}^{(i)}$ über die folgenden beiden Summen
+    \small \begin{align*}
+        U_j^{(i)} &:= \sum_{\substack{1 \leq i_1, \ldots, i_{d_j} \leq N_j \\ \forall k: i_k \neq i}} f_j(i_1, \ldots, i_{d_j}) Z_{i_1}^{(i)} \cdots Z_{d_j}^{(i)} \text{ für } j = 1, \ldots, m\\
+        V_j^{(i)} &:= \sum_{\substack{1 \leq i_1, \ldots, i_{d_j} \leq N_j \\ \exists k: i_k = i}} f_j(i_1, \ldots, i_{d_j}) Z_{i_1}^{(i)} \cdots \textcolor{orange}{\widehat{Z_{i_{k}}^{(i)}}} \cdots Z_{i_d}^{(i)} \text{ für } j = 1, \ldots, m
+    \end{align*}
+    \normalsize
+    \pause
+    \item Dann schreibe \small \begin{align*}
+    &\left|\E[\varphi(\mathbf{Q}(\mathbb{Z}^{(i-1)}))] - \E[\varphi(\mathbf{Q}(\mathbb{Z}^{(i)}))]\right| \\ & \qquad \qquad \qquad \qquad = \left|\E[\varphi(\mathbb{U}^{(i)} + X_i\mathbb{V}^{(i)})] - \E[\varphi(\mathbb{U}^{(i)} + G_i\mathbb{V}^{(i)})]\right| 
+    \end{align*}
+    \end{itemize}
+\end{proofs}
+\end{frame}
+
+\begin{frame}{Bound für $d_\H(Q_d(N,f,\mathbb{G}), Q_d(N,f,\mathbb{X}))$ -- \textbf{Beweis}}
+    \begin{proofs}[Beweis (fortg.)]
+        \begin{itemize}
+        \item Machen also jetzt Taylorentwicklung dritter Ordnung: Für $\alpha \in \N^m$ Multiindizes gilt
+        \begin{align*}
+        \left|\varphi(x + y) - \sum_{|\alpha| < 3} \frac{\varphi^{(\alpha)}(x)}{\alpha!} y^\alpha\right| \leq \sum_{|\alpha| = 3} \frac{\norm{\varphi^{(\alpha)}}_\infty}{\alpha!} |y|^\alpha
+        \end{align*}
+        \pause
+        \item Mit der von uns angenommenen Unabhängigkeit, $\varphi', \varphi'' \in L^2(P^{\mathbb{U}^{(i)}})$ und $\E[X_i^k] = \E[G_j^k]$ (für $k = 1,2$)  folgt für $x = \mathbb{U}^{(i)}$  und $y = X_i\mathbb{V}^{(i)},G_i\mathbb{V}^{(i)}$ \[
+        \E[\sum_{|\alpha| < 3} \frac{\varphi^{(\alpha)}(\mathbb{U}^{\textcolor{orange}{(i)}})}{\alpha!} (\textcolor{orange}{X_i} \mathbb{V}^{\textcolor{orange}{(i)}})^{\alpha}] = \E[\sum_{|\alpha| < 3} \frac{\varphi^{(\alpha)}(\mathbb{U}^{\textcolor{orange}{(i)}})}{\alpha!} (\textcolor{orange}{G_i} \mathbb{V}^{\textcolor{orange}{(i)}})^{\alpha}]
+        \]
+        \end{itemize}
+    \end{proofs}
+\end{frame}
+
+\begin{frame}{Bound für $d_\H(Q_d(N,f,\mathbb{G}), Q_d(N,f,\mathbb{X}))$ -- \textbf{Beweis}}
+   
+    \begin{proofs}[Beweis (fortg.)]
+        \small
+        \begin{itemize}
+        \item Damit schreibe \begin{align*}
+        & \left|\E[\varphi(\mathbb{U}^{(i)} + X_i \mathbb{V}^{(i)}) - \varphi(\mathbb{U}^{(i)} + G_i \mathbb{V}^{(i)})]\right| \\ & \qquad \leq \E[\left|\varphi(\mathbb{U}^{(i)} + X_i \mathbb{V}^{(i)}) - \sum_{|\alpha| < 3} \frac{\varphi^{(\alpha)}(\mathbb{U}^{(i)})}{\alpha!} (X_i \mathbb{V}^{(i)})^{\alpha}\right|] \\ & \qquad \qquad +  \E[\left|\varphi(\mathbb{U}^{(i)} + G_i \mathbb{V}^{(i)}) - \sum_{|\alpha| < 3} \frac{\varphi^{(\alpha)}(\mathbb{U}^{(i)})}{\alpha!} (G_i \mathbb{V}^{(i)})^{\alpha}\right|] \\ & \qquad \leq \sum_{|\alpha| = 3}\frac{\norm{\varphi'''}_\infty}{\alpha!}\left(\E[|X_i\mathbb{V}^{(i)}|^\alpha] + \E[|G_i\mathbb{V}^{(i)}|^\alpha]\right) \\ 
+        & \qquad \leq \left(\beta + \sqrt{\frac{8}{\pi}} \right) \norm{\varphi'''}_\infty \sum_{|\alpha| = 3} \E[|\mathbb{V}^{(i)}|^\alpha] \text{ (wegen Unabhängigkeit).}\\
+        \end{align*} 
+        \end{itemize}
+    \end{proofs}
+\end{frame}
+
+%% jetzt Pointe mit Influenz indices
+%% Ist die Konstante richtig?
+
+\begin{frame}{Bound für $d_\H(Q_d(N,f,\mathbb{G}), Q_d(N,f,\mathbb{X}))$ -- \textbf{Beweis}}
+   \small
+    \begin{proofs}[Beweis (fortg.)]
+        \begin{itemize}
+        \item Schätze nun weiter ab: \begin{align*}
+            \sum_{|\alpha| = 3} \E[|\mathbb{V}^{(i)}|^\alpha] &= \sum_{r,j,k=1}^m \E[|V_r^{(i)}V_j^{(i)}V_k^{(i)}|] \\ \text{(Hölder } p=3, q = \frac{3}{2} \text{ und CS)} &\leq \sum_{r,j,k=1}^m \E[|V_r^{(i)}|^3]^{\frac{1}{3}}\E[|V_j^{(i)}|^3]^{\frac{1}{3}} \E[|V_k^{(i)}|^3]^{\frac{1}{3}} \\ & = \left(\sum_{j=1}^m \E[|V_j^{(i)}|^3]^\frac{1}{3}\right)^3
+        \end{align*}
+        \pause
+        \item Nun wieder so etwas wie Hyperkontraktivität! \textbf{Fakt:} Man kann Hyperkontraktivitätskonstante so wählen, dass \[\E[|V_{j}^{(i)}|^3] \leq (16 \sqrt{2}\textcolor{orange}{\beta})^{d_j-1} \E[(V_j^{(i)})^2]^\frac{3}{2}\]
+        \end{itemize}
+    \end{proofs}
+\end{frame}
+
+\begin{frame}{Bound für $d_\H(Q_d(N,f,\mathbb{G}), Q_d(N,f,\mathbb{X}))$ -- \textbf{Beweis}}
+   \small
+   \textcolor{orange}{
+   \textbf{Fakt:} Man kann \textit{Hyperkontraktivitäts}konstante so wählen, dass \[\E[|V_{j}^{(i)}|^3] \leq (16 \sqrt{2}\beta)^{d_j-1} \E[(V_j^{(i)})^2]^\frac{3}{2}\]}
+    \begin{proofs}[Beweis (fortg.)]
+        \begin{itemize}
+        \item Nun ein Highlight! Wegen Zentriertheit, Unabhängigkeit und Normierheit \begin{align*}\E[(V_j^{(i)})^2] &= \sum_{\substack{1 \leq i_1, \ldots, i_{d_j} \leq N_j \\ \exists k: i_k = i}} f_j(i_1, \ldots, i_{d_j})^2 \E[(Z_{i_1}^{(i)})^2] \cdots \textcolor{orange}{\widehat{1}_{(i)}} \cdots \E[(Z_{i_d}^{(i)})^2] \\ &= \sum_{\substack{1 \leq i_1, \ldots, i_{d_j} \leq N_j \\ \exists k: i_k = i}} f_j(i_1, \ldots, i_{d_j})^2 = d_j! \mathrm{Inf}_i(f_j) \end{align*} 
+        \pause
+        \item Damit gilt: $
+            \left(\sum_{j=1}^m \E[|V_j^{(i)}|^3]^\frac{1}{3}\right)^3 \leq \left[\sum_{j=1}^m (16 \sqrt{2}\beta)^{\frac{d_j-1}{3}} d_j!\right]^3 \max_{j=1}^m \mathrm{Inf}_i(f_j)^{\frac{3}{2}}.$
+        \end{itemize}
+    \end{proofs}
+\end{frame}
+
+\begin{frame}{Bound für $d_\H(Q_d(N,f,\mathbb{G}), Q_d(N,f,\mathbb{X}))$ -- \textbf{Beweis}}
+   \small
+    \begin{proof}[Beweis (fortg.)]
+        \begin{itemize}
+        \item Definiere $\tau_i := \max_{j = 1, \ldots, m} \mathrm{Inf}_i(f_j)$ Nach Voraussetzung \vspace{-0.3cm}\[\sum_{i=1}^{\max_j N_j} \tau_i^\frac{3}{2} \leq \max_{i = 1, \ldots, \max_j N_j} \tau_i^\frac{1}{2} \sum_{i=1}^{\max_j N_j} \tau_i \leq \max_{j = 1, \ldots, m}\tau_i^\frac{1}{2} \cdot C \]
+        \pause
+        \vspace{-0.4cm}
+        \item Können nun alles zusammensetzen: \end{itemize}\vspace{-0.2cm}\begin{align*}
+             &\left|\E[\varphi(\mathbf{Q(\mathbb{X})})] - \E[\varphi(\mathbf{Q(\mathbb{G})})]\right| \leq \sum_{i=1}^{\max_j N_j} \left|\E[\varphi(\mathbf{Q}(\mathbb{Z}^{(i-1)}))] - \E[\varphi(\mathbf{Q}(\mathbb{Z}^{(i)}))]\right| \\ & \qquad \leq  \norm{\varphi'''}_\infty \left(\beta + \sqrt{\frac{8}{\pi}}\right) \sum_{i=1}^{\max_j N_j}  \left[\sum_{j=1}^m (16 \sqrt{2}\beta)^{\frac{d_j-1}{3}} d_j!\right]^3 \max_{j=1, \ldots,m} \mathrm{Inf}_i(f_j)^{\frac{3}{2}} \\ & \qquad \leq C \cdot \norm{\varphi'''}_\infty \left(\beta + \sqrt{\frac{8}{\pi}}\right) \left[\sum_{j=1}^m (16 \sqrt{2} \beta)^{\frac{d_j-1}{3}} d_j!\right]^3 \times \sqrt{\max_{j=1, \ldots, m}\max_{1 \leq i \leq N} \mathrm{Inf}_i(f_j)}.
+        \end{align*}\end{proof}
+\end{frame}
+
+
+

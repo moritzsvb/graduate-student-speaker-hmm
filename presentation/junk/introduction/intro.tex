@@ -1,0 +1,66 @@
+\section{Es geht los}
+
+\begin{frame}{Worum geht es?}
+    \begin{itemize}
+    \item Haben eine Folge $\mathbb{X} = (X_n)_{n \in \N}$ von unabhängigen zentrierten Zufallsvariablen mit Varianz 1 (mit gewissen Momentannahmen).  
+    \item Interessiert an folgenden homogenen Summen: \[
+    Q_d(f^{(N)}, N, \mathbb{X}) = \sum_{1 \leq i_1, \ldots, i_d \leq  N} f^{(N)}(i_1, \ldots, i_d) X_{i_1} \cdots X_{i_d}\]
+    für symmetrische $f: \{1, \ldots, N\}^d \to \R$; $f^{(N)}(i_1, \ldots, i_d) = 0$ falls $i_j = i_k$ für $j \neq k$.
+    \pause
+    \item Was passiert in Verteilung, falls $N \to \infty$? 
+    \item Im Prinzip einiges möglich: $\chi^2$-Verteilung, Normalverteilung, womöglich noch mehr...
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Worum geht es?}
+    \begin{itemize}
+        \item Es genügt jedoch, ein wesentlich einfacheres Objekt zu betrachten: \[
+        Q_d(f^{(N)}, N, \mathbb{G}) = \sum_{1 \leq i_1, \ldots, i_d \leq  N} f^{(N)}(i_1, \ldots, i_d) G_{i_1} \cdots G_{i_d}\]
+        für $G_1, G_2, \ldots$ unabhängige standardnormalverteilte Zufallsvariablen.
+        \pause
+        \item Verhält sich asymptotisch unter geeigneten Annahmen genauso.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Warum ist das interessant?}
+    \begin{itemize}
+        \item Grundsätzlich möglich, bestimmte Bilinearformen abzudecken, und potentielle Anwendungen auf Spektralstatistiken
+        \pause
+        \item Wir können somit mithilfe des Wiener Chaos andere Chaos-Objekte besser verstehen. Wiener Chaos selbst gut verstanden.
+%         \pause
+% \begin{satzblockname}{Poisson-Chaos}
+%     Für den kompensierten Poisson-Prozess $M_n := P_{\lambda,t} - \lambda t$ mit Intensität $\lambda$ definieren wir \[
+%     I_n(f_n) = n! \int_0^\infty \int_0^{t_n} \cdots \int_0^{t_2} f_n(t_1, \ldots, t_n) dM_{t_1} \cdots dM_{t_n}.
+%     \]
+%     Der von $\{I_k(f_1 \otimes \cdots \otimes f_k) : f_i \in \mathcal{C}_c^\infty(\R_+)\}$ erzeugte Vektorraum entspricht den Polynomen vom Grad $\leq n$ 
+%     in $I_1(f), f \in C_c^\infty(\R_+)$.
+% \end{satzblockname}
+        % \item Zum Beispiel wichtig für $U$-Statistiken-Theorie.
+        % \item $U$-Statistiken: \[
+        % f(X_1, \ldots, X_n) = \frac{1}{\binom{n}{d}} \sum_{1 \leq i_1 \neq \ldots \neq i_d \leq n} f(X_{i_1} \cdots X_{i_d})\]
+        % \item Elementares Beispiel für $d=2$ wäre \[
+        % 2 \cdot \binom{n}{2}^{-1}\sum_{1 \leq i_1 < i_2\leq N} X_{i_1} X_{i_2}
+        % \]
+        % \pause
+        % \item Falls lineare Terme dabei, asymptotisch eine Normalverteilung.
+        % \item In unserem Fall: "degenerierte" $U$-Statistik, da $f^{(N)}$ keine linearen Terme enthält.
+    \end{itemize}
+\end{frame}
+% \begin{frame}{Wo ist das einzuordnen?}
+% \begin{itemize}
+%     \item Für $U$-Statistiken der Form \[
+%     \sum_{1 \leq i_1 < \ldots < i_d \leq N} f(X_1, \ldots X_{i_d}); X_i \text{ i.i.d.}\] 
+%     und $f$ mit $\E[f(X_1, x_2, \ldots, x_n)] = 0$ f.s. ist Asymptotik bereits gut verstanden (präsentiert in \cite{ghs})
+%     \pause
+%     \item \textit{Unsere} Resultate (aus \cite{homsums}) liefern explizite bounds für Verteilungsabstände, genauer für\[
+%     d_{\mathcal{H}}(F, Z) = \sup_{h \in \mathcal{H}} \left|\E[h(F)]- \E[h(Z)]\right|
+%     \] und wir betrachten allgemeinere Klassen von $f^{(N)}$ und $X_n$.
+% \end{itemize}
+% \end{frame}
+\begin{frame}{Fahrplan}
+    \begin{itemize}
+        \item Präsentation des Hauptresultates 
+        \item Kontraktionen, Einflussindizes und die Beweisstrategie 
+        \item Beweis des Hauptresultates
+    \end{itemize}
+\end{frame}

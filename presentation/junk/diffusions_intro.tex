@@ -1,0 +1,182 @@
+\section{Es geht los}
+
+\begin{frame}{Worum geht es?}
+    \begin{itemize}
+    \item Modellieren \textbf{zeitstetigen zufälligen Zusammenhang} durch $X = (X_t)_{t \geq 0}$ und sind für bestimmte messbare $f$ zunächst an Statistiken der Form \[T_tf(X) = t^{-1}\int_0^t f(X_t) dt\] interessiert
+    \pause
+    \begin{itemize}
+        \item So etwas wie $f(x) = \indicatorset{y_1 \leq x\leq y}(x)$ liefert etwa prozentualen Aufenthalt eines Teilchens in $[y_1, y_2]$ 
+    \end{itemize}
+    \pause
+    \item In unserem Vortrag: $X$ \textbf{Diffusion}
+    \item Unter welchen Voraussetzungen \textbf{schwache Konvergenz} des entsprechenden kontinuierlichen \textbf{empirischen Prozesses}?
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Der Fahrplan}
+\textbf{Erster Vortrag} \normalsize
+\begin{itemize}
+    \item Crashkurs Diffusionen
+    \item Vorstellung des Hauptresultates
+    \item Vorbereitungen für den Beweis des Hauptresultats
+    \begin{itemize}
+        \item Technik der majorisierenden Maße
+        \item Grenzwertsätze für die Lokalzeit
+    \end{itemize}
+\end{itemize}    
+\textbf{Zweiter Vortrag} \normalsize
+\begin{itemize}
+    \item Beweis des Hauptresultates
+    \item Vorstellung von Anwendungen
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%% 1. Teil %%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Diffusionen}
+
+\begin{frame}{Das kanonische Setting}
+    \begin{itemize}
+        \item Sei $I \subset \R$ ein Intervall. 
+        Wir befinden uns im sogenannten \textbf{kanonischen Setup}, dem Produktraum $\br{\mathcal{C}([0, \infty), I), \F := \sigma(X_t: t \geq 0), \Fi}$, wobei \[\Fi^0 := \{\F_t^0 := \sigma(X_r: r \leq t)\}_{t \geq 0}, \;\;\; \Fi := \{\F_t := \F_{t+}^0\}_{t \geq 0}.\] Dabei $X$ Koordinatenprozess. Natürlich adaptiert.
+    \item Haben ab jetzt eine Familie von Maßen $\{P_x\}_{x \in I}$ derart gegeben, dass 
+    \begin{itemize}
+        \item $P_x(X_0 = x) = 1$ für jedes $x \in I$.
+        \item für jedes $G \in \F$ ist $x \mapsto P_x(G)$ Borel-messbar
+    \end{itemize}
+    \end{itemize}
+\end{frame}
+% \begin{frame}{Die starke Markoveigenschaft}
+%     \begin{block}{$\sigma\text{-Algebra der } \tau\text{-Vergangenheit}$}
+%     Für beliebige Stoppzeiten $\tau$ definieren wir die $\sigma\text{-Algebra der } \tau\text{-Vergangenheit}$ als \[\F_\tau := \{A \in \F: A \cap \{\tau \leq s\} \in \F_s \text{ für alle } s \geq 0\}\]
+%     \end{block}
+% \begin{itemize}
+%     \item Das ist eine $\sigma$-Algebra und $X_\tau$ ist in unserem Fall stets $\mathcal{F}_\tau$-messbar.
+% \end{itemize}    
+% \pause
+% \begin{block}{Starke Markovfamilien}
+%     $\{P_x\}_{x \in I}$ besitzt die starke Markoveigenschaft, falls für alle $x \in I$, $s \geq 0$ beliebig und alle fast sicher endlichen Stoppzeiten $\tau$ bereits für alle $G \in \mathcal{B}(I)$ \[
+% \P_x\br{X_{s+\tau} \in G| \F_\tau} = \P_{X_\tau}(X_s \in G) \; P_x\text{-fast-sicher  gilt.}
+%     \] 
+% \end{block}
+% \end{frame}
+% \begin{frame}{Regularität und Definition}
+%     \begin{block}{Treffzeiten und reguläre Familien}
+%         Für beliebiges $y \in I$ definieren wir die erste Treffzeit von $y$ als $T_y := \inf\{t > 0: X_t = y\}$. Dies ist eine Stoppzeit. 
+%         Wir nennen $\{P_x\}_{x \in I}$ regulär, falls für alle $x \in \operatorname{int}I$ und $y \in I$ \[
+%         P_x(T_y < \infty) > 0.
+%         \]
+%     \end{block}
+%     \pause
+%     \begin{block}{Definition Diffusionen}
+%         Wir nennen die Familie $\{P_x\}_{x \in I}$ eine Diffusion, falls sie \begin{itemize}
+%             \item stark Markov und
+%             \item regulär ist.
+%         \end{itemize}
+%         Nenne aber auch, wenn die Maßfamilie klar ist, $X$ eine Diffusion.
+%     \end{block}
+% \end{frame}
+% \begin{frame}{Beispiele für Diffusionen}
+%     \begin{center}
+%     \includegraphics[width=0.6\linewidth]{drift1.png}
+%         \\
+%         {verschiedene Sample Paths der Diffusion $t + \frac{1}{2}W_t^x$}
+%     \end{center}    
+% \end{frame}
+
+% \begin{frame}{Beispiele für Diffusionen}
+%     \begin{center}
+%          \includegraphics[width=0.6\linewidth]{stopped.png}
+%         \\
+%         {verlangsamte Brownsche Bewegung $Y_t^x = W_{\frac{t}{2}}^x$ und dann gestoppt bei Verlassen des Intervalls $I = [-1,1]$: \\ $Y_{t\wedge T_1 \wedge T_{-1}}^x$}
+%     \end{center}    
+% \end{frame}
+
+% \begin{frame}{Skalenfunktion}
+% \begin{block}{Definierende Eigenschaft der Skalenfunktion (= Scale Function)}
+%     Gibt eine \textbf{stetige} streng monoton wachsende Funktion $\s: I \to \R$, welche bis auf affine Transformationen eindeutig ist und welche für alle endlichen $(a,b) \subset I, a < x < b$ die Identität \[
+% P_x(T_b > T_a) = \frac{\s(x) - \s(a)}{\s(b) - \s(a)}
+%     \] erfüllt. Solch eine Funktion wird \textbf{Skalenfunktion} genannt.
+% \end{block} 
+% \pause
+% \begin{block}{Natürliche Skala}
+%     \begin{itemize}
+%         \item Besitzt eine Diffusion u. a. die Skalenfunktion $\s = \operatorname{id}$, nennt man sie \textbf{Difffusion in natürlicher Skala}
+%         \item Für Brownsche Bewegung gilt für alle $a < x < b$ bereits \[P_x(T_b > T_a) = (b-a)^{-1}(x-a)\].
+%     \end{itemize}
+% \end{block}
+% \end{frame}
+% \begin{frame}{Skalenfunktion}
+%     \begin{block}{Grobe Interpretation der Skalenfunktion}
+%         \begin{itemize}
+%             \item Entspricht räumlicher Transformation in der $y$-Koordinate.
+%         \end{itemize}
+%     \end{block}
+% \begin{center}
+%     \includegraphics[width = 0.45\linewidth]{drift1.png}
+%     \\
+%          Diffusion $t + \frac{1}{2}W_t^x$ mit $\s(x) = 8\exp(-8x)$
+% \end{center}
+% \end{frame}
+
+% \begin{frame}{Geschwindigkeitsmaß}
+%     \begin{itemize}
+%         \item Einerseits zeichnet eine Diffusion so etwas wie \textit{Drift} aus (hängt mit Skalenfunktion zusammen)
+%         \item Andererseits tendieren $t + W_t^x$ und $\frac{t}{2} + W_{\frac{t}{2}}^x$ in dieselbe Richtung (nach oben), aber unterschiedlich schnell
+%         \item Benötigen Definition von Geschwindigkeit
+%         % \item \textcolor{red}{Ab jetzt Diffusion in natürlicher Skala}
+%         % VIELLEICHT ECHT IM SINNE VON RODGERS ABKÜRZEN
+%     \end{itemize}
+
+% \begin{block}{Erwartete Austrittszeiten}
+%     \begin{itemize}
+%         \item Können für $x \in [a,b]$ darüber reden, wie schnell Diffusion Intervall $[a,b] \subset I$ \textit{erwartbarerweise} wieder verlässt: \[
+% e_{[a,b]}(x) := \E_{P_x}[T_a \wedge T_b].
+%         \]
+%         \item \textit{Änderungsrate} dieses Erwartungswertes in $x$ hängt damit zusammen an, wie lange Diffusion in $x$ bleibt.
+%     \end{itemize}
+% \end{block}
+% \end{frame}
+% \begin{frame}{Geschwindigkeitsmaß}
+%         \begin{itemize}
+%             \item Man kann zeigen: $e_{[a,b]}(x) := \E_{P_x}[T_a \wedge T_b]$ ist konkave Funktion.
+%             \item Konvexe (bzw. konkave) Funktionen haben im Inneren ihres Definitionsbereiches stets links- bzw. rechsseitige Ableitungen
+%         \end{itemize}
+% \begin{block}{Beispiel}
+%     \begin{itemize}
+%         \item $\{W_x\}_{x \in \R}$ die Familie zur Brownschen Bewegung. $X_t^2 - t$ ein lokales Martingal. Nach Optional Sampling \begin{align*}
+%              x^2 &= \E_{W_x}[X_{T_a \wedge T_b}^2 - T_a\wedge T_b] \\
+%              &= \P_{W_x}(T_a < T_b)a^2 + \P_{W_x}(T_b < T_a)b^2 - \E_{W_x}[T_a \wedge T_b] \\
+%             &\Longrightarrow \E_{W_x}[T_a \wedge T_b] = -x^{2} + \frac{b-x}{b-a}a^{2} + \frac{x-a}{b-a}b^{2}
+%         \end{align*}
+%         Das ist konkav. Es gilt also $-e_{[a,b]}'(x) = 2x + C$ und somit $-de_{(a,b)}' = 2dx$.
+%     \end{itemize}
+% \end{block}
+% \end{frame}
+% \begin{frame}{Geschwindigkeitsmaß}
+% \begin{block}{Definition des Geschwindigkeitsmaßes (= Speed Measure)}
+%    \begin{itemize}
+%        \item Konvexe (bzw. konkave) Funktionen haben im Inneren ihres Definitionsbereiches stets links- bzw. rechsseitige Ableitungen
+%        \item Auf endlichen Intervallen $J = [a,b]$ erhalte also ein Maß durch $-de_{[a,b]}^+$.
+%        \item Rechne nach, dass für $I \supset J'=[a',b'] \supset J$ das Maß $-de_{J'}^+$ das Maß $-de_{J}^+$ fortsetzt.
+%        \item $I$ $\sigma$-kompakt, also $I = \bigcup_{n \in I} J_n$ für kompakte aufsteigende $J_n$.
+%        \item \textbf{Definiere das Geschwindigkeitsmaß} $\m$ \textbf{einer Diffusion via} \[d\m :=  \bigcup_{n\in\N} -de_{J_n}^+.\]
+%    \end{itemize} 
+% \end{block}
+%   \begin{itemize}
+%       \item Geschwindigkeitsmaß einer Brownschen Bewegung also zum Beispiel $2dx$ (oder manchmal $dx$).
+%   \end{itemize}  
+% \end{frame}
+% \begin{frame}{Und wozu das ganze?}
+%     \begin{theoremblockname}{Charakterisierung durch Speed und Scale}
+%         \begin{itemize}
+%             \item Jede Diffusion kann in natürliche Skala gebracht werden durch $Q_y := P_{\s^{-1}(y)} \circ \s(X)^{-1}$. Dort im Speed Measure veränderte Brownsche Bewegung.
+%             % \item Für jedes strikt positive lokal endliche Maß $\m: \mathcal{B}(I) \to \R_{\geq 0}$ gibt es einen monoton wachsenden adaptierten Prozess $T_t$ derart, dass die Familie gegeben durch $P_x := W_x \circ X_{T}^{-1}$ eine Diffusion in natürlicher Skala $\s = \operatorname{id}: I \to I$ mit Geschwindigkeitsmaß $\m$ ist.
+%             \item Andersherum wird jede Diffusion durch Speed und Scale eindeutig festgelegt.
+%             \item Insbesondere sind alle Diffusionen somit in Speed und Scale modifizierte Brownsche Bewegungen.
+%         \end{itemize}
+%     \end{theoremblockname}
+% Speed und Scale somit für die Untersuchung von 1D-Diffusionen unentbehrlich.
+% \end{frame}
