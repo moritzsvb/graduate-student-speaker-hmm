@@ -39,16 +39,15 @@ First let us go back to \textbf{assuming stationarity}.
 	\begin{itemize}
 	\item \textit{I.i.d.}-LLN unavailable but in many cases of intererest Markov chains are \textit{ergodic}. 
 	\pause
-	\item Remember: $n^{-1}\sum_{k=0}^{n-1} g(\tau^k) \to \E[g]$ almost surely, where $\tau$ is the shift operator of a measure-preserving dynamical system. 
-	\item $\tau^k(Y_0, Y_1, \ldots) = (Y_{k}, Y_{k+1}, \ldots)$
-	\item Have to always include the same amount of $m$ observations. \begin{align*} g_k(Y_0^k) &= \log \rho_\theta(Y_k|Y_0^{k-1}) \approx \log \rho_\theta(Y_{k}|Y_{k-m+1}^{k-1}) \\ &= g(\tau^{k-m+1}(Y_0, Y_1, \ldots))\end{align*}
+	\item Remember: $n^{-1}\sum_{k=0}^{n-1} g(Y_{k-m+1},\ldots, Y_{k}) \to \E[g(Y_0, \ldots, Y_{m-1})]$ almost surely,
+	\item Have to always include the same amount of $m$ observations (approximation depth). 
 	\pause
-	\item There is a term $\ell(\theta)$ independent of the approximation depth. Show now:
+	\item There is a term $\ell(\theta)$ independent of the approximation depth (corresponding to $m = \infty$). Show now:
 	$n^{-1} \sum_{k=0}^{n-1} \log \rho_\theta(Y_k | Y_{k-m+1}^{k-1}) \longrightarrow \ell(\theta) + \varepsilon.$
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{But if homogeneity fails?}
+\begin{frame}{What we need to do in the \textbf{locally stationary} case}
 	\small
 		\begin{align*}
 		n^{-1} \sum_{k=0}^{n-1} \log \rho_\theta(Y_k | Y_{k-m+1}^{k-1}) \longrightarrow \ell(\theta) + \varepsilon
